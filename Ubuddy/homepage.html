@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>UBuddy - Home</title>
+
+  <!-- Poppins font -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <!-- Home, search, filter and notification icon -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home,notifications,search,filter_alt">
+  <!-- Your own styles (separate from the login page's style.css) -->
+   <link rel="stylesheet" href="base.css">
+  <link rel="stylesheet" href="home.css">
+</head>
+<body>
+  <div class="page">
+
+    <!-- 1. TOP TABS -->
+    <nav class="tabs">
+      <a href="homepage.html" class="tab-icon material-symbols-outlined">home</a>
+      <a href="#" class= "tab-icon-bell material-symbols-outlined">notifications</a>
+      <span class="spacer"></span>
+      <a href="#" class="tab">My Activity</a>
+      <a href="#" class="tab">My Applications</a>
+      <a href="#" class="tab">My Achievements</a>
+    </nav>
+
+    <div class="sheet">
+
+      <!-- 2. HEADER -->
+      <header class="header">
+
+        <!-- Logo -->
+        <div class="logo">
+          ÜBuddy
+          <small>Let UBuddy be your buddy</small>
+        </div>
+
+
+        <!-- Student Profile -->
+        <div class="user">
+
+          <div class="user-info">
+            <strong>Student Name</strong>
+
+            <small>
+              2486023 ·
+              <a href="#">View Profile</a>
+            </small>
+          </div>
+
+          <div class="avatar">
+            <!-- Profile image will go here later -->
+          </div>
+
+        </div>
+
+      </header>
+
+      <!-- 3. LATEST NEWS BANNER -->
+      <section class="news">
+        <button class="arrow" id="newsPrev">‹</button>
+
+        <div class="news-banner" id="newsBanner">
+          <h2>Latest News</h2>
+          <p id="newsText"></p>
+          <button class="btn">View Details</button>
+        </div>
+
+        <button class="arrow" id="newsNext">›</button>
+      </section>
+      <div class="dots" id="newsDots"></div>
+
+      <!-- 4. SEARCH -->
+      <h1 class="main-title">Check out all the buddies!</h1>
+      <div class="content">
+        <div class="search-bar">
+          <div class="search-input">
+            <span class="material-symbols-outlined search-icon">
+              search
+            </span>
+            <input type="text" id="searchInput" placeholder="Search">
+          </div>
+          <button class="filter-btn material-symbols-outlined">
+            filter_alt
+          </button>
+        </div>
+        
+        <!-- 5. CLUBS ROW -->
+        <div class="row-header">
+          <h2>Clubs</h2>
+          <a href="club_page.html" class="btn-small">See All</a>
+        </div>
+        <div class="row-wrap">
+          <button class="arrow" data-target="clubsRow" data-dir="-1">‹</button>
+          <div class="card-row" id="clubsRow"></div>
+          <button class="arrow" data-target="clubsRow" data-dir="1">›</button>
+        </div>
+
+        <!-- 6. EVENTS ROW -->
+        <div class="row-header">
+          <h2>Events</h2>
+          <button class="btn-small">See All</button>
+        </div>
+        <div class="row-wrap">
+          <button class="arrow" data-target="eventsRow" data-dir="-1">‹</button>
+          <div class="card-row" id="eventsRow"></div>
+          <button class="arrow" data-target="eventsRow" data-dir="1">›</button>
+        </div>
+      </div>
+
+      <!-- 7. FEEDBACK -->
+      <section class="feedback">
+        <h2>We'd love to hear your voice</h2>
+        <p>Help us make this website better by voicing your thoughts!</p>
+        <button class="btn btn-large">Leave Feedback</button>
+        <small>Any suggestions? Complaints? Bugs? We got you, buddy!</small>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- Your own script (separate from the login page's script.js) -->
+  <script src="home.js"></script>
+</body>
+</html>

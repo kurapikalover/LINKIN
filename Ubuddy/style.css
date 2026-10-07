@@ -30,23 +30,6 @@ body {
 }
 
 
-
-/* Wave Divider*/
-.wave-divider {
-    position: absolute;
-    left: -1px;
-    top: 0;
-
-    width: 80px;
-    height: 100%;
-
-    z-index: 1;
-}
-
-.wave-divider path {
-    fill:white;
-}
-
 /* Navy side */
 .brand-section {
     width: 50%;
@@ -95,7 +78,22 @@ body {
     text-align: left;
 }
 
+/* Wave Divider*/
+.wave-divider {
+    position: absolute;
+    top: 0;
+    right: -1px;
+    
 
+    width: 80px;
+    height: 100%;
+
+    z-index: 1;
+}
+
+.wave-divider path {
+    fill:white;
+}
 
 /* Login form */
 .login-box {
@@ -191,5 +189,110 @@ body {
 input[type="password"]::-ms-reveal,
 input[type="password"]::-ms-clear {
     display: none;
+}
+
+/* =========================
+   MOBILE LOGIN
+========================= */
+
+@media (max-width: 600px) {
+
+    .login-page {
+        flex-direction: column;
+        min-height: 100vh;
+        overflow: auto;
+    }
+
+    /* =========================
+       BRAND SECTION
+    ========================= */
+
+    .brand-section {
+        width: 100%;
+        min-height: 280px;
+
+        justify-content: center;
+        align-items: center;
+    }
+
+    .brand-content {
+        width: auto;
+    }
+
+    .brand-section h2 {
+        font-size: 48px;
+        text-align: center;
+    }
+
+    .tagline {
+        font-size: 14px;
+        margin-left: 0;
+        margin-top: -8px;
+        text-align: center;
+        white-space: normal;
+    }
+
+    .announcement {
+        font-size: 13px;
+        margin-left: 0;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+
+    /* =========================
+       WAVE DIVIDER
+    ========================= */
+
+    .wave-divider {
+        top: auto;
+        bottom: -1px;
+        right: 0;
+
+        width: 100%;
+        height: 50px;
+    }
+
+
+    /* =========================
+       LOGIN SECTION
+    ========================= */
+
+    .login-section {
+        width: 100%;
+        min-height: calc(100vh - 280px);
+
+        padding: 40px 25px;
+    }
+
+    .login-box {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .login-box h1 {
+        font-size: 32px;
+        margin-bottom: 22px;
+    }
+
+    .login-box label {
+        font-size: 14px;
+    }
+
+    .login-box input {
+        font-size: 15px;
+        padding: 13px;
+    }
+
+    .password-container input {
+        padding: 13px;
+        padding-right: 45px;
+    }
+
+    .login-box button {
+        padding: 13px;
+        font-size: 15px;
+    }
+
 }
     

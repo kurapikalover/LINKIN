@@ -1,0 +1,231 @@
+.back-button {
+  display: inline-block;
+  margin-bottom: 20px;
+
+  color: var(--navy);
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.back-button:hover {
+  color: var(--orange);
+}
+
+
+/* Club page layout */
+
+.club-layout {
+  display: grid;
+  grid-template-columns: 1fr 300px;
+  column-gap: 30px;
+}
+
+.club-information {
+  grid-column: 1;
+  min-width: 0;
+}
+
+
+/* Club title */
+
+.club-information h1 {
+  margin: 0;
+
+  font-size: 32px;
+  font-weight: 700;
+}
+
+
+/* Decorative circles */
+
+.club-circles {
+  display: flex;
+  gap: 8px;
+  margin: 20px 0 30px;
+}
+
+.club-circles span {
+  width: 13px;
+  height: 13px;
+
+  border-radius: 50%;
+  background: var(--navy);
+}
+
+
+/* Information sections */
+
+.info-section {
+  margin-bottom: 25px;
+}
+
+.info-section h2 {
+  margin: 0 0 7px;
+
+  font-size: 19px;
+  font-weight: 600;
+}
+
+.info-section p {
+  margin: 0;
+
+  color: #555;
+  font-size: 14px;
+  line-height: 1.7;
+}
+
+.info-section ul {
+  margin: 0;
+  padding-left: 20px;
+
+  color: #555;
+  font-size: 14px;
+  line-height: 1.8;
+}
+
+
+/* Social media */
+
+.social-buttons {
+  display: flex;
+  gap: 8px;
+}
+
+.social-buttons a {
+  padding: 7px 14px;
+
+  border: 1px solid var(--navy);
+  border-radius: 8px;
+
+  color: var(--navy);
+  font-size: 12px;
+  text-decoration: none;
+}
+
+.social-buttons a:hover {
+  background: var(--navy);
+  color: var(--white);
+}
+
+
+/* Right side */
+
+.club-sidebar {
+  grid-column: 2;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+
+/* Club image */
+
+.club-image {
+  height: 400px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 16px;
+
+  background: var(--sky);
+  color: var(--muted);
+
+  font-size: 14px;
+}
+
+
+/* Join button */
+
+.join-button {
+  width: 100%;
+  padding: 12px;
+
+  border: none;
+  border-radius: 10px;
+
+  background: var(--orange);
+  color: var(--white);
+
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+}
+
+.join-button:hover {
+  background: #e86a0c;
+}
+
+
+/* Contact information */
+
+.contact-card {
+  padding: 20px;
+
+  border-radius: 14px;
+
+  background: #f5f8fc;
+}
+
+.contact-card h2 {
+  margin: 0 0 15px;
+
+  font-size: 18px;
+}
+
+.contact-card p {
+  margin: 0 0 12px;
+
+  color: #555;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.contact-card p:last-child {
+  margin-bottom: 0;
+}
+
+.contact-card strong {
+  color: var(--navy);
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .club-layout {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  .club-sidebar {
+    display: contents;
+  }
+
+  .club-image {
+    order: 1;
+    width: 100%;
+    height: 220px;
+  }
+
+  .club-information {
+    order: 2;
+  }
+
+  .join-button {
+    order: 3;
+  }
+
+  .contact-card {
+    order: 4;
+  }
+
+}

@@ -1,0 +1,175 @@
+/* Back button */
+
+.back-button {
+  display: inline-block;
+  margin-bottom: 10px;
+
+  color: var(--navy);
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.back-button:hover {
+  color: var(--orange);
+}
+
+
+/* Page title */
+
+.clubs-title {
+  margin: 0 0 20px;
+
+  text-align: center;
+
+  font-size: 32px;
+  font-weight: 700;
+}
+
+
+/* Search and filter */
+
+/* ===== 4. SEARCH ===== */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin: 0 auto 30px;
+  max-width: 700px;
+}
+
+.search-input {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background: var(--sky);
+  border-radius: 20px;
+
+  padding: 12px 18px;
+}
+
+.search-icon {
+  color: var(--navy);
+  font-size: 22px;
+}
+
+.search-input input {
+  flex: 1;
+
+  border: none;
+  outline: none;
+  background: transparent;
+
+  font: 14px "Poppins", sans-serif;
+  color: var(--navy);
+}
+
+.search-input input::placeholder {
+  color: var(--navy);
+  opacity: 0.6;
+}
+
+.filter-btn {
+  background: none;
+  border: none;
+
+  color: var(--orange);
+  font-size: 32px;
+
+  cursor: pointer;
+}
+
+.filter-btn:hover {
+  color: var(--navy);
+}
+
+.filter-btn:hover {
+  color: var(--navy);
+}
+
+
+/* Club grid */
+
+.club-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 25px 18px;
+}
+
+
+/* Club card */
+
+.club-card {
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.club-card-image {
+  width: 100%;
+  height:300px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: var(--sky);
+  color: var(--muted);
+
+  font-size: 12px;
+}
+
+.club-card h2 {
+  margin: 8px 0 0;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.club-card .category {
+  margin-top: 4px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 800px) {
+
+  .club-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .clubs-title {
+    font-size: 28px;
+  }
+
+  .club-controls {
+    flex-direction: column;
+  }
+
+  .club-search {
+    width: 100%;
+  }
+
+  .club-filter {
+    width: 100%;
+  }
+
+  .club-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
