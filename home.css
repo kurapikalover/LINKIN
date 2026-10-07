@@ -1,0 +1,290 @@
+/* ===== VARIABLES: change colors here and the whole page updates ===== */
+:root {
+  --navy: #134a8e;
+  --orange: #ff7a1a;
+  --sky: #bcdcff;
+  --page-bg: #a9cdfc;
+  --white: #ffffff;
+  --muted: #8fb6e8;
+  --grey: #9aa3ad;
+}
+ 
+* { box-sizing: border-box; }
+ 
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: var(--page-bg);
+  color: var(--navy);
+}
+ 
+.page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 12px;
+}
+ 
+/* ===== 1. TOP TABS ===== */
+.tabs {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+.spacer { flex: 1; }
+ 
+.tab-icon {
+  width: 40px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  background: var(--white);
+  border-radius: 12px 12px 0 0;
+  text-decoration: none;
+}
+.tab-icon-bell {
+  width: 40px;
+  height: 36px;
+  display: grid;
+  place-items: center;
+  background: var(--grey);
+  border-radius: 12px 12px 0 0;
+  text-decoration: none;
+}
+
+ 
+.tab {
+  background: var(--navy);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 9px 18px;
+  border-radius: 16px 16px 0 0;
+  /* no underline */
+  text-decoration: none;
+}
+/* if mouse near each tab, tukar warna tab and font */
+.tab:hover { background: #fff; color: var(--navy); }
+ 
+/* White sheet that holds everything */
+.sheet {
+  background: var(--white);
+  border-radius: 0 0 18px 18px;
+  overflow: hidden;
+}
+ 
+/* ===== 2. HEADER ===== */
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 3px solid var(--sky);
+}
+.logo {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.logo small {
+  display: block;
+  font-size: 9px;
+  font-weight: 500;
+  color: var(--muted);
+}
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-align: right;
+  font-size: 14px;
+}
+.user small {
+  display: block;
+  font-size: 10px;
+  color: var(--muted);
+}
+.avatar {
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  background: var(--navy);
+}
+ 
+/* ===== 3. NEWS BANNER ===== */
+.news {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 16px 12px 6px;
+}
+.news-banner {
+  flex: 1;
+  position: relative;
+  height: 250px;
+  border-radius: 24px;
+  color: var(--white);
+  overflow: hidden;
+  /* Replace with a real photo:
+     background: url("images/news1.jpg") center/cover; */
+  background: linear-gradient(135deg, #2b6cc4, #e0505a);
+}
+.news-banner h2 {
+  position: absolute;
+  top: 14px;
+  left: 18px;
+  margin: 0;
+  font-size: 26px;
+  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
+}
+.news-banner p {
+  position: absolute;
+  left: 18px;
+  bottom: 62px;
+  margin: 0;
+  max-width: 70%;
+}
+.news-banner .btn {
+  position: absolute;
+  left: 16px;
+  bottom: 16px;
+}
+ 
+.dots { text-align: center; padding-bottom: 8px; }
+.dot {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  margin: 0 2px;
+  border-radius: 50%;
+  background: var(--sky);
+}
+.dot.active { background: var(--navy); }
+ 
+/* ===== BUTTONS ===== */
+.btn {
+  background: var(--orange);
+  color: var(--white);
+  border: none;
+  border-radius: 20px;
+  padding: 10px 26px;
+  font: 600 14px "Poppins", sans-serif;
+  cursor: pointer;
+}
+.btn:hover { background: #e86a0c; }
+.btn-large { font-size: 18px; padding: 12px 44px; border-radius: 24px; }
+ 
+.btn-small {
+  background: var(--orange);
+  color: var(--white);
+  border: none;
+  border-radius: 14px;
+  padding: 5px 16px;
+  font: 600 12px "Poppins", sans-serif;
+  cursor: pointer;
+}
+ 
+.arrow {
+  background: none;
+  border: none;
+  color: var(--navy);
+  font-size: 28px;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+ 
+/* ===== 4. SEARCH ===== */
+.main-title {
+  text-align: center;
+  font-size: 22px;
+  margin: 16px 0;
+}
+.content { padding: 10px 20px; }
+ 
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.search-bar input {
+  flex: 1;
+  background: var(--sky);
+  border: none;
+  border-radius: 20px;
+  padding: 12px 18px;
+  font: 14px "Poppins", sans-serif;
+  color: var(--navy);
+}
+
+.filter-btn {
+  background: none;
+  border: none;
+  color: var(--orange);
+  font-size: 40px;
+  cursor: pointer;
+}
+ 
+/* ===== 5 & 6. CARD ROWS ===== */
+.row-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 18px 0 8px;
+}
+.row-header h2 { margin: 0; font-size: 26px; }
+ 
+.row-wrap { display: flex; align-items: center; gap: 4px; }
+ 
+.card-row {
+  flex: 1;
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;          /* lets the row scroll sideways */
+  scroll-behavior: smooth;
+  scrollbar-width: none;     /* hide scrollbar (Firefox) */
+  padding: 4px 2px;
+}
+.card-row::-webkit-scrollbar { display: none; } /* hide scrollbar (Chrome) */
+ 
+.card {
+  flex: 0 0 150px;           /* each card is 150px wide and won't shrink */
+  font-size: 13px;
+  font-weight: 600;
+}
+.card-img {
+  height: 135px;
+  border-radius: 12px;
+  margin-bottom: 6px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  /* Placeholder sky + hill. Replace with: background: url("images/club1.jpg") center/cover; */
+  background: linear-gradient(#bfe3ff 55%, #a6c968 56%, #7a9c14);
+}
+.tag {
+  display: inline-block;
+  margin-top: 4px;
+  padding: 2px 14px;
+  border-radius: 10px;
+  font-size: 9px;
+  color: var(--white);
+}
+ 
+/* ===== 7. FEEDBACK ===== */
+.feedback {
+  text-align: center;
+  padding: 36px 20px 40px;
+  /* bagi border mcm line rah ampir Ubuddy */
+  border-top: 3px solid var(--sky);
+  margin-top: 20px;
+
+}
+.feedback h2 { margin: 0 0 6px; font-size: 26px; }
+.feedback p { color: var(--muted); margin: 4px 0 14px; }
+.feedback small { display: block; margin-top: 14px; color: var(--grey); }
+ 
+/* ===== PHONES ===== */
+@media (max-width: 600px) {
+  .news-banner { height: 190px; }
+  .logo { font-size: 24px; }
+  .tab { padding: 8px 10px; font-size: 11px; }
+}
+ 
