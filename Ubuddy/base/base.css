@@ -12,6 +12,38 @@
   --grey: #9aa3ad;
 }
 
+/* =========================
+   CATEGORY & COLOURS
+========================= */
+.category {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.category-sports {
+  background: #ef5b6a;
+}
+
+.category-arts {
+  background: #f58fb0;
+}
+
+.category-recreational {
+  background: #4cc36b;
+}
+
+.category-culture {
+  background: #ff9a52;
+}
+
+.category-religious {
+  background: #c68af0;
+}
 
 /* =========================
    BASIC RESET
