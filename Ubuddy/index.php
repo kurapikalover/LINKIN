@@ -59,8 +59,27 @@
                      <button type="button" id="toggle-password">👁</button>
 
                     </div>
+                    <div class="login-options">
+
+                        <label class="remember-me">
+                            <input type="checkbox" id="rememberMe">
+                            <span>Remember me</span>
+                        </label>
+
+                        <a href="#" class="forgot-password">
+                            Forgot password?
+                        </a>
+
+                        </div>
                     
-                    <button type="submit">LOG IN</button>
+                    <button type="submit" class="login-button">
+                        LOGIN
+                    </button>
+
+                    <p class="signup-text">
+                        Don't have an account?
+                        <a href="#">Sign up</a>
+                    </p>
                 </form>
             </div>
 
