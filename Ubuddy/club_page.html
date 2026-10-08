@@ -25,8 +25,8 @@
          TOP TABS
     ========================== -->
     <nav class="tabs">
-
-      <a href="#" class="tab-icon material-symbols-outlined">
+      
+      <a href="homepage.html" class="tab-icon material-symbols-outlined">
         home
       </a>
 
@@ -97,7 +97,7 @@
 
         <div class="clubs-page">
 
-          <a href="#" class="back-button">← Home</a>
+          <a href="homepage.html" class="back-button">← Home</a>
 
           <h1 class="clubs-title">Clubs</h1>
 
@@ -119,6 +119,7 @@
 
             <button
               type="button"
+              id="filterBtn"
               class="filter-btn material-symbols-outlined"
               title="Filter by category"
             >
@@ -126,6 +127,35 @@
             </button>
 
           </div>
+
+          <div class="filter-menu" id="filterMenu">
+
+            <button type="button" class="filter-option active" data-category="all">
+              All
+            </button>
+
+            <button type="button" class="filter-option" data-category="Sports">
+              Sports
+            </button>
+
+            <button type="button" class="filter-option" data-category="Arts and Crafts">
+              Arts and Crafts
+            </button>
+
+            <button type="button" class="filter-option" data-category="Recreational">
+              Recreational
+            </button>
+
+            <button type="button" class="filter-option" data-category="Culture">
+              Culture
+            </button>
+
+            <button type="button" class="filter-option" data-category="Religious">
+              Religious
+            </button>
+
+          </div>
+
 
           <div class="club-grid">
 
@@ -174,7 +204,7 @@
               <p class="category category-culture">Culture</p>
             </a>
 
-            <a href="#" class="club-card">
+            <a href="club.html" class="club-card">
               <div class="club-card-image">
                 Club Image
               </div>
@@ -192,6 +222,7 @@
     </div>
 
   </div>
+  <script src="club_page.js"></script>
 
 </body>
 </html>
