@@ -1,0 +1,174 @@
+/* Back button */
+
+.back-button {
+  display: inline-block;
+  margin-bottom: 10px;
+
+  color: var(--navy);
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.back-button:hover {
+  color: var(--orange);
+}
+
+
+/* Page title */
+
+.events-title {
+  margin: 0 0 20px;
+
+  text-align: center;
+
+  font-size: 32px;
+  font-weight: 700;
+}
+
+
+/* Search and filter */
+
+/* ===== 4. SEARCH ===== */
+.search-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  margin: 0 auto 30px;
+  max-width: 700px;
+}
+
+.search-input {
+  flex: 1;
+
+  display: flex;
+  align-items: center;
+  gap: 8px;
+
+  background: var(--sky);
+  border-radius: 20px;
+
+  padding: 12px 18px;
+}
+
+.search-icon {
+  color: var(--navy);
+  font-size: 22px;
+}
+
+.search-input input {
+  flex: 1;
+
+  border: none;
+  outline: none;
+  background: transparent;
+
+  font: 14px "Poppins", sans-serif;
+  color: var(--navy);
+}
+
+.search-input input::placeholder {
+  color: var(--navy);
+  opacity: 0.6;
+}
+
+.filter-btn {
+  background: none;
+  border: none;
+
+  color: var(--orange);
+  font-size: 32px;
+
+  cursor: pointer;
+}
+
+.filter-btn:hover {
+  color: var(--navy);
+}
+
+.filter-btn:hover {
+  color: var(--navy);
+}
+
+
+/* Event grid */
+
+.event-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 25px 18px;
+}
+
+
+/* Event card */
+
+.event-card {
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.event-card-image {
+  width: 100%;
+  height:300px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: linear-gradient(#bfe3ff 55%, #a6c968 56%, #7a9c14);
+
+  font-size: 12px;
+}
+
+.event-card h2 {
+  margin: 8px 0 0;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.event-card .category {
+  margin-top: 4px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 800px) {
+
+  .event-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .event-title {
+    font-size: 28px;
+  }
+
+  .event-controls {
+    flex-direction: column;
+  }
+
+  .event-search {
+    width: 100%;
+  }
+
+  .event-filter {
+    width: 100%;
+  }
+
+  .event-grid {
+    grid-template-columns: 1fr;
+  }
+
+}
