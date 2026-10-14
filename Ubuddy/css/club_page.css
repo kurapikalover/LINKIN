@@ -1,0 +1,141 @@
+
+/* Page title */
+
+.clubs-title {
+  margin: 0 0 20px;
+
+  text-align: center;
+
+  font-size: 32px;
+  font-weight: 700;
+}
+
+
+/* Search and filter */
+
+.filter-menu {
+  display: none;
+
+  margin: -15px auto 25px;
+  padding: 10px;
+
+  max-width: 700px;
+
+  background: var(--white);
+  border: 1px solid var(--sky);
+  border-radius: 12px;
+
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-menu.show {
+  display: flex;
+}
+
+.filter-option {
+  padding: 7px 14px;
+
+  border: 1px solid var(--sky);
+  border-radius: 20px;
+
+  background: var(--white);
+  color: var(--navy);
+
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+  font-weight: 500;
+
+  cursor: pointer;
+}
+
+.filter-option:hover {
+  background: var(--sky);
+}
+
+.filter-option.active {
+  background: var(--navy);
+  color: var(--white);
+  border-color: var(--navy);
+}
+
+
+/* Club grid */
+
+.club-grid {
+  display: grid;
+
+  grid-template-columns: repeat(4, 1fr);
+
+  gap: 25px 18px;
+}
+
+
+/* Club card */
+
+.club-card {
+  color: var(--navy);
+  text-decoration: none;
+}
+
+.club-card-image {
+  width: 100%;
+  height:300px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 14px;
+
+  background: linear-gradient(#bfe3ff 55%, #a6c968 56%, #7a9c14);
+
+  font-size: 12px;
+}
+
+.club-card h2 {
+  margin: 8px 0 0;
+
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.club-card .category {
+  margin-top: 4px;
+}
+
+
+/* Mobile */
+
+@media (max-width: 800px) {
+
+  .club-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+}
+
+
+@media (max-width: 600px) {
+
+  .clubs-title {
+    font-size: 28px;
+  }
+
+  .club-controls {
+    flex-direction: column;
+  }
+
+  .club-search {
+    width: 100%;
+  }
+
+  .club-filter {
+    width: 100%;
+  }
+
+  .club-grid {
+    grid-template-columns: 1fr;
+  }
+
+}

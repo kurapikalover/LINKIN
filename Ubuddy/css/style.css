@@ -1,0 +1,364 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background: var(--page-bg);
+    color: var(--navy);
+}
+
+
+
+.login-page {
+    min-height: 100vh;
+    display: flex;
+    overflow: hidden;
+}
+
+/* White side */
+.login-section {
+    width: 50%;
+    min-height: 100vh;
+    background-color: white;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position: relative;
+}
+
+
+/* Navy side */
+.brand-section {
+    width: 50%;
+    min-height: 100vh;
+    background-color: #172A46;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    position:relative;
+
+    color: white;
+    
+}
+
+.brand-content{
+    width: max-content;
+}
+
+.brand-section h2 {
+    color: white;
+    font-size: 72px;
+    margin-bottom: 10px;
+    text-align: left;
+    
+}
+
+.tagline{
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(127, 164, 244);
+    margin-top:-15px;
+    margin-left: 4px;
+    line-height:1.4;
+    text-align: left;
+    white-space: nowrap;
+}
+
+.announcement{
+    margin-top: 30px;
+    margin-left: 4px;
+    font-size: 16px;
+    font-weight: bold;
+    line-height:1.6;
+    text-align: left;
+}
+
+/* Wave Divider*/
+.wave-divider {
+    position: absolute;
+    top: 0;
+    right: -1px;
+    
+
+    width: 80px;
+    height: 100%;
+
+    z-index: 1;
+}
+
+.wave-divider path {
+    fill:white;
+}
+
+/* Login form */
+.login-box {
+    width: 350px;
+}
+
+.login-box h1 {
+    font-size: 40px;
+    margin-bottom: 25px;
+    text-align: center;
+}
+
+.login-box form {
+    display: flex;
+    flex-direction: column;
+}
+
+.login-box > form > label {
+    margin-bottom: 8px;
+    font-size: 16px;
+}
+
+.login-box input {
+    width:100%;
+    padding: 14px;
+    margin-bottom: 20px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    font-size: 16px;
+}
+
+.login-box button {
+    padding: 14px;
+
+    border: none;
+    border-radius: 8px;
+
+    background-color: #426fb1;
+    color: white;
+
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.login-box button:hover {
+    background-color: #263F63;
+}
+
+.login-box button:active{
+    background-color: #648bc2;
+}
+
+
+.password-container{
+    position: relative;
+    width: 100%;
+    margin-bottom: 20px;
+}
+    
+
+
+.password-container input{
+    width: 100%;
+    padding: 14px;
+    padding-right: 45px;
+
+    border: 1px solid #ccc;
+    border-radius: 8px;
+
+    font-size: 16px;
+    margin-bottom: 0;
+}
+    
+
+#toggle-password {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    padding: 0;
+    border: none;
+    background: none;
+
+    color: #555;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+    display: none;
+}
+
+.login-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0 20px;
+}
+
+.remember-me {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin: 0;
+    color: #555;
+    font-size: 12px !important;
+    font-weight: 400;
+    line-height: normal;
+    cursor: pointer;
+}
+
+.remember-me input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+    padding: 0;
+    margin: 0;
+    accent-color: #426fb1;
+    cursor: pointer;
+}
+
+.remember-me span {
+    font-size: 12px !important;
+    font-weight: 400;
+}
+
+.forgot-password {
+    color: #426fb1;
+    font-size: 12px !important;
+    font-weight: 400;
+    line-height: normal;
+    text-decoration: none;
+}
+
+.forgot-password:hover {
+    text-decoration: underline;
+}
+
+.signup-text {
+  margin-top: 18px;
+
+  text-align: center;
+
+  color: #777;
+  font-size: 12px;
+}
+
+.signup-text a {
+  color: #426fb1;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.signup-text a:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   MOBILE LOGIN
+========================= */
+
+@media (max-width: 600px) {
+
+    .login-page {
+        flex-direction: column;
+        min-height: 100vh;
+        overflow: auto;
+    }
+
+    /* =========================
+       BRAND SECTION
+    ========================= */
+
+    .brand-section {
+        width: 100%;
+        min-height: 280px;
+
+        justify-content: center;
+        align-items: center;
+    }
+
+    .brand-content {
+        width: auto;
+    }
+
+    .brand-section h2 {
+        font-size: 48px;
+        text-align: center;
+    }
+
+    .tagline {
+        font-size: 14px;
+        margin-left: 0;
+        margin-top: -8px;
+        text-align: center;
+        white-space: normal;
+    }
+
+    .announcement {
+        font-size: 13px;
+        margin-left: 0;
+        margin-top: 20px;
+        text-align: center;
+    }
+
+
+    /* =========================
+       WAVE DIVIDER
+    ========================= */
+
+    .wave-divider {
+        top: auto;
+        bottom: -1px;
+        right: 0;
+
+        width: 100%;
+        height: 50px;
+    }
+
+
+    /* =========================
+       LOGIN SECTION
+    ========================= */
+
+    .login-section {
+        width: 100%;
+        min-height: calc(100vh - 280px);
+
+        padding: 40px 25px;
+    }
+
+    .login-box {
+        width: 100%;
+        max-width: 350px;
+    }
+
+    .login-box h1 {
+        font-size: 32px;
+        margin-bottom: 22px;
+    }
+
+    .login-box label {
+        font-size: 14px;
+    }
+
+    .login-box input {
+        font-size: 15px;
+        padding: 13px;
+    }
+
+    .password-container input {
+        padding: 13px;
+        padding-right: 45px;
+    }
+
+    .login-box button {
+        padding: 13px;
+        font-size: 15px;
+    }
+
+}
+    
