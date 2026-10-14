@@ -257,6 +257,12 @@ input[type="password"]::-ms-clear {
   text-decoration: underline;
 }
 
+.login-error {
+    color: #c62828;
+    font-size: 14px;
+    margin-bottom: 16px;
+}
+
 /* =========================
    MOBILE LOGIN
 ========================= */

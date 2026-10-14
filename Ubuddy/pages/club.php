@@ -1,191 +1,218 @@
+
+<?php
+require_once __DIR__ . '/../php/functions.php';
+require_once __DIR__ . '/../php/db.php';
+require_once __DIR__ . '/../php/club_functions.php';
+require_once __DIR__ . '/../php/club_queries.php';
+
+// Read the club ID from the URL.
+$clubId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
+
+$club = false;
+$socialLinks = [];
+
+if ($clubId !== false && $clubId !== null && $clubId > 0) {
+    $club = getClubById($pdo, $clubId);
+
+    if ($club) {
+        $socialLinks = getClubSocialLinks($pdo, $clubId);
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>ÜBuddy</title>
+    <title>ÜBuddy</title>
+    
+    <?php pageIcons(); ?>
 
-  <!-- Home and notification icons -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home,notifications">
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/shared.css">
+    <link rel="stylesheet" href="../css/club.css">
 
-  <!-- Base CSS -->
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/shared.css">
-  <link rel="stylesheet" href="../css/club.css">
+    
 </head>
 
 <body>
 
-  <div class="page">
+<?php pageHeader(); ?>
 
-    <!-- =========================
-         TOP TABS
-    ========================== -->
-    <nav class="tabs">
+<div class="sheet">
+    <main class="page-content">
 
-      <a href="homepage.html" class="tab-icon material-symbols-outlined">
-        home
-      </a>
+      <?php backLink('club_page.php', 'Back to Clubs'); ?>
 
-      <a href="#" class="tab-icon-bell material-symbols-outlined">
-        notifications
-      </a>
+      <?php if (!$club): ?>
 
-      <span class="spacer"></span>
-
-      <a href="#" class="tab">
-        My Activity
-      </a>
-
-      <a href="#" class="tab">
-        My Applications
-      </a>
-
-      <a href="#" class="tab">
-        My Achievements
-      </a>
-
-    </nav>
-
-
-    <!-- =========================
-         MAIN WHITE SHEET
-    ========================== -->
-    <div class="sheet">
-
-      <!-- =========================
-           HEADER
-      ========================== -->
-      <header class="header">
-
-        <!-- Logo -->
-        <div class="logo">
-          ÜBuddy
-          <small>Let UBuddy be your buddy</small>
-        </div>
-
-
-        <!-- Student Profile -->
-        <div class="user">
-
-          <div class="user-info">
-            <strong>Student Name</strong>
-
-            <small>
-              2486023 ·
-              <a href="#">View Profile</a>
-            </small>
+          <div class="club-layout">
+              <section class="club-information">
+                  <h1>Club not found</h1>
+                  <p>This club does not exist or the link is invalid.</p>
+                  <a href="club_page.php">Browse all clubs</a>
+              </section>
           </div>
 
-          <div class="avatar">
-            <!-- Profile image will go here later -->
+      <?php else: ?>
+
+          <?php
+          $categoryName = $club['category_name'] ?? 'Uncategorised';
+          $categoryClass = getClubCategoryClass($categoryName);
+
+          $activities = getClubActivities($club['activities']);
+          ?>
+
+          <div class="club-layout">
+
+              <!-- CLUB INFORMATION -->
+              <section class="club-information">
+
+                  <h1><?= clubEscape($club['club_name']) ?></h1>
+
+                  <p class="category <?= clubEscape($categoryClass) ?>">
+                      <?= clubEscape($categoryName) ?>
+                  </p>
+
+                  <div class="club-circles">
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                      <span></span>
+                  </div>
+
+                  <!-- ABOUT -->
+                  <div class="info-section">
+                      <h2>About</h2>
+                      <p>
+                          <?= nl2br(clubEscape(
+                              $club['description']
+                              ?: 'No description available yet.'
+                          )) ?>
+                      </p>
+                  </div>
+
+                  <!-- ACTIVITIES -->
+                  <div class="info-section">
+                      <h2>Activities</h2>
+
+                      <?php if (!empty($activities)): ?>
+                          <ul>
+                              <?php foreach ($activities as $activity): ?>
+                                  <li><?= clubEscape($activity) ?></li>
+                              <?php endforeach; ?>
+                          </ul>
+                      <?php else: ?>
+                          <p>No activities listed yet.</p>
+                      <?php endif; ?>
+                  </div>
+
+                  <!-- MEETING FREQUENCY -->
+                  <div class="info-section">
+                      <h2>Meeting Frequency</h2>
+                      <p>
+                          <?= clubEscape(
+                              $club['meeting_frequency'] ?? 'Not specified'
+                          ) ?>
+                      </p>
+                  </div>
+
+                  <!-- EXPERIENCE REQUIREMENT -->
+                  <div class="info-section">
+                      <h2>Experience Requirement</h2>
+                      <p>
+                          <?= clubEscape(
+                              $club['exp_requirement'] ?? 'Not specified'
+                          ) ?>
+                      </p>
+                  </div>
+
+                  <!-- MEMBERSHIP FEE -->
+                  <div class="info-section">
+                      <h2>Fee</h2>
+                      <p>
+                          <?= clubEscape(formatClubFee(
+                              $club['membership_fee'],
+                              $club['fee_currency']
+                          )) ?>
+                      </p>
+                  </div>
+
+                  <!-- SOCIAL MEDIA -->
+                  <?php if (!empty($socialLinks)): ?>
+                      <div class="info-section">
+                          <h2>Social Media</h2>
+
+                          <div class="social-buttons">
+
+                              <?php foreach ($socialLinks as $social): ?>
+                                  <a
+                                      class="social-button"
+                                      href="<?= clubEscape($social['account_url']) ?>"
+                                      target="_blank"
+                                      rel="noopener noreferrer"
+                                  >
+                                      <i
+                                          class="<?= clubEscape(
+                                              getClubSocialIcon($social['platform'])
+                                          ) ?>"
+                                          aria-hidden="true"
+                                      ></i>
+
+                                      <span class="social-button-text">
+                                          <span class="social-platform">
+                                              <?= clubEscape($social['platform']) ?>
+                                          </span>
+
+                                          <?php if (!empty($social['social_media_name'])): ?>
+                                              <span class="social-username">
+                                                  <?= clubEscape(
+                                                      $social['social_media_name']
+                                                  ) ?>
+                                              </span>
+                                          <?php endif; ?>
+                                      </span>
+                                  </a>
+                              <?php endforeach; ?>
+
+                          </div>
+                      </div>
+                  <?php endif; ?>
+
+              </section>
+
+              <!-- RIGHT SIDEBAR -->
+              <aside class="club-sidebar">
+
+                  <div class="club-image">
+                      <span>Club Image</span>
+                  </div>
+
+                  <button
+                      type="button"
+                      class="join-button"
+                      disabled
+                      title="Application functionality has not been connected yet"
+                  >
+                      JOIN CLUB
+                  </button>
+
+                  <div class="contact-card">
+                      <h2>Contact Information</h2>
+                      <p>Contact information has not been added yet.</p>
+                  </div>
+
+              </aside>
+
           </div>
+      <?php endif; ?>
 
-        </div>
+    </main>
+</div>
 
-      </header>
-
-
-      <!-- =========================
-           PAGE CONTENT
-           Individual pages go here
-      ========================== -->
-      <main class="page-content">
-        <!-- Back -->
-        <a href="club_page.html" class="back-button">← Back</a>
-        <div class="club-layout">
-
-          <!-- CLUB INFORMATION -->
-          <section class="club-information">
-
-            <h1>Muslim Youth Club</h1>
-            <p class="category category-religious">Religious</p>
-
-            <div class="club-circles">
-              <span></span>
-              <span></span>
-              <span></span>
-              <span></span>
-            </div>
-
-            <div class="info-section">
-              <h2>About</h2>
-              <p>
-                Assalamualaikum, we are the Muslim Youth Club! Our mission is to lead others and oneself closer to Allah with the guidance of Al-Quran and the prophetic sunnah.
-
-                Join us!
-
-              </p>
-            </div>
-
-            <div class="info-section">
-              <h2>Activities</h2>
-              <ul>
-                <li>Islamic motivational talks by an invited speaker</li>
-                <li>Group bonding sessions</li>
-              </ul>
-            </div>
-
-            <div class="info-section">
-              <h2>Meeting Frequency</h2>
-              <p>2-3 times per month</p>
-            </div>
-
-            <div class="info-section">
-              <h2>Experience Requirement</h2>
-              <p>No experience required</p>
-            </div>
-
-            <div class="info-section">
-              <h2>Social Media</h2>
-
-              <div class="social-buttons">
-                <a href="#">Instagram</a>
-                <a href="#">TikTok</a>
-              </div>
-            </div>
-
-          </section>
-
-
-          <!-- RIGHT SIDE -->
-          <aside class="club-sidebar">
-
-            <!-- CLUB IMAGE -->
-            <div class="club-image">
-              <span>Club Image</span>
-            </div>
-
-            <!-- JOIN BUTTON -->
-            <button class="join-button">
-              JOIN CLUB
-            </button>
-
-            <!-- CONTACT -->
-            <div class="contact-card">
-
-              <h2>Contact Information</h2>
-
-              <p>
-                <strong>Whatsapp</strong><br>
-                Contact Name
-                +673 ### ####
-                @2XBXXXX
-              </p>
-
-            </div>
-
-          </aside>
-
-        </div>
-        
-       
-      </main>
-
-    </div>
-
-  </div>
+<?php pageFooter(); ?>
 
 </body>
 </html>

@@ -13,13 +13,19 @@
   padding-left: 30px;
 }
 
+.category {
+    display: inline-block;
+    padding: 6px 14px;
+    margin: 0px 0 0;
+    border-radius: 20px;
+}
 
 /* Club title */
 
 .club-information h1 {
   margin: 0;
 
-  font-size: 32px;
+  font-size: 48px;
   font-weight: 700;
 }
 
@@ -74,25 +80,63 @@
 
 /* Social media */
 
+
+/* Social media buttons */
+
 .social-buttons {
   display: flex;
-  gap: 8px;
+  flex-wrap: wrap;
+  gap: 10px;
 }
 
-.social-buttons a {
-  padding: 7px 14px;
+.social-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
 
-  border: 1px solid var(--navy);
-  border-radius: 8px;
+  padding: 10px 15px;
+  border: 1px solid #d9e1ec;
+  border-radius: 10px;
 
+  background: #fff;
   color: var(--navy);
-  font-size: 12px;
+  font-family: "Poppins", sans-serif;
   text-decoration: none;
+
+  transition: background 0.2s ease,
+              color 0.2s ease,
+              border-color 0.2s ease;
 }
 
-.social-buttons a:hover {
+.social-button > i {
+  font-size: 22px;
+}
+
+.social-button-text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.social-platform {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.social-username {
+  color: #777;
+  font-size: 11px;
+  overflow-wrap: anywhere;
+}
+
+.social-button:hover {
   background: var(--navy);
+  border-color: var(--navy);
   color: var(--white);
+}
+
+.social-button:hover .social-username {
+  color: #dbe5f5;
 }
 
 

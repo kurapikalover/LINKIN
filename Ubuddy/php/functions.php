@@ -1,8 +1,16 @@
 
 <?php
 
-function pageHeader($studentName = "Student Name", $studentId = "2486023")
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+
+function pageHeader($studentName = null, $studentId = null)
 {
+    // Use the logged-in user's details from the session.
+    $studentName = $studentName ?? $_SESSION['name'] ?? 'Student Name';
+    $studentId = $studentId ?? $_SESSION['user_id'] ?? 'User ID';
     ?>
     <div class="page">
 
@@ -36,9 +44,12 @@ function pageHeader($studentName = "Student Name", $studentId = "2486023")
                             <?= htmlspecialchars($studentName, ENT_QUOTES, 'UTF-8') ?>
                         </strong>
 
-                        <small>
+                        <small class="user-id">
                             <?= htmlspecialchars($studentId, ENT_QUOTES, 'UTF-8') ?>
-                            · <a href="#">View Profile</a>
+                        </small>
+
+                        <small class="profile-link">
+                            <a href="profile.php">View Profile</a>
                         </small>
                     </div>
 
@@ -49,6 +60,9 @@ function pageHeader($studentName = "Student Name", $studentId = "2486023")
     <?php
 }
 
+
+
+
 function pageFooter()
 {
     ?>
@@ -56,4 +70,31 @@ function pageFooter()
     </div> <!-- .page -->
     <?php
 }
+
+
+
+function pageIcons() {
+    echo '
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700">
+    ';
+}
+
+
+function backLink($url, $label) {
+    $safeUrl = htmlspecialchars($url, ENT_QUOTES, 'UTF-8');
+    $safeLabel = htmlspecialchars($label, ENT_QUOTES, 'UTF-8');
+
+    echo '
+        <a href="' . $safeUrl . '" class="back-link">
+            <span class="back-icon">
+                <span class="material-symbols-outlined">arrow_back</span>
+            </span>
+            <span class="back-text">' . $safeLabel . '</span>
+        </a>
+    ';
+}
+
+
 ?>

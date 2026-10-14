@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
 /* =========================
    VARIABLES
 ========================= */
@@ -44,6 +46,10 @@
 
 .category-religious {
   background: #c68af0;
+}
+
+.category-community {
+  background: #4c91d9;
 }
 
 /* =========================
@@ -224,46 +230,44 @@ body {
 }
 
 
-/* Name + ID */
 
+/* Name + ID */
 .user-info {
   display: flex;
   flex-direction: column;
   align-items: flex-end;
-
   text-align: right;
 }
 
-
 /* Student name */
-
 .user strong {
   font-size: 14px;
   font-weight: 600;
 }
 
-
 /* Student ID */
-
-.user small {
-  font-size: 10px;
+.user-info .user-id {
+  font-size: 14px;
+  font-weight: 600;
   color: var(--muted);
 }
 
-
 /* View Profile */
+.user-info .profile-link {
+  font-size: 12px;
+  font-weight: 600;
+}
 
-.user small a {
+.user-info .profile-link a {
   color: var(--navy);
-
   text-decoration: none;
-
   font-weight: 500;
 }
 
-.user small a:hover {
+.user-info .profile-link a:hover {
   text-decoration: underline;
 }
+
 
 
 /* =========================

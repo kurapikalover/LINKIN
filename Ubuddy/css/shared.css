@@ -3,18 +3,49 @@
    BACK BUTTON
 ========================= */
 
-.back-button {
-  display: inline-block;
-  margin-bottom: 10px;
-  color: var(--navy);
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    text-decoration: none;
+    margin-bottom: 10px;
 }
 
-.back-button:hover {
-  color: var(--orange);
+.back-icon {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background-color: #426fb1;
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: background-color 0.2s ease;
 }
+
+.back-icon .material-symbols-outlined {
+    font-size: 22px;
+    line-height: 1;
+}
+
+.back-text {
+    font-family: 'Poppins', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: #426fb1;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover .back-icon {
+    background-color: #263f63;
+}
+
+.back-link:hover .back-text {
+    color: #263f63;
+}
+
 
 /* =========================
    SEARCH BAR
@@ -72,4 +103,18 @@
 
 .filter-btn:hover {
   color: var(--navy);
+}
+
+.user-info .user-id,
+.user-info .profile-link {
+    display: block;
+}
+
+.user-info .profile-link a {
+    color: #172a46;
+    text-decoration: none;
+}
+
+.user-info .profile-link a:hover {
+    text-decoration: underline;
 }

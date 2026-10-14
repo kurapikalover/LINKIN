@@ -10,8 +10,7 @@ require_once __DIR__ . '/../php/functions.php';
 
   <title>ÜBuddy</title>
 
-  <!-- Home and notification icons -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home,notifications,search,filter_alt">
+  <?php pageIcons(); ?>
 
   <!-- Base CSS -->
   <link rel="stylesheet" href="../css/base.css">
@@ -33,7 +32,7 @@ require_once __DIR__ . '/../php/functions.php';
 
       <div class="events-page">
 
-        <a href="../pages/homepage.php" class="back-button">← Home</a>
+        <?php backLink('homepage.php', 'Home'); ?>
 
         <h1 class="events-title">Events</h1>
 

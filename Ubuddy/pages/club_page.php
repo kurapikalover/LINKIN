@@ -1,6 +1,31 @@
 <?php
 require_once __DIR__ . '/../php/functions.php';
+require_once __DIR__ . '/../php/db.php';
+
+$sql = "
+    SELECT
+        c.club_id,
+        c.club_name,
+        cat.category_name
+    FROM public.club AS c
+    LEFT JOIN public.category AS cat
+        ON c.category_id = cat.category_id
+    ORDER BY c.club_name;
+";
+
+$stmt = $pdo->query($sql);
+$clubs = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+$categoryClasses = [
+    'Sports' => 'category-sports',
+    'Culture' => 'category-culture',
+    'Recreational' => 'category-recreational',
+    'Arts & Creative' => 'category-arts',
+    'Religious' => 'category-religious',
+    'Community Service' => 'category-community'
+];
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -10,13 +35,13 @@ require_once __DIR__ . '/../php/functions.php';
 
   <title>ÜBuddy</title>
 
-  <!-- Home and notification icons -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home,notifications,search,filter_alt">
+  <?php pageIcons(); ?>
 
   <!-- Base CSS -->
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/shared.css">
   <link rel="stylesheet" href="../css/club_page.css">
+
 </head>
 
 <body>
@@ -31,7 +56,7 @@ require_once __DIR__ . '/../php/functions.php';
 
     <div class="clubs-page">
 
-      <a href="../pages/homepage.php" class="back-button">← Home</a>
+      <?php backLink('homepage.php', 'Home'); ?>
 
       <h1 class="clubs-title">Clubs</h1>
 
@@ -65,27 +90,31 @@ require_once __DIR__ . '/../php/functions.php';
       <div class="filter-menu" id="filterMenu">
 
         <button type="button" class="filter-option active" data-category="all">
-          All
+            All
         </button>
 
         <button type="button" class="filter-option" data-category="Sports">
-          Sports
-        </button>
-
-        <button type="button" class="filter-option" data-category="Arts and Crafts">
-          Arts and Crafts
-        </button>
-
-        <button type="button" class="filter-option" data-category="Recreational">
-          Recreational
+            Sports
         </button>
 
         <button type="button" class="filter-option" data-category="Culture">
-          Culture
+            Culture
+        </button>
+
+        <button type="button" class="filter-option" data-category="Recreational">
+            Recreational
+        </button>
+
+        <button type="button" class="filter-option" data-category="Arts & Creative">
+            Arts &amp; Creative
         </button>
 
         <button type="button" class="filter-option" data-category="Religious">
-          Religious
+            Religious
+        </button>
+
+        <button type="button" class="filter-option" data-category="Community Service">
+            Community Service
         </button>
 
       </div>
@@ -93,59 +122,37 @@ require_once __DIR__ . '/../php/functions.php';
 
       <div class="club-grid">
 
-        <a href="#" class="club-card">
-          <div class="club-card-image">
-            Club Image
-          </div>
+          <?php foreach ($clubs as $club): ?>
 
-          <h2>Swimming Club</h2>
-          <p class="category category-sports">Sports</p>
-        </a>
+              <?php
+              $clubName = $club['club_name'];
+              $categoryName = $club['category_name'] ?? 'Uncategorised';
+              $categoryClass = $categoryClasses[$categoryName] ?? '';
+              ?>
 
-        <a href="#" class="club-card">
-          <div class="club-card-image">
-            Club Image
-          </div>
+              <a
 
-          <h2>Japan Culture Club</h2>
-          <p class="category category-culture">Culture</p>
-        </a>
+              href="club.php?id=<?= (int) $club['club_id'] ?>"
+              class="club-card"
+              data-category="<?= htmlspecialchars($categoryName, ENT_QUOTES, 'UTF-8') ?>"
 
-        <a href="#" class="club-card">
-          <div class="club-card-image">
-            Club Image
-          </div>
+              >
 
-          <h2>Gardening Club</h2>
-          <p class="category category-recreational">Recreational</p>
-        </a>
+                  <div class="club-card-image">
+                      Club Image
+                  </div>
 
-        <a href="#" class="club-card">
-          <div class="club-card-image">
-            Club Image
-          </div>
+                  <h2>
+                      <?= htmlspecialchars($clubName, ENT_QUOTES, 'UTF-8') ?>
+                  </h2>
 
-          <h2>Crochet Society Club</h2>
-          <p class="category category-arts">Arts and Crafts</p>
-        </a>
+                  <p class="category <?= htmlspecialchars($categoryClass, ENT_QUOTES, 'UTF-8') ?>">
+                      <?= htmlspecialchars($categoryName, ENT_QUOTES, 'UTF-8') ?>
+                  </p>
 
-        <a href="#" class="club-card">
-          <div class="club-card-image">
-            Club Image
-          </div>
+              </a>
 
-          <h2>BJFA Club</h2>
-          <p class="category category-culture">Culture</p>
-        </a>
-
-        <a href="../pages/club.php" class="club-card">
-          <div class="club-card-image">
-            Club Image
-          </div>
-
-          <h2>Muslim Youth Club</h2>
-          <p class="category category-religious">Religious</p>
-        </a>
+          <?php endforeach; ?>
 
       </div>
 

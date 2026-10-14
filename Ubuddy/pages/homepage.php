@@ -9,14 +9,16 @@ require_once __DIR__ . '/../php/functions.php';
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>UBuddy - Home</title>
 
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home,notifications,search,filter_alt">
-  
+  <?php pageIcons(); ?>
+
   <!-- Your own styles (separate from the login page's style.css) -->
   <link rel="stylesheet" href="../css/base.css">
   <link rel="stylesheet" href="../css/shared.css">
   <link rel="stylesheet" href="../css/home.css">
 
 </head>
+
+
 <body>
   <div class="page">
 
