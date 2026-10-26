@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>ÜBuddy</title>
+
+  <!-- Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Home and notification icons -->
+   <!-- Event, Membership, Interview, Application icons for Notification page --> 
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home,notifications,calendar_month,groups_2,frame_person_mic,document_scanner">
+
+  <!-- Base CSS -->
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/shared.css">
+<link rel="stylesheet" href="../css/notification.css">
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- =========================
+         TOP TABS
+    ========================== -->
+    <nav class="tabs">
+
+      <a href="../pages/homepage.php" class="tab-icon material-symbols-outlined">
+        home
+      </a>
+
+      <a href="notification.html" class="tab-icon-bell material-symbols-outlined">
+        notifications
+      </a>
+
+      <span class="spacer"></span>
+
+      <a href="myactivity.html" class="tab">
+        My Activity
+      </a>
+
+      <a href="myapplication.html" class="tab">
+        My Applications
+      </a>
+
+      <a href="#" class="tab">
+        My Achievements
+      </a>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN WHITE SHEET
+    ========================== -->
+    <div class="sheet">
+
+      <!-- =========================
+           HEADER
+      ========================== -->
+      <header class="header">
+
+        <!-- Logo -->
+        <div class="logo">
+          ÜBuddy
+          <small>Let UBuddy be your buddy</small>
+        </div>
+
+
+        <!-- Student Profile -->
+        <div class="user">
+
+          <div class="user-info">
+            <strong>Student Name</strong>
+
+            <small>
+              2486023 ·
+              <a href="#">View Profile</a>
+            </small>
+          </div>
+
+          <div class="avatar">
+            <!-- Profile image will go here later -->
+          </div>
+
+        </div>
+
+      </header>
+
+
+      <!-- =========================
+           PAGE CONTENT
+           Individual pages go here
+      ========================== -->
+      <main class="page-content">
+      <div class="notification-page">
+
+          <a href="../pages/homepage.php" class="back-button">← Home</a>
+
+          <h1 class="notifications-title">Notifications</h1>
+          <div class="notifications-layout">
+          <div class = "notification-list">
+           <div class="info-notification event ">
+            <!-- Event Icon -->
+            <a href="#" class="notification-icon material-symbols-outlined">calendar_month</a>
+            <div class="notification-content">
+            <div class="notification-header">
+            <h2>Event</h2>
+            <span class="notification-time"> Now </span> 
+            </div>
+            <p>BJFA club will be holding Yukata Workshop this week </p>
+            </div>
+
+            <!-- Unread dot -->
+            <span class="badge"></span>
+        </div>
+
+
+           <div class="info-notification membership ">
+            <!--  Membership Icon -->
+            <a href="#" class="notification-icon material-symbols-outlined">groups_2</a>
+            <div class="notification-content">
+            <div class="notification-header">
+            <h2>Membership</h2>
+            <span class="notification-time"> 13/08/2026 </span> 
+            </div>
+            <p>Membership Update: You have succesfully joined the BJFA club  </p>
+            </div>
+            <!-- already read the notification -->
+            </div>
+
+            <div class="info-notification interview ">
+            <!--  Interview  Icon -->
+            <a href="#" class="notification-icon material-symbols-outlined">frame_person_mic</a>
+            <div class="notification-content">
+            <div class="notification-header">
+            <h2>Interview</h2>
+            <span class="notification-time"> 13/08/2026 </span> 
+            </div>
+            <p>Committee interview Update: Congratulation, You passed the interview </p>
+            </div>
+            </div>
+
+            <div class="info-notification interview">
+            <!--  Interview  Icon -->
+            <a href="#" class="notification-icon material-symbols-outlined">frame_person_mic</a> </span>
+            <div class="notification-content">
+            <div class="notification-header">
+            <h2>Interview</h2>
+            <span class="notification-time"> 10/08/2026 </span> 
+            </div>
+            <p>Interview Required: Your committee application requires an interview. Please check your application for details </p>
+            </div>
+            </div>
+
+            <div class="info-notification application">
+            <!--  Application  Icon -->
+            <a href="#" class="notification-icon material-symbols-outlined">document_scanner</a>
+            <div class="notification-content">
+            <div class="notification-header">
+            <h2>Application</h2>
+            <span class="notification-time"> 10/08/2026 </span> 
+            </div>
+            <p>Application Update: Your application to BJFA-UBD Club has been accepted</p>
+            </div>
+            </div>
+        </div>
+        </div>
+          </div>
+
+      </main>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

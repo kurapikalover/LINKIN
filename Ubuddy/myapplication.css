@@ -1,0 +1,173 @@
+/* change the background of Home's tab to navy */
+.tab-icon {
+  width: 40px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--navy);
+
+  border-radius: 12px 12px 0 0;
+
+  text-decoration: none;
+  color: var(--white);
+}
+
+/* change my application tab's background to white  */
+a.tab[href="myapplication.html"] {
+    background: var(--white);
+    color: var(--navy);
+
+    font-size: 12px;
+    font-weight: 600;
+
+    padding: 9px 18px;
+
+    border-radius: 16px 16px 0 0;
+
+    text-decoration: none;
+}
+
+.back-button {
+  display: inline-block;
+  margin-bottom: 20px;
+
+  color: var(--navy);
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.back-button:hover {
+  color: var(--orange);
+}
+
+/* Page title */
+
+.myapplication-title {
+  margin: 0 0 20px;
+
+  text-align: center;
+
+  font-size: 50px;
+  font-weight: 700;
+}
+
+
+/* My Application layout */
+.myapplication-layout {
+  width: 900 px;
+  height: px;
+  background-color:#bcdcff;
+  padding: clamp(10px, 2vw, 20px);
+   margin: clamp(5px, 1vw, 15px);
+  box-sizing: border-box;
+  border-radius: 40px;
+  corner-shape: squircle; /* Smooths out the curvature like an iOS app icon */
+}
+/* scroll-bar */
+.application-list{
+  max-height: 350px; 
+  overflow-y: auto; /*scrollbar appears only when content overflow */
+}
+
+.info-section {
+  display: flex; 
+  flex-direction: column; /* Forces content to stack vertically */
+  align-items: stretch; /*informations fill the width */
+  gap: 10px;
+  background-color: #fff;
+  padding: clamp(10px, 1.5vw, 15px);
+  margin: clamp(5px, 1vw, 15px); 
+  box-sizing: border-box;
+  border-radius: 40px;
+  corner-shape: squircle;
+}
+
+/* This targets the wrapper holding your row text */
+.inline-row {
+  display: flex;
+  justify-content: space-between;    /* club name on the left, status on the right */
+  align-items:flex-start;  
+  gap: 4px 12px;
+  width: 100%;            /* Allows it to use the full width if needed */
+}
+
+/* name + date on one line, wraps if the name is long */
+.app-title {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 10px;
+}
+
+.inline-row h2 {
+  font-size: 29px; 
+  margin: 0;
+  white-space: normal;
+}
+
+.inline-row .apply-date {
+  font-weight: bold;
+  font-size: 19px;
+  color: #b4b4b4; 
+}
+.apply-date::before {
+  content: "•";
+}
+
+/* type and position directly under the title */
+/* .app-main p {
+  margin: 4px 0 0;
+} */
+ /* or */
+.app-main {
+  align-self: flex-start;      /* overrides any centering */
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+.app-main p {
+  margin: 0;
+  margin-top: 6px;          /* space between line 1 and the paragraph */
+  font-weight: bold;
+  color: #555;
+  font-size: 16px;
+}
+
+.inline-row .accepted{
+  color: #858a4f;
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: 10px;       /* keeps it inside the white box */
+}
+.inline-row .rejected{
+  color: #ab2303;
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: 10px;       /* keeps it inside the white box */
+}
+.inline-row .pending{
+  color: #ff8d17;
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: 10px;       /* keeps it inside the white box */
+}
+
+/* per-type colors */
+.status .accepted  { --type-color: #858a4f; }
+.status .rejected { --type-color: #ab2303; }
+.status .pending { --type-color: #ff8d17 }
+
+.inline-row {
+  color: var(--type-color);
+  font-weight: bold;
+  font-size: 20px;
+  margin-right: 10px;  /* keeps it inside the white box */
+}
+
+
+
+

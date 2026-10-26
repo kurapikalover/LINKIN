@@ -1,0 +1,280 @@
+.tab {
+  background: var(--navy);
+  color: var(--white);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  padding: 9px 18px;
+
+  border-radius: 16px 16px 0 0;
+
+  text-decoration: none;
+}
+
+
+/* change the background of Home's tab to navy */
+.tab-icon {
+  width: 40px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--navy);
+
+  border-radius: 12px 12px 0 0;
+
+  text-decoration: none;
+  color: var(--white);
+}
+
+/* change my activity tab's background to white  */
+a.tab[href="myactivity.html"] {
+    background: var(--white);
+    color: var(--navy);
+
+    font-size: 12px;
+    font-weight: 600;
+
+    padding: 9px 18px;
+
+    border-radius: 16px 16px 0 0;
+
+    text-decoration: none;
+}
+
+.back-button {
+  display: inline-block;
+  margin-bottom: 20px;
+
+  color: var(--navy);
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.back-button:hover {
+  color: var(--orange);
+}
+
+/* Page title */
+
+.myactivity-title {
+  margin: 0 0 20px;
+
+  text-align: center;
+
+  font-size: 50px;
+  font-weight: 700;
+}
+
+.container{
+ display:flex;
+ flex-wrap: nowrap; 
+ gap:10px;
+ align-items: flex-start; /*panels only as tall as their content */
+}
+
+/* My clubs and events layout */
+.clubsandevents-layout {
+  flex: 2 1 0; 
+  min-width: 0;
+  background-color:#bcdcff;
+  padding: 20px;
+  margin: 15px;
+  box-sizing: border-box;
+  border-radius: 40px;
+  corner-shape: squircle; /* Smooths out the curvature like an iOS app icon */
+}
+
+.info-section  {
+  display: flex; 
+  flex-direction: column; /* Forces content to stack vertically */
+  align-items: stretch; /*informations fill the width */
+  gap: 10px;
+  background-color: #fff;
+  padding: 15px;
+  margin: 15px;
+  box-sizing: border-box;
+  border-radius: 40px;
+  corner-shape: squircle;
+  
+}
+
+/* gap between club name and status */
+.inline-row {
+  display: flex;
+  justify-content: space-between;    /* club name on the left, status on the right */
+  align-items:flex-start;  
+  gap: 4px 12px;
+  width: 100%;            /* Allows it to use the full width if needed */
+}
+
+.inline-row h3 {
+  margin: 0;
+  white-space: normal; /* replaces nowrap so long names can wrap */
+}
+
+.inline-row span {
+  white-space: nowrap; /*keeps "Upcoming" in one piece instead of kana cut */
+}
+.inline-row .upcoming {
+  color:#21663a;
+  font-weight: bold;
+  /* background-color: #ddf3e4; */
+}
+
+.inline-row .ongoing {
+  color:#855b00;
+  font-weight: bold;
+  /* background-color: #fff0cc; */
+}
+.inline-row .completed{
+  color:#4b5563;
+  font-weight: bold;
+}
+.inline-row .cancelled{
+  color:#991b1b;
+  font-weight: bold;
+}
+
+.details-section {
+  align-self: flex-start;      /* overrides any centering */
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.details-section p {
+  margin: 0 0 5px 0;
+  font-weight: bold;
+  color: #696767;
+}
+
+.details-section small {
+  display: block;
+  color:#b4b4b4;
+}
+
+.memberships-layout {
+  flex: 2 1 0;
+  min-width: 0;
+  background-color:#bcdcff;
+  padding: 20px;
+  margin: 15px;
+  box-sizing: border-box;
+  border-radius: 40px;
+  corner-shape: squircle; /* Smooths out the curvature like an iOS app icon */
+}
+
+/* scale the text and padding down as the window gets smaller */
+.clubsandevents-layout,
+.memberships-layout{
+   padding: clamp(10px, 2vw, 20px);
+   margin: clamp(5px, 1vw, 15px);
+}
+
+.clubsandevents-list,
+.memberships-list{
+  max-height: 350px; 
+  overflow-y: auto; /*scrollbar appears only when content overflow */ 
+}
+.memberships-info {
+  display: flex;            /* logo and text side by side */
+  align-items: center;      /* vertically centered */
+  gap: 20px;                /* space between logo and text */
+  height: fit-content;     /* box shrinks to fit its content */
+  height: 100%;
+  background-color: #fff;
+  padding: 15px;
+  margin: 15px;
+  box-sizing: border-box;
+  border-radius: 40px;
+  corner-shape: squircle;
+}
+
+.info-section,
+.memberships-info {
+   padding: clamp(10px, 1.5vw, 15px);
+   margin: clamp(5px, 1vw, 15px);  
+}
+
+.logo-container {
+  /* Crucial: Width and height must be exactly the same for a perfect circle */
+  /* width: 100px; 
+  height: 100px;  */
+  /* clamp(min, preferred, max) means logo is 110px on wide screen, scales down with the window but never goes below min 60px */
+  width: clamp(60px, 8vw, 110px);
+  height: clamp(60px, 8vw, 110px);
+
+  /* Makes the container a circle */
+  border-radius: 50%; 
+  
+  /* Prevents the image from spilling out of the circle */
+  overflow: hidden; 
+  
+  /* Optional styling to make it look like a club badge */
+  border: 4px solid #0056b3; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15); 
+  flex-shrink: 0; /* the circle keeps ots shape eventho the page kana narrow */   
+}
+
+.club-logo {
+  width: 100%;
+  height: 100%;
+  
+  /* Forces the image to fill the circle without stretching awkwardly */
+  object-fit: cover; 
+}
+
+.memberships-info .details-section {
+  min-width: 0;/*lets the text shrink and wrap */
+  overflow-wrap: anywhere;
+}
+.memberships-info .details-section h3 {
+  margin:0; 
+  color: #0f4a89;
+  /* font-size: 22px; */
+  font-size: clamp(15px, 2vw, 22px);
+}
+
+.memberships-info .details-section p {
+  margin:0;
+  color: #6f6e6e;
+  /* font-size: 19.4px; */
+  font-size: clamp(13px, 1.7vw, 19.4px);
+}
+
+.memberships-info .details-section .p1 {
+  color: #88bef9;
+  font-size: clamp(13px, 1.7vw, 19.4px);
+}
+/* keep the word Joined and the date on one line, also add space abpve it */
+.memberships-info .details-section p.p2 {
+  white-space: nowrap; /*never wrap onto a second line */
+  margin-top: 25px; /* space between Position and Joined Date*/
+  color: #b4b4b4;
+  font-size: clamp(12px, 1.3vw, 18px);
+  font-weight: bold;
+}
+
+@media (max-width: 700px) {
+  .clubsandevents-layout,
+  .memberships-layout {
+    flex-basis: 100%;        /* each panel takes the full width */
+    margin: 10px 0;
+    padding: 15px;
+  }
+
+  .info-section,
+  .memberships-info {
+    margin: 10px 0;
+  }
+
+  .logo-container {
+    width: 100px;
+    height: 100px;
+  }
+}

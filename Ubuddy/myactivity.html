@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>ÜBuddy</title>
+
+  <!-- Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Home and notification icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home,notifications,calendar_month,groups_2,frame_person_mic,document_scanner">
+
+  <!-- Base CSS -->
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/shared.css">
+<link rel="stylesheet" href="../css/myactivity.css">
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- =========================
+         TOP TABS
+    ========================== -->
+    <nav class="tabs">
+
+      <a href="../pages/homepage.php" class="tab-icon material-symbols-outlined">
+        home
+      </a>
+
+      <a href="notification.html" class="tab-icon-bell material-symbols-outlined">
+        notifications
+      </a>
+
+      <span class="spacer"></span>
+
+      <a href="myactivity.html" class="tab">
+        My Activity
+      </a>
+
+      <a href="myapplication.html" class="tab">
+        My Applications
+      </a>
+
+      <a href="#" class="tab">
+        My Achievements
+      </a>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN WHITE SHEET
+    ========================== -->
+    <div class="sheet">
+
+      <!-- =========================
+           HEADER
+      ========================== -->
+      <header class="header">
+
+        <!-- Logo -->
+        <div class="logo">
+          ÜBuddy
+          <small>Let UBuddy be your buddy</small>
+        </div>
+
+
+        <!-- Student Profile -->
+        <div class="user">
+
+          <div class="user-info">
+            <strong>Student Name</strong>
+
+            <small>
+              2486023 ·
+              <a href="#">View Profile</a>
+            </small>
+          </div>
+
+          <div class="avatar">
+            <!-- Profile image will go here later -->
+          </div>
+
+        </div>
+
+      </header>
+
+
+      <!-- =========================
+           PAGE CONTENT
+           Individual pages go here
+      ========================== -->
+      <main class="page-content">
+
+        <div class="myactivity-page">
+
+          <a href="../pages/homepage.php" class="back-button">← Home</a>
+          
+
+          <h1 class="myactivity-title">My Activity</h1>
+          <div class ="container">
+            <div class="clubsandevents-layout">
+            <!-- Clubs and Events INFORMATION -->
+              <h2>Clubs and Events</h2>
+              <div class="clubsandevents-list">
+              <div class="info-section">
+  
+              <!-- Row 1: Club Name left and Status right -->
+              <div class="inline-row">
+              <h3>BJFA-UBD CLUB</h3>
+              <span class="upcoming"> Upcoming</span>
+              </div>
+
+              <!-- Row 2: Event Details (Perfectly Left-Aligned under Row 1 club name) -->
+              <div class="details-section">
+              <p>Yukata Workshop</p>
+              <small>16th October 2026 <br> UTH Building, Room 5</small>
+              </div>
+              </div>
+
+              <div class="info-section">
+                <div class="inline-row">
+                  <h3>Club Name </h3>
+                  <span class="ongoing">Ongoing</span>
+                </div>
+
+              <div class="details-section">
+              <p> Event Name </p>
+              <small> 15th October 2026 <br> Venue </small>
+              </div>
+              </div>
+
+              <div class="info-section">
+              <div class="inline-row">
+              <h3> KSVG41 CLUB </h3>
+              <span class="completed">Completed</span>
+              </div>
+
+              <div class="details-section">
+              <p> Opening Ceremony </p>
+              <small> 10th October 2026 <br> Central Lecture Theatre, Room 1.13 </small>
+              </div>
+              </div>
+            </div>
+            </div>
+          
+          
+          <!-- Right Side-->
+          <div class="memberships-layout">
+            <!-- Memberships Information -->
+            <h2>Memberships</h2>
+            <div class ="memberships-list">
+
+            <div class="memberships-info">
+            <div class="logo-container">
+            <img src="#" alt="Club Logo" class="club-logo"> 
+            </div> 
+
+            <div class="details-section">
+            <h3> KSVG41 club</h3>
+               <p> Member</p>
+               <!-- missing p1 -->
+               <p class="p2">Joined 09/08/2026</p>
+            </div>
+            </div> 
+
+            <div class="memberships-info">
+            <div class="logo-container">
+            <img src="#" alt="Club Logo" class="club-logo"> 
+            </div> 
+
+
+            <div class="details-section">
+            <h3> BJFA-UBD club</h3>
+               <p> Committee</p>
+               <!-- Committee has position unlike Member -->
+               <p class= "p1"> Member of Media</p> 
+               <p class="p2"> Joined 09/08/2026</p>
+            </div>
+            </div>
+          </div>
+          </div>
+          </div>
+          </div>
+        </div>
+      </main>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

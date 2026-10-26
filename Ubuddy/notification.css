@@ -1,0 +1,151 @@
+/* change the background of Home's tab to navy */
+.tab-icon {
+  width: 40px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--navy);
+
+  border-radius: 12px 12px 0 0;
+
+  text-decoration: none;
+  color: var(--white);
+}
+
+/* change my notification tab's background to white  */
+.tab-icon-bell {
+  width: 40px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--orange);
+
+  border-radius: 12px 12px 0 0;
+
+  text-decoration: none;
+  color: var(--white);
+}
+
+.back-button {
+  display: inline-block;
+  margin-bottom: 20px;
+
+  color: var(--navy);
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.back-button:hover {
+  color: var(--orange);
+}
+
+/* Page title */
+
+.notifications-title {
+  margin: 0 0 20px;
+
+  text-align: center;
+
+  font-size: 50px;
+  font-weight: 700;
+}
+
+
+/* My Notification layout */
+.notifications-layout {
+  width: 900 px;
+  height: px;
+  background-color:#bcdcff;
+  padding: 20px;
+  margin: 15px;
+  box-sizing: border-box;
+  border-radius: 40px;
+  corner-shape: squircle; /* Smooths out the curvature like an iOS app icon */
+}
+/* scroll-bar */
+.notification-list{
+  max-height: 350px; 
+  overflow-y: auto; /*scrollbar appears only when content overflow */
+}
+
+/* default colours */
+.info-notification {
+  display: flex;            /* logo and text side by side */
+  align-items: center;      /* vertically centered */
+  gap: 20px;                /* space between logo and text */
+  height: fit-content;     /* box shrinks to fit its content */
+  height: 100%;
+  background-color: #fff;
+  padding: 15px;
+  margin: 15px;
+  box-sizing: border-box;
+  border-radius: 40px;
+  corner-shape: squircle;
+  --type-color: var(--navy);
+}
+
+/* per-type colors */
+.info-notification.interview   { --type-color: #ab2303; }
+.info-notification.application { --type-color: #7b3fa0; }
+.info-notification.event       { --type-color: #46869a; }
+.info-notification.membership  { --type-color: #0f4a89; }
+
+
+.notification-icon {
+/* Adjust notification icon size */  
+  font-size:70px;
+  color: var(--type-color);
+  /* if the bar under the icon is a border, color it too: */
+  border-bottom-color: var(--type-color);
+}
+
+/* text block takes all remaining space, which pushes the badge to the right */
+.notification-content {
+  flex: 1;
+  text-align: left;
+}
+
+.notification-header {
+  /* affecting notification title and notification time */
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  color: #b4b4b4;
+  font-weight: bold;
+}
+
+/* shared rules use the variable */
+.notification-header h2,
+.notification-content p {
+  /* affecting notification title only */
+  margin: 0;
+  color: var(--type-color);
+}
+
+.notification-content p {
+  margin-top: 6px;          /* space between line 1 and the paragraph */
+  color:#696767;
+}
+
+.notification-time::before {
+  content: "•";
+  margin-right: 8px;
+   color:#b4b4b4; 
+}
+
+/* orange unread dot */
+.badge {
+  width: 18px;
+  height: 18px;
+  background-color: orange;
+  border-radius: 50%;
+  flex-shrink: 0;           /* keeps it a circle */
+  margin-right: 10px;       /* keeps it inside the white box */
+  margin-top: -25px;
+}

@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>ÜBuddy</title>
+
+  <!-- Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Home and notification icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home,notifications,calendar_month,groups_2,frame_person_mic,document_scanner">
+
+  <!-- Base CSS -->
+<link rel="stylesheet" href="../css/base.css">
+<link rel="stylesheet" href="../css/shared.css">
+<link rel="stylesheet" href="../css/myapplication.css">
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- =========================
+         TOP TABS
+    ========================== -->
+    <nav class="tabs">
+
+      <a href="../pages/homepage.php" class="tab-icon material-symbols-outlined">
+        home
+      </a>
+
+      <a href="notification.html" class="tab-icon-bell material-symbols-outlined">
+        notifications
+      </a>
+
+      <span class="spacer"></span>
+
+      <a href="myactivity.html" class="tab">
+        My Activity
+      </a>
+
+      <a href="myapplication.html" class="tab">
+        My Applications
+      </a>
+
+      <a href="#" class="tab">
+        My Achievements
+      </a>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN WHITE SHEET
+    ========================== -->
+    <div class="sheet">
+
+      <!-- =========================
+           HEADER
+      ========================== -->
+      <header class="header">
+
+        <!-- Logo -->
+        <div class="logo">
+          ÜBuddy
+          <small>Let UBuddy be your buddy</small>
+        </div>
+
+
+        <!-- Student Profile -->
+        <div class="user">
+
+          <div class="user-info">
+            <strong>Student Name</strong>
+
+            <small>
+              2486023 ·
+              <a href="#">View Profile</a>
+            </small>
+          </div>
+
+          <div class="avatar">
+            <!-- Profile image will go here later -->
+          </div>
+
+        </div>
+
+      </header>
+
+
+      <!-- =========================
+           PAGE CONTENT
+           Individual pages go here
+      ========================== -->
+      <main class="page-content">
+
+        <div class="myapplication-page">
+
+          <a href="../pages/homepage.php" class="back-button">← Home</a>
+
+          <h1 class="myapplication-title">My Applications</h1>
+          
+          <div class="myapplication-layout">
+          <div class="application-list">
+              <div class="info-section">
+              <div class="inline-row">
+
+              <div class="app-main">
+                <div class="app-title">
+                  <h2>Muslim Youth Club</h2>
+                  <span class="apply-date"> 10/08/2026 </span> 
+                </div>
+                <p>Application type: Member <br> Position: - </p> 
+              </div>
+
+              <span class= "status pending">Pending</span>
+              </div>
+              </div>
+                      
+              <div class="info-section">
+              <div class="inline-row">
+ 
+              <div class="app-main">
+                <div class="app-title">
+                  <h2>KSVG41 club</h2>
+                  <span class="apply-date"> 10/08/2026 </span> 
+                </div>
+                <p>Application type: Member <br> Position: - </p> 
+              </div>
+              <!-- make separate class for word accepted,rejected,pending, so its easy to give diff color -->
+              <!-- Application type and Position in one line since same style for font -->
+              <span class= "status accepted">Accepted</span>
+              </div>
+              </div>
+
+
+              <div class="info-section">
+              <div class="inline-row">
+              
+              <div class="app-main">
+                <div class="app-title">
+                <h2>BJFA-UBD CLUB</h2>
+                <span class="apply-date"> 10/08/2026 </span> 
+                </div>
+                <p>Application type: Committee <br> Position: Member of Media</p> 
+                </div>
+                <span class= "status rejected">Rejected</span>
+              </div>
+              </div>
+          </div>  
+          </div>
+      </main>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
