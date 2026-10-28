@@ -1,3 +1,7 @@
+
+<?php
+require_once __DIR__ . '/../php/functions.php';
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,99 +10,22 @@
 
   <title>ÜBuddy</title>
 
-  <!-- Poppins -->
-  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
-
-  <!-- Home and notification icons -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home,notifications">
-
-  <!-- Base CSS -->
   <link rel="stylesheet" href="../css/base.css">
+
+   <?php pageIcons(); ?>
 </head>
 
 <body>
 
-  <div class="page">
+  <?php pageHeader(); ?>
 
-    <!-- =========================
-         TOP TABS
-    ========================== -->
-    <nav class="tabs">
+  <main class="page-content">
 
-      <a href="#" class="tab-icon material-symbols-outlined">
-        home
-      </a>
+    <!-- Page-specific content goes here -->
 
-      <a href="#" class="tab-icon-bell material-symbols-outlined">
-        notifications
-      </a>
+  </main>
 
-      <span class="spacer"></span>
-
-      <a href="#" class="tab">
-        My Activity
-      </a>
-
-      <a href="#" class="tab">
-        My Applications
-      </a>
-
-      <a href="#" class="tab">
-        My Achievements
-      </a>
-
-    </nav>
-
-
-    <!-- =========================
-         MAIN WHITE SHEET
-    ========================== -->
-    <div class="sheet">
-
-      <!-- =========================
-           HEADER
-      ========================== -->
-      <header class="header">
-
-        <!-- Logo -->
-        <div class="logo">
-          ÜBuddy
-          <small>Let UBuddy be your buddy</small>
-        </div>
-
-
-        <!-- Student Profile -->
-        <div class="user">
-
-          <div class="user-info">
-            <strong>Student Name</strong>
-
-            <small>
-              2486023 ·
-              <a href="#">View Profile</a>
-            </small>
-          </div>
-
-          <div class="avatar">
-            <!-- Profile image will go here later -->
-          </div>
-
-        </div>
-
-      </header>
-
-
-      <!-- =========================
-           PAGE CONTENT
-           Individual pages go here
-      ========================== -->
-      <main class="page-content">
-
-      </main>
-
-    </div>
-
-  </div>
+  <?php pageFooter(); ?>
 
 </body>
 </html>

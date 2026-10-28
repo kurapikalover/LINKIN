@@ -1,18 +1,8 @@
 
 <?php
 
-// Escape text before displaying it in HTML.
-function clubEscape($value)
-{
-    return htmlspecialchars(
-        (string) ($value ?? ''),
-        ENT_QUOTES,
-        'UTF-8'
-    );
-}
-
 // Return the CSS class for each club category.
-function getClubCategoryClass($categoryName)
+function getClubCategoryClass($categoryName): string
 {
     $categoryClasses = [
         'Sports' => 'category-sports',
@@ -23,7 +13,7 @@ function getClubCategoryClass($categoryName)
         'Community Service' => 'category-community'
     ];
 
-    return $categoryClasses[$categoryName] ?? '';
+    return $categoryClasses[$categoryName ?? ''] ?? '';
 }
 
 // Return the Font Awesome icon for a social media platform.

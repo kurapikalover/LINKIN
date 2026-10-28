@@ -1,94 +1,180 @@
+
+/* ========================================
+   EVENTS PAGE
+======================================== */
+
 /* Page title */
-
 .events-title {
-  margin: 0 0 20px;
-
-  text-align: center;
-
-  font-size: 32px;
-  font-weight: 700;
+    margin: 0 0 20px;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--navy);
 }
 
-
-/* Search and filter */
-
-
-/* Event grid */
+/* ========================================
+   EVENT GRID
+======================================== */
 
 .event-grid {
-  display: grid;
-
-  grid-template-columns: repeat(4, 1fr);
-
-  gap: 25px 18px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px 18px;
 }
 
+/* ========================================
+   CLICKABLE EVENT CARD
+======================================== */
 
-/* Event card */
-
-.event-card {
-  color: var(--navy);
-  text-decoration: none;
+.event-card,
+.event-card:link,
+.event-card:visited {
+    display: block;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #ffffff;
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer;
 }
+
+/* Keep link styling removed when hovered or clicked */
+.event-card:hover,
+.event-card:active {
+    color: inherit;
+    text-decoration: none;
+}
+
+/* Remove link styling from card contents */
+.event-card * {
+    text-decoration: none;
+}
+
+/* Keyboard focus indicator */
+.event-card:focus-visible {
+    outline: 3px solid #648bc2;
+    outline-offset: 3px;
+}
+
+/* ========================================
+   EVENT IMAGE
+======================================== */
 
 .event-card-image {
-  width: 100%;
-  height:300px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  border-radius: 14px;
-
-  background: linear-gradient(#bfe3ff 55%, #a6c968 56%, #7a9c14);
-
-  font-size: 12px;
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+    background: #eef2f7;
 }
 
-.event-card h2 {
-  margin: 8px 0 0;
-
-  font-size: 15px;
-  font-weight: 600;
+.event-card-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
-.event-card .category {
-  margin-top: 4px;
+.event-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #8a94a3;
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
 }
 
+/* ========================================
+   EVENT CARD CONTENT
+======================================== */
 
-/* Mobile */
+.event-card-content {
+    padding: 14px;
+}
 
+.event-name {
+    margin: 0;
+    color: var(--navy);
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.event-club-name {
+    margin: 5px 0 12px;
+    color: #8a94a3;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+/* Event status badge styling is in base.css */
+.event-status-row {
+    display: flex;
+    align-items: center;
+}
+
+/* ========================================
+   MESSAGES
+======================================== */
+
+.event-message {
+    margin: 24px 0;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    color: var(--navy);
+}
+
+/* Hide cards that do not match search or filters */
+.club-card[hidden],
+.event-card[hidden] {
+    display: none !important;
+}
+
+/* Hide filter panel when closed */
+#filterPanel[hidden] {
+    display: none !important;
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 1000px) {
+    .event-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* Smaller tablet */
 @media (max-width: 800px) {
-
-  .event-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
+    .event-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
+/* ========================================
+   MOBILE
+======================================== */
 
-@media (max-width: 600px) {
+@media (max-width: 500px) {
+    .events-title {
+        font-size: 28px;
+    }
 
-  .event-title {
-    font-size: 28px;
-  }
+    .event-grid {
+        grid-template-columns: 1fr;
+    }
 
-  .event-controls {
-    flex-direction: column;
-  }
-
-  .event-search {
-    width: 100%;
-  }
-
-  .event-filter {
-    width: 100%;
-  }
-
-  .event-grid {
-    grid-template-columns: 1fr;
-  }
-
+    .event-card-image {
+        height: 220px;
+    }
 }

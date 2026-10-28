@@ -1,196 +1,466 @@
 
-/* ===== 3. NEWS BANNER ===== */
-.news {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 16px 12px 6px;
-}
-.news-banner {
-  flex: 1;
-  position: relative;
-  height: 250px;
-  border-radius: 24px;
-  color: var(--white);
-  overflow: hidden;
-  /* Replace with a real photo:
-     background: url("images/news1.jpg") center/cover; */
-  background: linear-gradient(135deg, #2b6cc4, #e0505a);
-}
-.news-banner h2 {
-  position: absolute;
-  top: 14px;
-  left: 18px;
-  margin: 0;
-  font-size: 26px;
-  text-shadow: 0 2px 6px rgba(0, 0, 0, 0.4);
-}
-.news-banner p {
-  position: absolute;
-  left: 18px;
-  bottom: 62px;
-  margin: 0;
-  max-width: 70%;
-}
-.news-banner .btn {
-  position: absolute;
-  left: 16px;
-  bottom: 16px;
-}
- 
-.dots { text-align: center; padding-bottom: 8px; }
-.dot {
-  display: inline-block;
-  width: 7px;
-  height: 7px;
-  margin: 0 2px;
-  border-radius: 50%;
-  background: var(--sky);
-}
-.dot.active { background: var(--navy); }
- 
-/* ===== BUTTONS ===== */
-.btn {
-  background: var(--orange);
-  color: var(--white);
-  border: none;
-  border-radius: 20px;
-  padding: 10px 26px;
-  font: 600 14px "Poppins", sans-serif;
-  cursor: pointer;
-}
-.btn:hover { background: #e86a0c; }
-.btn-large { font-size: 18px; padding: 12px 44px; border-radius: 24px; }
- 
-.btn-small {
-  background: var(--orange);
-  color: var(--white);
-  border: none;
-  border-radius: 14px;
-  padding: 5px 16px;
-  font: 600 12px "Poppins", sans-serif;
-  cursor: pointer;
+/* ========================================
+   GENERAL BUTTONS
+======================================== */
 
-  transition: 0.2s ease;
+.btn {
+    padding: 10px 26px;
+    border: none;
+    border-radius: 20px;
+    background: var(--orange);
+    color: var(--white);
+    font: 600 14px "Poppins", sans-serif;
+    cursor: pointer;
+}
+
+.btn:hover {
+    background: #e86a0c;
+}
+
+.btn:disabled {
+    opacity: 0.45;
+    cursor: not-allowed;
+}
+
+.btn:disabled:hover {
+    background: var(--orange);
+}
+
+.btn-large {
+    padding: 12px 44px;
+    border-radius: 24px;
+    font-size: 18px;
+}
+
+.btn-small {
+    display: inline-block;
+    padding: 5px 16px;
+    border: none;
+    border-radius: 14px;
+    background: var(--orange);
+    color: var(--white);
+    font: 600 12px "Poppins", sans-serif;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease, transform 0.2s ease;
 }
 
 .btn-small:hover {
-  background: var(--navy);
-  color: var(--white);
+    background: var(--navy);
+    color: var(--white);
 }
 
 .btn-small:active {
-  background: var(--orange);
-  color: var(--white);
-  transform: scale(0.96);
+    background: var(--orange);
+    color: var(--white);
+    transform: scale(0.96);
 }
- 
+
+/* ========================================
+   ARROWS
+======================================== */
+
 .arrow {
-  background: none;
-  border: none;
-  color: var(--navy);
-  font-size: 28px;
-  cursor: pointer;
-  padding: 4px 8px;
+    appearance: none;
+    padding: 4px 8px;
+    border: none;
+    background: transparent;
+    color: var(--navy);
+    font-size: 28px;
+    cursor: pointer;
 }
- 
-/* ===== 4. SEARCH ===== */
+
+.arrow:hover {
+    color: var(--button, #426fb1);
+}
+
+/* ========================================
+   MAIN HEADING
+======================================== */
 
 .main-title {
-  text-align: center;
-  font-size: 22px;
-  margin: 16px 0;
+    display: block;
+    width: 100%;
+    margin: 16px 0;
+    text-align: center;
+    font-size: 22px;
 }
+
+/* ========================================
+   MAIN CONTENT
+======================================== */
 
 .content {
-  padding: 10px 20px;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px 20px;
 }
 
+/* ========================================
+   HOMEPAGE SEARCH BAR
+======================================== */
+
+/* Homepage uses a wider search bar than other pages */
 .search-bar {
-  display:flex;
-  align-items: center;
-  gap: 12px;
-  max-width: 900px;
-  
+    width: 100%;
+    max-width: 900px;
 }
 
+/* Shared search-input styling is in shared.css */
 .search-input {
-  width: 825px;
-  max-width: 150%;
-
-  
+    flex: 1;
+    min-width: 0;
+    width: auto;
+    max-width: 100%;
 }
 
-
+/* Homepage-specific filter button size */
 .filter-btn {
-  font-size: 40px;
+    font-size: 40px;
 }
 
-.filter-btn:hover {
-  color: var(--navy);
-}
- 
-/* ===== 5 & 6. CARD ROWS ===== */
+/* ========================================
+   CLUBS AND EVENTS HEADINGS
+======================================== */
+
 .row-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: 18px 0 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin: 24px 0 8px;
 }
-.row-header h2 { margin: 0; font-size: 26px; }
- 
-.row-wrap { display: flex; align-items: center; gap: 4px; }
- 
-.card-row {
-  flex: 1;
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;          /* lets the row scroll sideways */
-  scroll-behavior: smooth;
-  scrollbar-width: none;     /* hide scrollbar (Firefox) */
-  padding: 4px 2px;
-}
-.card-row::-webkit-scrollbar { display: none; } /* hide scrollbar (Chrome) */
- 
-.card {
-  flex: 0 0 150px;           /* each card is 150px wide and won't shrink */
-  font-size: 13px;
-  font-weight: 600;
-}
-.card-img {
-  height: 200px;
-  border-radius: 12px;
-  margin-bottom: 6px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
-  /* Placeholder sky + hill. Replace with: background: url("images/club1.jpg") center/cover; */
-  background: linear-gradient(#bfe3ff 55%, #a6c968 56%, #7a9c14);
-}
-.tag {
-  display: inline-block;
-  margin-top: 4px;
-  padding: 2px 14px;
-  border-radius: 10px;
-  font-size: 9px;
-  color: var(--white);
-}
- 
-/* ===== 7. FEEDBACK ===== */
-.feedback {
-  text-align: center;
-  padding: 36px 20px 40px;
-  /* bagi border mcm line rah ampir Ubuddy */
-  border-top: 3px solid var(--sky);
-  margin-top: 20px;
 
+.row-header h2 {
+    margin: 0;
+    font-size: 26px;
 }
-.feedback h2 { margin: 0 0 6px; font-size: 26px; }
-.feedback p { color: var(--muted); margin: 4px 0 14px; }
-.feedback small { display: block; margin-top: 14px; color: var(--grey); }
- 
-/* ===== PHONES ===== */
+
+/* ========================================
+   HORIZONTAL CARD ROWS
+======================================== */
+
+.row-wrap {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    width: 100%;
+    min-width: 0;
+}
+
+.card-row {
+    display: flex;
+    flex: 1;
+    align-items: stretch;
+    gap: 18px;
+    min-width: 0;
+    overflow-x: auto;
+    padding: 6px 4px 16px;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}
+
+.card-row::-webkit-scrollbar {
+    display: none;
+}
+
+/* ========================================
+   HOMEPAGE CLUB CARDS
+======================================== */
+
+#clubsRow .club-card {
+    display: flex;
+    flex: 0 0 250px;
+    flex-direction: column;
+    width: 250px;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #ffffff;
+    color: var(--navy);
+    text-decoration: none;
+}
+
+#clubsRow .club-card:focus-visible,
+#eventsRow .event-card:focus-visible {
+    outline: 3px solid #648bc2;
+    outline-offset: 3px;
+}
+
+#clubsRow .club-card-image {
+    width: 100%;
+    height: 200px;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: #eef2f7;
+}
+
+#clubsRow .club-card-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#clubsRow .club-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #8a94a3;
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+}
+
+#clubsRow .club-card-content {
+    padding: 14px;
+}
+
+#clubsRow .club-card h2 {
+    margin: 0 0 10px;
+    color: var(--navy);
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+/* Homepage-specific category badge sizing.
+   Colours are defined in base.css. */
+#clubsRow .club-card .category {
+    display: inline-block;
+    max-width: 100%;
+    margin: 0;
+    padding: 5px 12px;
+    border: none;
+    border-radius: 20px;
+    color: var(--white);
+    font-family: "Poppins", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+/* ========================================
+   HOMEPAGE EVENT CARDS
+======================================== */
+
+#eventsRow .event-card {
+    display: flex;
+    flex: 0 0 250px;
+    flex-direction: column;
+    width: 250px;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #ffffff;
+    color: inherit;
+    text-decoration: none;
+}
+
+#eventsRow .event-card:hover,
+#eventsRow .event-card:active {
+    color: inherit;
+    text-decoration: none;
+}
+
+#eventsRow .event-card * {
+    text-decoration: none;
+}
+
+#eventsRow .event-card-image {
+    width: 100%;
+    height: 200px;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: #eef2f7;
+}
+
+#eventsRow .event-card-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+#eventsRow .event-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #8a94a3;
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+}
+
+#eventsRow .event-card-content {
+    padding: 14px;
+}
+
+#eventsRow .event-name {
+    margin: 0;
+    color: var(--navy);
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+#eventsRow .event-club-name {
+    margin: 5px 0 12px;
+    color: #8a94a3;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
+}
+
+#eventsRow .event-status-row {
+    display: flex;
+    align-items: center;
+}
+
+/* Status colours are in base.css.
+   Only adjust badge sizing for the homepage. */
+#eventsRow .event-status {
+    padding: 5px 12px;
+    font-size: 11px;
+    font-weight: 500;
+}
+
+/* ========================================
+   EMPTY RESULTS
+======================================== */
+
+#clubsRow > p,
+#eventsRow > p {
+    margin: 24px 0;
+    color: var(--navy);
+    font-family: "Poppins", sans-serif;
+}
+
+/* ========================================
+   FEEDBACK
+======================================== */
+
+.feedback {
+    margin-top: 20px;
+    padding: 36px 20px 40px;
+    border-top: 3px solid var(--sky);
+    text-align: center;
+}
+
+.feedback h2 {
+    margin: 0 0 6px;
+    font-size: 26px;
+}
+
+.feedback p {
+    margin: 4px 0 14px;
+    color: var(--muted);
+}
+
+.feedback small {
+    display: block;
+    margin-top: 14px;
+    color: var(--grey);
+}
+
+/* ========================================
+   PHONES
+======================================== */
+
 @media (max-width: 600px) {
-  .news-banner { height: 190px; }
-  .logo { font-size: 24px; }
-  .tab { padding: 8px 10px; font-size: 11px; }
+    .main-title {
+        padding: 0 12px;
+        text-align: center;
+        font-size: 20px;
+    }
+
+    .content {
+        padding: 10px 12px;
+    }
+
+    .search-bar {
+        width: 100%;
+    }
+
+    .search-input {
+        flex: 1;
+        min-width: 0;
+    }
+
+    .logo {
+        font-size: 24px;
+    }
+
+    .tab {
+        padding: 8px 10px;
+        font-size: 11px;
+    }
+
+    .row-header h2 {
+        font-size: 23px;
+    }
+
+    /* Keep homepage cards horizontally scrollable */
+    #clubsRow .club-card,
+    #eventsRow .event-card {
+        flex-basis: 200px;
+        width: 200px;
+    }
+
+    #clubsRow .club-card-image,
+    #eventsRow .event-card-image {
+        height: 145px;
+    }
+
+    .feedback {
+        padding: 30px 16px 36px;
+    }
+
+    .feedback h2 {
+        font-size: 23px;
+    }
 }
- 
+
+/* ========================================
+   REDUCED MOTION
+======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+    .btn-small,
+    #clubsRow .club-card,
+    #eventsRow .event-card,
+    .card-link {
+        transition: none;
+    }
+
+    #clubsRow .club-card:hover,
+    #eventsRow .event-card:hover {
+        transform: none;
+    }
+
+    .card-row {
+        scroll-behavior: auto;
+    }
+}
+
+/* ========================================
+   HIDE FILTERED CARDS
+======================================== */
+
+#clubsRow .club-card[hidden],
+#eventsRow .event-card[hidden] {
+    display: none !important;
+}

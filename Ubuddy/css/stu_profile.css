@@ -1,0 +1,331 @@
+
+/* ========================================
+   STUDENT PROFILE PAGE
+======================================== */
+
+.profile-page-title {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 20px;
+    margin: 0 0 28px;
+}
+
+.profile-page-title h1,
+h1.profile-page-title {
+    margin: 0;
+    color: var(--navy);
+    font-size: 28px;
+    font-weight: 700;
+}
+
+.profile-page-title p {
+    margin: 7px 0 0;
+    color: var(--navy);
+    font-size: 14px;
+    line-height: 1.7;
+}
+
+/* Profile summary */
+.profile-card {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin-bottom: 28px;
+    padding: 28px;
+    background: var(--profile-white);
+    border: 1px solid var(--profile-border);
+    border-radius: var(--profile-radius);
+    box-shadow: var(--profile-shadow);
+}
+
+.profile-avatar {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 76px;
+    height: 76px;
+    border-radius: 50%;
+    background: var(--profile-navy);
+    color: var(--profile-white);
+    font-size: 30px;
+    font-weight: 700;
+}
+
+.profile-summary h2 {
+    margin: 0 0 8px;
+    color: var(--profile-navy);
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.profile-summary p {
+    margin: 4px 0;
+    color: var(--profile-navy);
+    font-size: 13px;
+    overflow-wrap: anywhere;
+}
+
+/* Personal information */
+.information-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+}
+
+.information-item {
+    min-width: 0;
+    padding: 17px 18px;
+    background: #F8FAFD;
+    border: 1px solid var(--profile-border);
+    border-radius: 10px;
+}
+
+.information-item span,
+.information-label {
+    display: block;
+    margin-bottom: 7px;
+    color: var(--profile-navy);
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.information-item p {
+    margin: 0;
+    color: var(--profile-navy);
+    font-size: 14px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+/* Clubs and applications */
+.profile-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.profile-list-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    min-width: 0;
+    padding: 18px;
+    background: var(--profile-white);
+    border: 1px solid var(--profile-border);
+    border-radius: 10px;
+    transition: border-color 0.2s ease, background 0.2s ease;
+}
+
+.profile-list-card:hover {
+    background: #FAFBFE;
+    border-color: #C7D4E5;
+}
+
+.profile-list-card h3 {
+    margin: 0 0 6px;
+    color: var(--profile-navy);
+    font-size: 15px;
+    font-weight: 600;
+    overflow-wrap: anywhere;
+}
+
+.profile-list-card p {
+    margin: 0;
+    color: var(--profile-navy);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+/* Application and achievement status */
+.achievement-status {
+    display: inline-flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    padding: 6px 11px;
+    border-radius: 20px;
+    font-size: 11px;
+    font-weight: 700;
+    text-align: center;
+}
+
+.achievement-status.approved {
+    background: var(--profile-green-bg);
+    color: var(--profile-green);
+}
+
+.achievement-status.pending {
+    background: var(--profile-yellow-bg);
+    color: var(--profile-yellow);
+}
+
+.achievement-status.rejected {
+    background: var(--profile-red-bg);
+    color: var(--profile-red);
+}
+
+.achievement-status.default {
+    background: #EDF1F7;
+    color: #536276;
+}
+
+/* Achievements */
+.achievement-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.achievement-card {
+    min-width: 0;
+    padding: 22px;
+    background: var(--profile-white);
+    border: 1px solid var(--profile-border);
+    border-left: 4px solid var(--profile-blue);
+    border-radius: 11px;
+    transition: box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.achievement-card:hover {
+    box-shadow: 0 6px 20px rgba(23, 42, 70, 0.08);
+    transform: translateY(-2px);
+}
+
+.achievement-card-top {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 14px;
+    margin-bottom: 12px;
+}
+
+.achievement-card h3 {
+    margin: 0 0 8px;
+    color: var(--profile-navy);
+    font-size: 16px;
+    font-weight: 700;
+    overflow-wrap: anywhere;
+}
+
+.achievement-meta {
+    margin: 0;
+    color: var(--profile-navy);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.achievement-card > p:not(.achievement-meta) {
+    margin: 0;
+    color: var(--profile-navy);
+    font-size: 13px;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+.review-reason {
+    margin-top: 16px;
+    padding: 13px 15px;
+    background: var(--profile-red-bg);
+    border-radius: 8px;
+    color: #81202A;
+    font-size: 13px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+}
+
+.review-reason strong {
+    margin-right: 4px;
+}
+
+.achievement-evidence {
+    margin-top: 14px !important;
+}
+
+.achievement-evidence a {
+    color: var(--profile-blue);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.achievement-evidence a:hover {
+    text-decoration: underline;
+}
+
+/* Empty states */
+.empty-state {
+    padding: 28px 20px;
+    background: #F8FAFD;
+    border: 1px dashed #CBD5E1;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.empty-state p {
+    margin: 4px 0;
+    color: var(--profile-navy);
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* Responsive profile layout */
+@media (max-width: 700px) {
+    .profile-page-title {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 14px;
+    }
+
+    .profile-page-title h1,
+    h1.profile-page-title {
+        font-size: 24px;
+    }
+
+    .profile-card {
+        align-items: flex-start;
+        gap: 16px;
+        padding: 20px;
+    }
+
+    .profile-avatar {
+        width: 58px;
+        height: 58px;
+        font-size: 23px;
+    }
+
+    .profile-summary h2 {
+        font-size: 18px;
+    }
+
+    .information-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .profile-list-card {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .achievement-card {
+        padding: 17px;
+    }
+
+    .achievement-card-top {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .profile-list-card,
+    .achievement-card {
+        transition: none;
+    }
+
+    .achievement-card:hover {
+        transform: none;
+    }
+}

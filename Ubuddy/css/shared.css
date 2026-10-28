@@ -3,49 +3,47 @@
    BACK BUTTON
 ========================= */
 
-
 .back-link {
-    display: inline-flex;
-    align-items: center;
-    gap: 15px;
-    text-decoration: none;
-    margin-bottom: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 10px;
+  text-decoration: none;
 }
 
 .back-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 50%;
-    background-color: #426fb1;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background-color: #426fb1;
+  color: var(--white);
+  transition: background-color 0.2s ease;
 }
 
 .back-icon .material-symbols-outlined {
-    font-size: 22px;
-    line-height: 1;
+  font-size: 22px;
+  line-height: 1;
 }
 
 .back-text {
-    font-family: 'Poppins', sans-serif;
-    font-size: 16px;
-    font-weight: 500;
-    color: #426fb1;
-    transition: color 0.2s ease;
+  color: #426fb1;
+  font-family: "Poppins", sans-serif;
+  font-size: 16px;
+  font-weight: 500;
+  transition: color 0.2s ease;
 }
 
 .back-link:hover .back-icon {
-    background-color: #263f63;
+  background-color: #263f63;
 }
 
 .back-link:hover .back-text {
-    color: #263f63;
+  color: #263f63;
 }
-
 
 /* =========================
    SEARCH BAR
@@ -55,18 +53,18 @@
   display: flex;
   align-items: center;
   gap: 12px;
-  margin: 0 auto 30px;
   max-width: 700px;
+  margin: 0 auto 30px;
 }
 
 .search-input {
-  flex: 1;
   display: flex;
   align-items: center;
+  flex: 1;
   gap: 8px;
-  background: var(--sky);
-  border-radius: 20px;
   padding: 12px 18px;
+  border-radius: 20px;
+  background: var(--sky);
 }
 
 .search-icon {
@@ -76,11 +74,12 @@
 
 .search-input input {
   flex: 1;
+  min-width: 0;
   border: none;
   outline: none;
   background: transparent;
-  font: 14px "Poppins", sans-serif;
   color: var(--navy);
+  font: 14px "Poppins", sans-serif;
 }
 
 .search-input input::placeholder {
@@ -88,14 +87,13 @@
   opacity: 0.6;
 }
 
-
 /* =========================
    FILTER BUTTON
 ========================= */
 
 .filter-btn {
-  background: none;
   border: none;
+  background: none;
   color: var(--orange);
   font-size: 32px;
   cursor: pointer;
@@ -105,16 +103,365 @@
   color: var(--navy);
 }
 
-.user-info .user-id,
+/* =========================
+   TOP TABS
+========================= */
+
+.tabs {
+  display: flex;
+  align-items: flex-end;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.spacer {
+  flex: 1;
+}
+
+/* =========================
+   HOME TAB
+========================= */
+
+.tab-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 36px;
+  border-radius: 12px 12px 0 0;
+  background: var(--dark-grey);
+  color: var(--white);
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.tab-icon.active {
+  background: var(--orange);
+  color: var(--white);
+}
+
+/* =========================
+   NOTIFICATIONS TAB
+========================= */
+
+.tab-icon-bell {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 36px;
+  border-radius: 12px 12px 0 0;
+  background: var(--dark-grey);
+  color: var(--white);
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.tab-icon-bell.active {
+  background: var(--orange);
+  color: var(--white);
+}
+
+/* =========================
+   TEXT TABS
+========================= */
+
+.tab {
+  display: inline-block;
+  padding: 9px 18px;
+  border-radius: 16px 16px 0 0;
+  background: var(--navy);
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.tab.active {
+  background: var(--white);
+  color: var(--navy);
+}
+
+/* =========================
+   HOVER EFFECTS
+========================= */
+
+.tab:not(.active):hover {
+  background: var(--white);
+  color: var(--navy);
+}
+
+.tab-icon:not(.active):hover,
+.tab-icon-bell:not(.active):hover {
+  background: #5a5d63;
+  color: var(--white);
+}
+
+.tab-icon.active:hover,
+.tab-icon-bell.active:hover {
+  background: var(--orange);
+  color: var(--white);
+}
+
+.tab.active:hover {
+  background: var(--white);
+  color: var(--navy);
+}
+
+/* =========================
+   HEADER
+========================= */
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 20px;
+  border-bottom: 3px solid var(--sky);
+}
+
+/* =========================
+   ÜBUDDY LOGO
+========================= */
+
+.logo {
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+
+.logo small {
+  display: block;
+  color: var(--muted);
+  font-size: 9px;
+  font-weight: 500;
+}
+
+/* =========================
+   STUDENT PROFILE
+========================= */
+
+.user {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.user-info {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  text-align: right;
+}
+
+.user strong {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.user-info .user-id {
+  display: block;
+  color: var(--muted);
+  font-size: 14px;
+  font-weight: 600;
+}
+
 .user-info .profile-link {
-    display: block;
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .user-info .profile-link a {
-    color: #172a46;
-    text-decoration: none;
+  color: var(--navy);
+  font-weight: 500;
+  text-decoration: none;
 }
 
 .user-info .profile-link a:hover {
-    text-decoration: underline;
+  text-decoration: underline;
+}
+
+/* =========================
+   PROFILE IMAGE
+========================= */
+
+.avatar {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 50%;
+  background: var(--navy);
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .header {
+    padding: 12px 15px;
+  }
+
+  .logo {
+    font-size: 24px;
+  }
+
+  .tabs {
+    gap: 5px;
+  }
+
+  .tab {
+    padding: 8px 10px;
+    font-size: 11px;
+  }
+
+  .tab-icon,
+  .tab-icon-bell {
+    width: 36px;
+    height: 34px;
+  }
+
+  .user strong {
+    font-size: 12px;
+  }
+
+  .user small {
+    font-size: 9px;
+  }
+
+  .avatar {
+    width: 36px;
+    height: 36px;
+  }
+
+  .search-bar {
+    gap: 8px;
+  }
+
+  .search-input {
+    padding: 10px 12px;
+  }
+}
+
+
+/* =========================
+   SHARED CARD HOVER EFFECT
+========================= */
+
+.club-card,
+.event-card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.club-card:hover,
+.event-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+
+/* ========================================
+   PROFILE DROPDOWN
+======================================== */
+
+.profile-dropdown {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Clickable profile icon */
+.profile-dropdown .avatar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #426fb1;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.profile-dropdown .avatar:hover {
+    background: #263F63;
+}
+
+.profile-dropdown .avatar:focus-visible {
+    outline: 3px solid #648bc2;
+    outline-offset: 3px;
+}
+
+.profile-dropdown .avatar .material-symbols-outlined {
+    font-size: 30px;
+}
+
+/* Dropdown panel */
+.profile-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 10px);
+    right: 0;
+    z-index: 1000;
+
+    width: 190px;
+    padding: 6px;
+
+    background: #ffffff;
+    border: 1px solid #e2e7ef;
+    border-radius: 10px;
+    box-shadow: 0 8px 24px rgba(23, 42, 70, 0.16);
+}
+
+/* Respect the hidden attribute */
+.profile-dropdown-menu[hidden] {
+    display: none !important;
+}
+
+/* Dropdown links */
+.profile-dropdown-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    padding: 12px;
+    border-radius: 7px;
+
+    color: #172A46;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+
+    transition:
+        background-color 0.2s ease,
+        color 0.2s ease;
+}
+
+.profile-dropdown-menu a .material-symbols-outlined {
+    font-size: 21px;
+    color: #426fb1;
+}
+
+.profile-dropdown-menu a:hover {
+    background: #eef3fa;
+}
+
+/* Log Out option */
+.profile-dropdown-menu a.logout-option {
+    margin-top: 4px;
+    padding-top: 13px;
+    border-top: 1px solid #e2e7ef;
+    border-radius: 0 0 7px 7px;
+    color: #c2413b;
+}
+
+.profile-dropdown-menu a.logout-option .material-symbols-outlined {
+    color: #c2413b;
+}
+
+.profile-dropdown-menu a.logout-option:hover {
+    background: #fff1f0;
 }

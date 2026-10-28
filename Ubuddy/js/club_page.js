@@ -1,90 +1,118 @@
-const searchInput = document.getElementById("searchInput");
-const filterBtn = document.getElementById("filterBtn");
-const filterMenu = document.getElementById("filterMenu");
-const filterOptions = document.querySelectorAll(".filter-option");
-const clubCards = document.querySelectorAll(".club-card");
 
-let selectedCategory = "all";
+document.addEventListener("DOMContentLoaded", function () {
+  const searchInput = document.getElementById("searchInput");
+  const filterBtn = document.getElementById("toggleFilter");
+  const filterPanel = document.getElementById("filterPanel");
+  const resetBtn = document.getElementById("resetFilters");
+  const categoryFilter = document.getElementById("clubCategoryFilter");
+  const clubCards = [
+    ...document.querySelectorAll(".club-grid .club-card")
+  ];
+  const noResults = document.getElementById("noResults");
 
+  function normalise(value) {
+    return String(value ?? "").trim().toLowerCase();
+  }
 
-// ============================
-// SHOW / HIDE FILTER MENU
-// ============================
+  // Show or hide the filter panel
+  if (filterBtn && filterPanel) {
+    filterBtn.addEventListener("click", function () {
+      filterPanel.hidden = !filterPanel.hidden;
 
-filterBtn.addEventListener("click", function () {
-  filterMenu.classList.toggle("show");
-});
+      filterBtn.setAttribute(
+        "aria-expanded",
+        String(!filterPanel.hidden)
+      );
+    });
+  }
 
+  // Populate category dropdown
+  if (categoryFilter) {
+    const previousValue = categoryFilter.value || "all";
 
-// ============================
-// FILTER CLUBS
-// ============================
+    const categories = [
+      ...new Set(
+        clubCards.map(card =>
+          card.dataset.category?.trim() || "Uncategorised"
+        )
+      )
+    ].sort((a, b) => a.localeCompare(b));
 
-function filterClubs() {
+    categoryFilter.innerHTML =
+      '<option value="all">All categories</option>';
 
-  const searchText = searchInput.value.toLowerCase().trim();
-
-  let visibleClubs = 0;
-
-  clubCards.forEach(function (card) {
-
-    const clubName = card.querySelector("h2").textContent.toLowerCase();
-
-    const category = card
-      .querySelector(".category")
-      .textContent
-      .trim();
-
-    const matchesSearch = clubName.includes(searchText);
-
-    const matchesCategory =
-      selectedCategory === "all" ||
-      category === selectedCategory;
-
-    if (matchesSearch && matchesCategory) {
-
-      card.style.display = "";
-
-      visibleClubs++;
-
-    } else {
-
-      card.style.display = "none";
-
-    }
-
-  });
-
-}
-
-
-// ============================
-// SEARCH WHILE TYPING
-// ============================
-
-searchInput.addEventListener("input", function () {
-  filterClubs();
-});
-
-
-// ============================
-// CATEGORY FILTER
-// ============================
-
-filterOptions.forEach(function (option) {
-
-  option.addEventListener("click", function () {
-
-    selectedCategory = option.dataset.category;
-
-    filterOptions.forEach(function (button) {
-      button.classList.remove("active");
+    categories.forEach(category => {
+      const option = document.createElement("option");
+      option.value = category;
+      option.textContent = category;
+      categoryFilter.appendChild(option);
     });
 
-    option.classList.add("active");
+    const matchingOption = [...categoryFilter.options].find(
+      option => normalise(option.value) === normalise(previousValue)
+    );
 
-    filterClubs();
+    categoryFilter.value = matchingOption
+      ? matchingOption.value
+      : "all";
+  }
 
-  });
+  // Search and filter clubs
+  function filterClubs() {
+    const searchText = normalise(searchInput?.value);
+    const selectedCategory = normalise(
+      categoryFilter?.value || "all"
+    );
 
+    let visibleCount = 0;
+
+    clubCards.forEach(card => {
+      const searchableText = normalise(
+        card.dataset.search || card.textContent
+      );
+
+      const category = normalise(
+        card.dataset.category || "Uncategorised"
+      );
+
+      const matchesSearch = searchableText.includes(searchText);
+
+      const matchesCategory =
+        selectedCategory === "all" ||
+        category === selectedCategory;
+
+      const isVisible = matchesSearch && matchesCategory;
+
+      card.hidden = !isVisible;
+
+      if (isVisible) visibleCount++;
+    });
+
+    if (noResults) {
+      noResults.hidden = visibleCount > 0;
+    }
+  }
+
+  // Attach search listener
+  if (searchInput) {
+    searchInput.addEventListener("input", filterClubs);
+  }
+
+  // Attach category listener
+  if (categoryFilter) {
+    categoryFilter.addEventListener("change", filterClubs);
+  }
+
+  // Reset search and filters
+  if (resetBtn) {
+    resetBtn.addEventListener("click", function () {
+      if (searchInput) searchInput.value = "";
+      if (categoryFilter) categoryFilter.value = "all";
+
+      filterClubs();
+    });
+  }
+
+  // Initial display
+  filterClubs();
 });

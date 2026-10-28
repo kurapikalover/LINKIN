@@ -1,141 +1,242 @@
 
+/* ========================================
+   CLUBS PAGE
+======================================== */
+
 /* Page title */
-
 .clubs-title {
-  margin: 0 0 20px;
-
-  text-align: center;
-
-  font-size: 32px;
-  font-weight: 700;
+    margin: 0 0 20px;
+    text-align: center;
+    font-family: "Poppins", sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    color: var(--navy);
 }
 
-
-/* Search and filter */
+/* ========================================
+   SEARCH AND FILTER MENU
+======================================== */
 
 .filter-menu {
-  display: none;
-
-  margin: -15px auto 25px;
-  padding: 10px;
-
-  max-width: 700px;
-
-  background: var(--white);
-  border: 1px solid var(--sky);
-  border-radius: 12px;
-
-  gap: 8px;
-  flex-wrap: wrap;
+    display: none;
+    margin: -15px auto 25px;
+    padding: 10px;
+    max-width: 700px;
+    background: var(--white);
+    border: 1px solid var(--sky);
+    border-radius: 12px;
+    gap: 8px;
+    flex-wrap: wrap;
 }
 
 .filter-menu.show {
-  display: flex;
+    display: flex;
 }
 
 .filter-option {
-  padding: 7px 14px;
-
-  border: 1px solid var(--sky);
-  border-radius: 20px;
-
-  background: var(--white);
-  color: var(--navy);
-
-  font-family: "Poppins", sans-serif;
-  font-size: 12px;
-  font-weight: 500;
-
-  cursor: pointer;
+    padding: 7px 14px;
+    border: 1px solid var(--sky);
+    border-radius: 20px;
+    background: var(--white);
+    color: var(--navy);
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    cursor: pointer;
 }
 
 .filter-option:hover {
-  background: var(--sky);
+    background: var(--sky);
 }
 
 .filter-option.active {
-  background: var(--navy);
-  color: var(--white);
-  border-color: var(--navy);
+    background: var(--navy);
+    color: var(--white);
+    border-color: var(--navy);
 }
 
-
-/* Club grid */
+/* ========================================
+   CLUB GRID
+======================================== */
 
 .club-grid {
-  display: grid;
-
-  grid-template-columns: repeat(4, 1fr);
-
-  gap: 25px 18px;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 24px 18px;
 }
 
-
-/* Club card */
+/* ========================================
+   CLUB CARD
+======================================== */
 
 .club-card {
-  color: var(--navy);
-  text-decoration: none;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    overflow: hidden;
+    border: 1px solid #e5e7eb;
+    border-radius: 14px;
+    background: #ffffff;
+    color: var(--navy);
+    text-decoration: none;
 }
 
+/* ========================================
+   CLUB IMAGE
+======================================== */
+
 .club-card-image {
-  width: 100%;
-  height:300px;
+    width: 100%;
+    height: 200px;
+    flex-shrink: 0;
+    overflow: hidden;
+    background: #eef2f7;
+}
 
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.club-card-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
-  border-radius: 14px;
+.club-image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+    color: #8a94a3;
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+}
 
-  background: linear-gradient(#bfe3ff 55%, #a6c968 56%, #7a9c14);
+/* ========================================
+   CLUB DETAILS
+======================================== */
 
-  font-size: 12px;
+.club-card-content {
+    padding: 14px;
 }
 
 .club-card h2 {
-  margin: 8px 0 0;
-
-  font-size: 15px;
-  font-weight: 600;
+    margin: 0 0 10px;
+    color: var(--navy);
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
 }
+
+/* ========================================
+   CATEGORY BADGE
+======================================== */
 
 .club-card .category {
-  margin-top: 4px;
+    display: inline-block;
+    max-width: 100%;
+    margin: 0;
+    padding: 5px 12px;
+    border: none;
+    border-radius: 20px;
+    color: #ffffff;
+    font-family: "Poppins", sans-serif;
+    font-size: 11px;
+    font-weight: 600;
+    line-height: 1.5;
+    white-space: normal;
+    overflow-wrap: anywhere;
 }
 
+/* Category colours */
+.category-sports {
+    background: #ef5b6a;
+}
 
-/* Mobile */
+.category-culture {
+    background: #ff9a52;
+}
 
+.category-recreational {
+    background: #4cc36b;
+}
+
+.category-arts {
+    background: #f58fb0;
+}
+
+.category-religious {
+    background: #c68af0;
+}
+
+.category-community {
+    background: #4c91d9;
+}
+
+/* ========================================
+   SEARCH RESULTS
+======================================== */
+
+.club-message {
+    margin: 24px 0;
+    text-align: center;
+    color: var(--navy);
+    font-family: "Poppins", sans-serif;
+}
+
+/* Hide cards that do not match search or filters */
+.club-card[hidden],
+.event-card[hidden],
+.club-message[hidden] {
+    display: none !important;
+}
+
+/* Hide the filter panel when closed */
+#filterPanel[hidden] {
+    display: none !important;
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 1000px) {
+    .club-grid {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+}
+
+/* Smaller tablet */
 @media (max-width: 800px) {
-
-  .club-grid {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
+    .club-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
 }
 
+/* ========================================
+   MOBILE
+======================================== */
 
 @media (max-width: 600px) {
+    .clubs-title {
+        font-size: 28px;
+    }
 
-  .clubs-title {
-    font-size: 28px;
-  }
+    .club-controls {
+        flex-direction: column;
+    }
 
-  .club-controls {
-    flex-direction: column;
-  }
+    .club-search,
+    .club-filter {
+        width: 100%;
+    }
 
-  .club-search {
-    width: 100%;
-  }
+    .club-grid {
+        grid-template-columns: 1fr;
+    }
 
-  .club-filter {
-    width: 100%;
-  }
-
-  .club-grid {
-    grid-template-columns: 1fr;
-  }
-
+    .club-card-image {
+        height: 220px;
+    }
 }

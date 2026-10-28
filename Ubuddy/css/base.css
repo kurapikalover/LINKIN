@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 
 /* =========================
@@ -12,17 +13,53 @@
   --white: #ffffff;
   --muted: #8fb6e8;
   --grey: #9aa3ad;
+  --dark-grey: #3f4146;
 }
 
+/* =========================
+   BASIC RESET
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: var(--page-bg);
+  color: var(--navy);
+}
 
 /* =========================
-   CATEGORY & COLOURS
+   GENERAL PAGE LAYOUT
 ========================= */
+
+.page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+.sheet {
+  background: var(--white);
+  border-radius: 0 0 18px 18px;
+  overflow: hidden;
+  min-height: 700px;
+}
+
+.page-content {
+  padding: 20px;
+}
+
+/* =========================
+   CATEGORY BADGES
+========================= */
+
 .category {
   display: inline-block;
   padding: 5px 12px;
   border-radius: 20px;
-
   color: var(--white);
   font-size: 12px;
   font-weight: 600;
@@ -53,283 +90,52 @@
 }
 
 /* =========================
-   BASIC RESET
+   SHARED EVENT STATUS BADGES
 ========================= */
 
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
+.event-status {
+  display: inline-block;
+  max-width: 100%;
+  padding: 7px 16px;
+  border-radius: 8px;
   font-family: "Poppins", sans-serif;
-  background: var(--page-bg);
-  color: var(--navy);
-}
-
-
-/* =========================
-   PAGE
-========================= */
-
-.page {
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 12px;
-}
-
-
-/* =========================
-   TOP TABS
-========================= */
-
-.tabs {
-  display: flex;
-  align-items: flex-end;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-
-/* Push the text tabs to the right */
-
-.spacer {
-  flex: 1;
-}
-
-
-/* Home */
-
-.tab-icon {
-  width: 40px;
-  height: 36px;
-
-  display: grid;
-  place-items: center;
-
-  background: var(--white);
-
-  border-radius: 12px 12px 0 0;
-
-  text-decoration: none;
-  color: var(--navy);
-}
-
-
-/* Notification */
-
-.tab-icon-bell {
-  width: 40px;
-  height: 36px;
-
-  display: grid;
-  place-items: center;
-
-  background: var(--grey);
-
-  border-radius: 12px 12px 0 0;
-
-  text-decoration: none;
-  color: var(--white);
-}
-
-
-/* Text tabs */
-
-.tab {
-  background: var(--navy);
-  color: var(--white);
-
-  font-size: 12px;
+  font-size: 13px;
   font-weight: 600;
-
-  padding: 9px 18px;
-
-  border-radius: 16px 16px 0 0;
-
-  text-decoration: none;
-}
-
-
-/* Hover */
-
-.tab:hover {
-  background: var(--white);
-  color: var(--navy);
-}
-
-.tab-icon:hover {
-  background: var(--navy);
-  color: var(--white);
-}
-
-.tab-icon-bell:hover {
-  background: var(--white);
-  color: var(--navy);
-}
-
-/* =========================
-   WHITE MAIN SHEET
-========================= */
-
-.sheet {
-  background: var(--white);
-
-  border-radius: 0 0 18px 18px;
-
-  overflow: hidden;
-
-  min-height: 700px;
-}
-
-
-/* =========================
-   HEADER
-========================= */
-
-.header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding: 12px 20px;
-
-  border-bottom: 3px solid var(--sky);
-}
-
-
-/* =========================
-   ÜBUDDY LOGO
-========================= */
-
-.logo {
-  font-size: 30px;
-  font-weight: 700;
   line-height: 1.5;
+  overflow-wrap: anywhere;
 }
 
-.logo small {
-  display: block;
-
-  font-size: 9px;
-  font-weight: 500;
-
-  color: var(--muted);
+.status-upcoming {
+  background: #ddf3e4;
+  color: #21663a;
 }
 
-
-/* =========================
-   STUDENT PROFILE
-========================= */
-
-.user {
-  display: flex;
-  align-items: center;
-
-  gap: 10px;
+.status-ongoing {
+  background: #fff0cc;
+  color: #855b00;
 }
 
-
-
-/* Name + ID */
-.user-info {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  text-align: right;
+.status-completed {
+  background: #e5e7eb;
+  color: #4b5563;
 }
 
-/* Student name */
-.user strong {
-  font-size: 14px;
-  font-weight: 600;
+.status-cancelled {
+  background: #fee2e2;
+  color: #991b1b;
 }
 
-/* Student ID */
-.user-info .user-id {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--muted);
+.status-default {
+  background: #f3f4f6;
+  color: #374151;
 }
-
-/* View Profile */
-.user-info .profile-link {
-  font-size: 12px;
-  font-weight: 600;
-}
-
-.user-info .profile-link a {
-  color: var(--navy);
-  text-decoration: none;
-  font-weight: 500;
-}
-
-.user-info .profile-link a:hover {
-  text-decoration: underline;
-}
-
-
-
-/* =========================
-   PROFILE IMAGE
-========================= */
-
-.avatar {
-  width: 42px;
-  height: 42px;
-
-  border-radius: 50%;
-
-  background: var(--navy);
-
-  flex-shrink: 0;
-}
-
-
-/* =========================
-   PAGE CONTENT
-========================= */
-
-.page-content {
-  padding: 20px;
-}
-
-
 
 /* =========================
    MOBILE
 ========================= */
 
 @media (max-width: 600px) {
-
   .page {
     padding: 8px;
   }
-
-  .header {
-    padding: 12px 15px;
-  }
-
-  .logo {
-    font-size: 24px;
-  }
-
-  .tab {
-    padding: 8px 10px;
-    font-size: 11px;
-  }
-
-  .user strong {
-    font-size: 12px;
-  }
-
-  .user small {
-    font-size: 9px;
-  }
-
-  .avatar {
-    width: 36px;
-    height: 36px;
-  }
-
 }

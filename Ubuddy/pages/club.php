@@ -4,6 +4,7 @@ require_once __DIR__ . '/../php/functions.php';
 require_once __DIR__ . '/../php/db.php';
 require_once __DIR__ . '/../php/club_functions.php';
 require_once __DIR__ . '/../php/club_queries.php';
+require_once __DIR__ . '/../php/shared_functions.php';
 
 // Read the club ID from the URL.
 $clubId = filter_input(INPUT_GET, 'id', FILTER_VALIDATE_INT);
@@ -70,10 +71,10 @@ if ($clubId !== false && $clubId !== null && $clubId > 0) {
               <!-- CLUB INFORMATION -->
               <section class="club-information">
 
-                  <h1><?= clubEscape($club['club_name']) ?></h1>
+                  <h1><?= escapeHTML($club['club_name']) ?></h1>
 
-                  <p class="category <?= clubEscape($categoryClass) ?>">
-                      <?= clubEscape($categoryName) ?>
+                  <p class="category <?= escapeHTML($categoryClass) ?>">
+                      <?= escapeHTML($categoryName) ?>
                   </p>
 
                   <div class="club-circles">
@@ -87,7 +88,7 @@ if ($clubId !== false && $clubId !== null && $clubId > 0) {
                   <div class="info-section">
                       <h2>About</h2>
                       <p>
-                          <?= nl2br(clubEscape(
+                          <?= nl2br(escapeHTML(
                               $club['description']
                               ?: 'No description available yet.'
                           )) ?>
@@ -101,7 +102,7 @@ if ($clubId !== false && $clubId !== null && $clubId > 0) {
                       <?php if (!empty($activities)): ?>
                           <ul>
                               <?php foreach ($activities as $activity): ?>
-                                  <li><?= clubEscape($activity) ?></li>
+                                  <li><?= escapeHTML($activity) ?></li>
                               <?php endforeach; ?>
                           </ul>
                       <?php else: ?>
@@ -113,7 +114,7 @@ if ($clubId !== false && $clubId !== null && $clubId > 0) {
                   <div class="info-section">
                       <h2>Meeting Frequency</h2>
                       <p>
-                          <?= clubEscape(
+                          <?= escapeHTML(
                               $club['meeting_frequency'] ?? 'Not specified'
                           ) ?>
                       </p>
@@ -123,7 +124,7 @@ if ($clubId !== false && $clubId !== null && $clubId > 0) {
                   <div class="info-section">
                       <h2>Experience Requirement</h2>
                       <p>
-                          <?= clubEscape(
+                          <?= escapeHTML(
                               $club['exp_requirement'] ?? 'Not specified'
                           ) ?>
                       </p>
@@ -133,7 +134,7 @@ if ($clubId !== false && $clubId !== null && $clubId > 0) {
                   <div class="info-section">
                       <h2>Fee</h2>
                       <p>
-                          <?= clubEscape(formatClubFee(
+                          <?= escapeHTML(formatClubFee(
                               $club['membership_fee'],
                               $club['fee_currency']
                           )) ?>
@@ -150,12 +151,12 @@ if ($clubId !== false && $clubId !== null && $clubId > 0) {
                               <?php foreach ($socialLinks as $social): ?>
                                   <a
                                       class="social-button"
-                                      href="<?= clubEscape($social['account_url']) ?>"
+                                      href="<?= escapeHTML($social['account_url']) ?>"
                                       target="_blank"
                                       rel="noopener noreferrer"
                                   >
                                       <i
-                                          class="<?= clubEscape(
+                                          class="<?= escapeHTML(
                                               getClubSocialIcon($social['platform'])
                                           ) ?>"
                                           aria-hidden="true"
@@ -163,12 +164,12 @@ if ($clubId !== false && $clubId !== null && $clubId > 0) {
 
                                       <span class="social-button-text">
                                           <span class="social-platform">
-                                              <?= clubEscape($social['platform']) ?>
+                                              <?= escapeHTML($social['platform']) ?>
                                           </span>
 
                                           <?php if (!empty($social['social_media_name'])): ?>
                                               <span class="social-username">
-                                                  <?= clubEscape(
+                                                  <?= escapeHTML(
                                                       $social['social_media_name']
                                                   ) ?>
                                               </span>

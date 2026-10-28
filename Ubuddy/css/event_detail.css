@@ -1,0 +1,321 @@
+
+/* ========================================
+   EVENT DETAIL PAGE
+======================================== */
+
+/* Main event layout */
+.event-layout {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 30px;
+    align-items: start;
+    margin: 25px 15px 35px;
+}
+
+/* ========================================
+   EVENT INFORMATION
+======================================== */
+
+.event-information {
+    min-width: 0;
+    padding-left: 30px;
+}
+
+.event-information h1 {
+    margin: 0 0 12px;
+    color: var(--navy);
+    font-family: "Poppins", sans-serif;
+    font-size: 48px;
+    font-weight: 700;
+    line-height: 1.2;
+    overflow-wrap: anywhere;
+}
+
+/* Decorative circles */
+
+.event-circles {
+  display: flex;
+  gap: 8px;
+  margin: 20px 0 30px;
+}
+
+.event-circles span {
+  width: 13px;
+  height: 13px;
+
+  border-radius: 50%;
+  background: var(--navy);
+}
+
+
+
+/* Individual information sections */
+.event-info-section {
+    margin-bottom: 24px;
+}
+
+.event-info-section h2 {
+    margin: 0 0 8px;
+    color: var(--navy);
+    font-family: "Poppins", sans-serif;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.event-info-section p {
+    margin: 0;
+    color: #4b5563;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 400;
+    line-height: 1.8;
+    overflow-wrap: anywhere;
+}
+
+/* ========================================
+   HOSTING CLUB HIGHLIGHT
+======================================== */
+
+.event-info-section.highlight-box {
+    margin-top: 28px;
+    padding: 16px 18px;
+    border-left: 5px solid #426fb1;
+    border-radius: 8px;
+    background: #eef4fc;
+}
+
+.event-info-section.highlight-box h2 {
+    margin-bottom: 8px;
+    color: #172A46;
+    font-size: 16px;
+}
+
+/* Club name link */
+.event-host-link,
+.event-host-link:visited {
+    display: inline-block;
+    color: #315f9e;
+    font-family: "Poppins", sans-serif;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    overflow-wrap: anywhere;
+}
+
+.event-host-link:hover {
+    color: #172A46;
+    text-decoration: underline;
+}
+
+/* ========================================
+   MAIN EVENT IMAGE
+======================================== */
+
+.event-sidebar {
+    min-width: 0;
+    width: 100%;
+}
+
+.event-main-image {
+    width: 100%;
+    height: 400px;
+    overflow: hidden;
+    border-radius: 12px;
+    background: #eef2f7;
+}
+
+.event-image-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+    height: 100%;
+    padding: 15px;
+    box-sizing: border-box;
+    background: #eef2f7;
+    color: #8a94a3;
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    text-align: center;
+}
+
+.event-image-placeholder .material-symbols-outlined {
+    font-size: 48px;
+}
+
+/* ========================================
+   EVENT GALLERY
+======================================== */
+
+.event-gallery-section {
+    margin: 35px 15px 30px;
+    padding: 25px;
+    border: 1px solid #172A46;
+    border-radius: 14px;
+    background: #172A46;
+}
+
+.event-gallery-section > h2 {
+    margin: 0 0 20px;
+    color: #ffffff;
+    font-family: "Poppins", sans-serif;
+    font-size: 22px;
+    font-weight: 600;
+}
+
+.event-gallery {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 20px;
+}
+
+/* White picture border */
+.gallery-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+    height: 180px;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 8px solid #ffffff;
+    border-radius: 8px;
+    background: #f5f7fa;
+    color: #94a3b8;
+}
+
+.gallery-image .material-symbols-outlined {
+    font-size: 40px;
+}
+
+/* ========================================
+   EVENT NOT FOUND
+======================================== */
+
+.event-not-found {
+    margin: 40px 15px;
+    padding: 35px;
+    border-radius: 12px;
+    background: #f5f7fa;
+    text-align: center;
+}
+
+.event-not-found h1 {
+    margin: 0 0 12px;
+    color: var(--navy);
+    font-family: "Poppins", sans-serif;
+    font-size: 30px;
+}
+
+.event-not-found p {
+    margin: 0 0 20px;
+    color: #64748b;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+}
+
+.event-not-found a {
+    color: #426fb1;
+    font-family: "Poppins", sans-serif;
+    text-decoration: none;
+}
+
+.event-not-found a:hover {
+    text-decoration: underline;
+}
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 900px) {
+    .event-layout {
+        grid-template-columns: minmax(0, 1fr) 250px;
+        gap: 20px;
+    }
+
+    .event-information {
+        padding-left: 15px;
+    }
+
+    .event-information h1 {
+        font-size: 38px;
+    }
+
+    .event-main-image {
+        height: 320px;
+    }
+
+    .event-gallery {
+        gap: 15px;
+    }
+
+    .gallery-image {
+        height: 160px;
+    }
+}
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 600px) {
+    .event-layout {
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+        margin: 20px 10px 30px;
+    }
+
+    /* Image appears above event information */
+    .event-sidebar {
+        order: 1;
+    }
+
+    .event-information {
+        order: 2;
+        padding-left: 5px;
+    }
+
+    .event-information h1 {
+        font-size: 32px;
+    }
+
+    .event-main-image {
+        height: 240px;
+    }
+
+    .event-circles {
+        margin: 20px 0 25px;
+    }
+
+    .event-info-section h2 {
+        font-size: 18px;
+    }
+
+    /* Gallery */
+    .event-gallery-section {
+        margin: 25px 10px;
+        padding: 18px;
+    }
+
+    .event-gallery-section > h2 {
+        font-size: 20px;
+    }
+
+    .event-gallery {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .gallery-image {
+        height: 160px;
+    }
+
+    .event-not-found {
+        margin: 25px 10px;
+        padding: 25px 15px;
+    }
+}

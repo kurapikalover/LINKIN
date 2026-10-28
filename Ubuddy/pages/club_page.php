@@ -1,168 +1,154 @@
+
 <?php
 require_once __DIR__ . '/../php/functions.php';
 require_once __DIR__ . '/../php/db.php';
+require_once __DIR__ . '/../php/shared_functions.php';
+require_once __DIR__ . '/../php/club_functions.php';
+require_once __DIR__ . '/../php/club_queries.php';
 
-$sql = "
-    SELECT
-        c.club_id,
-        c.club_name,
-        cat.category_name
-    FROM public.club AS c
-    LEFT JOIN public.category AS cat
-        ON c.category_id = cat.category_id
-    ORDER BY c.club_name;
-";
+$clubs = [];
+$error = '';
 
-$stmt = $pdo->query($sql);
-$clubs = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
-$categoryClasses = [
-    'Sports' => 'category-sports',
-    'Culture' => 'category-culture',
-    'Recreational' => 'category-recreational',
-    'Arts & Creative' => 'category-arts',
-    'Religious' => 'category-religious',
-    'Community Service' => 'category-community'
-];
+try {
+    $clubs = getAllClubs($pdo);
+} catch (PDOException $e) {
+    error_log('Failed to load clubs: ' . $e->getMessage());
+    $error = 'Unable to load clubs right now. Please try again later.';
+}
 ?>
-
 
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>ÜBuddy</title>
+    <title>ÜBuddy | Clubs</title>
 
-  <?php pageIcons(); ?>
+    <?php pageIcons(); ?>
 
-  <!-- Base CSS -->
-  <link rel="stylesheet" href="../css/base.css">
-  <link rel="stylesheet" href="../css/shared.css">
-  <link rel="stylesheet" href="../css/club_page.css">
-
+    <link rel="stylesheet" href="../css/base.css">
+    <link rel="stylesheet" href="../css/shared.css">
+    <link rel="stylesheet" href="../css/club_page.css">
+    <link rel="stylesheet" href="../css/filter.css">
 </head>
 
 <body>
 
-  <?php pageHeader(); ?>
+    <?php pageHeader(); ?>
 
-  <!-- =========================
-        PAGE CONTENT
-        Individual pages go here
-  ========================== -->
-  <main class="page-content">
+    <main class="page-content">
+        <div class="clubs-page">
 
-    <div class="clubs-page">
+            <?php backLink('homepage.php', 'Home'); ?>
 
-      <?php backLink('homepage.php', 'Home'); ?>
+            <h1 class="clubs-title">Clubs</h1>
 
-      <h1 class="clubs-title">Clubs</h1>
+            <div class="search-bar">
+                <div class="search-input">
+                    <span class="material-symbols-outlined search-icon">
+                        search
+                    </span>
 
-      <div class="search-bar">
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="Search clubs"
+                        aria-label="Search clubs"
+                    >
+                </div>
 
-        <div class="search-input">
+                <button
+                    type="button"
+                    id="toggleFilter"
+                    class="filter-btn material-symbols-outlined"
+                    title="Show filters"
+                    aria-label="Show filters"
+                    aria-expanded="false"
+                    aria-controls="filterPanel"
+                >
+                    filter_alt
+                </button>
+            </div>
 
-          <span class="material-symbols-outlined search-icon">
-            search
-          </span>
+            <?php
+            $filterPage = 'clubs';
+            require __DIR__ . '/../php/filter.php';
+            ?>
 
-          <input
-            type="text"
-            id="searchInput"
-            placeholder="Search"
-          >
+            <?php if ($error !== ''): ?>
+
+                <p class="club-message">
+                    <?= escapeHtml($error) ?>
+                </p>
+
+            <?php elseif (empty($clubs)): ?>
+
+                <p class="club-message">
+                    No clubs available at the moment.
+                </p>
+
+            <?php else: ?>
+
+                <div class="club-grid">
+
+                    <?php foreach ($clubs as $club): ?>
+
+                        <?php
+                        $clubName = $club['club_name'];
+                        $categoryName = $club['category_name']
+                            ?? 'Uncategorised';
+
+                        $categoryClass = getClubCategoryClass(
+                            $club['category_name']
+                        );
+                        ?>
+
+                        <a
+                            href="club.php?id=<?= (int) $club['club_id'] ?>"
+                            class="club-card"
+                            data-category="<?= escapeHtml($categoryName) ?>"
+                            data-search="<?= escapeHtml(
+                                $clubName . ' ' . $categoryName
+                            ) ?>"
+                        >
+
+                            <div class="club-card-image">
+                                <div class="club-image-placeholder">
+                                    Club Image
+                                </div>
+                            </div>
+
+                            <div class="club-card-content">
+
+                                <h2 class="club-name">
+                                    <?= escapeHtml($clubName) ?>
+                                </h2>
+
+                                <p class="category <?= escapeHtml($categoryClass) ?>">
+                                    <?= escapeHtml($categoryName) ?>
+                                </p>
+
+                            </div>
+
+                        </a>
+
+                    <?php endforeach; ?>
+
+                </div>
+
+                <p id="noResults" class="club-message" hidden>
+                    No matching clubs found.
+                </p>
+
+            <?php endif; ?>
 
         </div>
+    </main>
 
-        <button
-          type="button"
-          id="filterBtn"
-          class="filter-btn material-symbols-outlined"
-          title="Filter by category"
-        >
-          filter_alt
-        </button>
+    <?php pageFooter(); ?>
 
-      </div>
-
-      <div class="filter-menu" id="filterMenu">
-
-        <button type="button" class="filter-option active" data-category="all">
-            All
-        </button>
-
-        <button type="button" class="filter-option" data-category="Sports">
-            Sports
-        </button>
-
-        <button type="button" class="filter-option" data-category="Culture">
-            Culture
-        </button>
-
-        <button type="button" class="filter-option" data-category="Recreational">
-            Recreational
-        </button>
-
-        <button type="button" class="filter-option" data-category="Arts & Creative">
-            Arts &amp; Creative
-        </button>
-
-        <button type="button" class="filter-option" data-category="Religious">
-            Religious
-        </button>
-
-        <button type="button" class="filter-option" data-category="Community Service">
-            Community Service
-        </button>
-
-      </div>
-
-
-      <div class="club-grid">
-
-          <?php foreach ($clubs as $club): ?>
-
-              <?php
-              $clubName = $club['club_name'];
-              $categoryName = $club['category_name'] ?? 'Uncategorised';
-              $categoryClass = $categoryClasses[$categoryName] ?? '';
-              ?>
-
-              <a
-
-              href="club.php?id=<?= (int) $club['club_id'] ?>"
-              class="club-card"
-              data-category="<?= htmlspecialchars($categoryName, ENT_QUOTES, 'UTF-8') ?>"
-
-              >
-
-                  <div class="club-card-image">
-                      Club Image
-                  </div>
-
-                  <h2>
-                      <?= htmlspecialchars($clubName, ENT_QUOTES, 'UTF-8') ?>
-                  </h2>
-
-                  <p class="category <?= htmlspecialchars($categoryClass, ENT_QUOTES, 'UTF-8') ?>">
-                      <?= htmlspecialchars($categoryName, ENT_QUOTES, 'UTF-8') ?>
-                  </p>
-
-              </a>
-
-          <?php endforeach; ?>
-
-      </div>
-
-    </div>
-
-  </main>
-
-  <?php pageFooter(); ?>
-
-  <script src="../js/club_page.js"></script>
+    <script src="../js/club_page.js"></script>
 
 </body>
 </html>

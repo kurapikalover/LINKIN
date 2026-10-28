@@ -1,0 +1,210 @@
+
+/* ============================
+   SHARED FILTER PANEL
+   ÜBuddy colour scheme
+============================ */
+
+.home-filter-panel {
+    width: 100%;
+    margin: 16px 0 24px;
+    padding: 24px;
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-radius: 16px;
+    box-shadow: 0 6px 20px rgba(19, 74, 142, 0.08);
+    box-sizing: border-box;
+}
+
+.home-filter-panel[hidden] {
+    display: none !important;
+}
+
+
+/* ============================
+   PANEL HEADER
+============================ */
+
+.home-filter-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding-bottom: 18px;
+    border-bottom: 1px solid #EDF0F5;
+}
+
+.home-filter-heading h2 {
+    margin: 0;
+    color: #ff7a1a;
+    font-size: 21px;
+    font-weight: 700;
+}
+
+
+/* ============================
+   RESET BUTTON
+============================ */
+
+.home-filter-heading .btn-small {
+    padding: 8px 16px;
+    border: 1px solid #D8E3F2;
+    border-radius: 9px;
+    background: #F3F7FD;
+    color: #134a8e;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.home-filter-heading .btn-small:hover {
+    background: #426FB1;
+    color: #FFFFFF;
+    border-color: #426FB1;
+}
+
+.home-filter-heading .btn-small:focus-visible {
+    outline: 3px solid rgba(66, 111, 177, 0.3);
+    outline-offset: 3px;
+}
+
+
+/* ============================
+   FILTER GROUPS
+============================ */
+
+.home-filter-groups {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+    padding-top: 20px;
+}
+
+.home-filter-group {
+    min-width: 0;
+    padding: 18px;
+    background: #F8FAFF;
+    border: 1px solid #E8EEF7;
+    border-radius: 12px;
+}
+
+
+/* ============================
+   SECTION HEADINGS
+============================ */
+
+.home-filter-group h3 {
+    margin: 0 0 16px;
+    color: #134a8e;
+    font-size: 16px;
+    font-weight: 700;
+}
+
+
+/* ============================
+   FILTER LABELS
+============================ */
+
+.home-filter-group label {
+    display: block;
+    margin: 14px 0 7px;
+    color: #134a8e;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.home-filter-group label:first-of-type {
+    margin-top: 0;
+}
+
+
+/* ============================
+   DROPDOWN MENUS
+============================ */
+
+.home-filter-group select {
+    display: block;
+    width: 100%;
+    min-height: 44px;
+    padding: 10px 36px 10px 12px;
+    border: 1px solid #D7E0ED;
+    border-radius: 9px;
+    background-color: #FFFFFF;
+    color: #134a8e;
+    font-family: inherit;
+    font-size: 14px;
+    cursor: pointer;
+    outline: none;
+    transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease;
+}
+
+.home-filter-group select:hover {
+    border-color: #8BA9D5;
+}
+
+.home-filter-group select:focus {
+    border-color: #426FB1;
+    box-shadow: 0 0 0 3px rgba(66, 111, 177, 0.15);
+}
+
+.home-filter-group select option {
+    color: #134a8e;
+    background-color: #FFFFFF;
+}
+
+
+/* ============================
+   FILTER TOGGLE BUTTON
+============================ */
+
+.filter-btn {
+    color: var(--orange);
+    font-size: 40px;
+    transition:
+        background 0.2s ease,
+        color 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.filter-btn:hover,
+.filter-btn[aria-expanded="true"] {
+    background: #EAF1FC;
+    color: #426FB1;
+    border-color: #B9CDEC;
+}
+
+.filter-btn:focus-visible {
+    outline: 3px solid rgba(66, 111, 177, 0.3);
+    outline-offset: 3px;
+}
+
+
+/* ============================
+   RESPONSIVE LAYOUT
+============================ */
+
+@media (max-width: 600px) {
+    .home-filter-panel {
+        margin-top: 12px;
+        padding: 16px;
+    }
+
+    .home-filter-heading h2 {
+        font-size: 18px;
+    }
+
+    .home-filter-groups {
+        grid-template-columns: 1fr;
+        gap: 14px;
+        padding-top: 16px;
+    }
+
+    .home-filter-group {
+        padding: 16px;
+    }
+}

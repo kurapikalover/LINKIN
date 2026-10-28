@@ -48,4 +48,35 @@ function getClubSocialLinks(PDO $pdo, int $clubId)
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
 
+
+
+function getAllClubs(PDO $pdo): array
+{
+    $sql = "
+        SELECT
+            c.club_id,
+            c.club_name,
+            c.description,
+            cat.category_name,
+            ci.storage_path AS image_url
+        FROM public.club AS c
+        LEFT JOIN public.category AS cat
+            ON c.category_id = cat.category_id
+        LEFT JOIN LATERAL (
+            SELECT storage_path
+            FROM public.club_image
+            WHERE club_id = c.club_id
+            ORDER BY is_primary DESC NULLS LAST,
+                     uploaded_at DESC,
+                     image_id ASC
+            LIMIT 1
+        ) AS ci ON TRUE
+        ORDER BY c.club_name;
+    ";
+
+    $stmt = $pdo->query($sql);
+
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+}
+
 ?>
