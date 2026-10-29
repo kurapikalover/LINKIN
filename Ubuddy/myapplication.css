@@ -71,6 +71,7 @@ a.tab[href="myapplication.html"] {
 .application-list{
   max-height: 350px; 
   overflow-y: auto; /*scrollbar appears only when content overflow */
+  scrollbar-color: #ffffff transparent;
 }
 
 .info-section {
@@ -156,10 +157,11 @@ a.tab[href="myapplication.html"] {
   margin-right: 10px;       /* keeps it inside the white box */
 }
 
+/* trying kalau dapat mcm notification tpi mcm failed but i keep it jic u want to change like below cz more efficient than above but u can delete below if want*/
 /* per-type colors */
 .status .accepted  { --type-color: #858a4f; }
 .status .rejected { --type-color: #ab2303; }
-.status .pending { --type-color: #ff8d17 }
+.status .pending { --type-color: #ff8d17;}
 
 .inline-row {
   color: var(--type-color);
