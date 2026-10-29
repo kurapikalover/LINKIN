@@ -180,6 +180,7 @@ a.tab[href="myactivity.html"] {
 .memberships-list{
   max-height: 350px; 
   overflow-y: auto; /*scrollbar appears only when content overflow */ 
+  scrollbar-color: #ffffff transparent;
 }
 .memberships-info {
   display: flex;            /* logo and text side by side */
