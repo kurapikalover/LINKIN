@@ -72,6 +72,7 @@
 .notification-list{
   max-height: 350px; 
   overflow-y: auto; /*scrollbar appears only when content overflow */
+  scrollbar-color: #ffffff transparent;
 }
 
 /* default colours */
@@ -95,6 +96,7 @@
 .info-notification.application { --type-color: #7b3fa0; }
 .info-notification.event       { --type-color: #46869a; }
 .info-notification.membership  { --type-color: #0f4a89; }
+.info-notification.feedback { --type-color: #ff8db9;}
 
 
 .notification-icon {
