@@ -1,0 +1,169 @@
+[hidden] { display: none !important; }
+
+.feedback-page {
+    max-width: 600px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.feedback-title{
+    margin: 10px 0 0;
+    font-size: 40px;
+    color: #0f4a89; 
+}
+
+.feedback-page small {
+    color: #696767;
+    font-size: 22px;
+}
+
+/* the user feedback form */
+/* using # for id */
+#feedbackForm{
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+#typeFeedback{
+    width: 100%;
+    height: 200px; /* fixed height. so if there's extra text , ada scroll*/
+    min-height: 0; 
+    resize: none; /* the box will not getting wider or higher?(height) */
+    overflow-y: auto; /* scrollbar appears only when needed*/
+    scrollbar-width: thin; /*so scrollbar does not look crampt in rounded corner*/
+    scrollbar-color: #4a9bea transparent;
+    padding: 14px 18px;
+    box-sizing: border-box;
+    border: 3px solid #0f4a89;
+    border-radius: 24px;
+    font-family: inherit; /*textareas not inherit Poppins by default :(*/
+    font-size: 16px;
+}
+
+#typeFeedback:focus{
+    outline: none;
+    border-color: #0f4a89;
+}
+
+/* Upload files and send button, both align at right */
+.actions{
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+/* for all buttons aka the word upload files and send*/
+.btn,
+.dropbtn {
+    border: none;
+    border-radius: 999px;
+    padding: 10px 36px;
+    font-family: inherit;
+    font-size: 23px;
+    font-weight: bold;
+    color:#ffffff;
+    cursor: pointer;   
+}
+
+.dropbtn {background: #519bec;} /* button upload file*/
+.btn {background: #ff8d43;} /*send button */
+.btn:hover {filter: brightness(0.95);}
+
+/* dropdown menu for upload file */
+.dropdown{
+    position: relative; /*connect the menu to the button*/
+}
+
+.dropdown-content{
+    display: none;
+    position: absolute;
+    top: 100%; /*no gap, directly under the button*/
+    left: 0;
+    min-width: 160px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    overflow: hidden;
+    z-index: 10;
+}
+
+/* hover on desktop, focus/tap on touch and keyboard (for mobile ig)*/
+.dropdown:hover .dropdown-content,
+.dropdown:focus-within .dropdown-content{
+    display:block;
+}
+/* Select file type: */
+.dropdown-content p {
+    margin: 0;
+    padding: 10px 14px;
+    font-size: 15.3px;
+    font-weight: bold;
+    color:#0f4a89;
+    border-bottom: 1px solid #bcdcff;
+}
+/* Image and Video */
+.dropdown-content button {
+    display: block;
+    width:100%;
+    padding: 10px 14px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #bcdcff; /*give border after image*/
+    text-align: left;
+    font-family: inherit;
+    font-size: 15.3px; 
+    color:#0f4a89;
+    cursor:pointer;
+}
+
+.dropdown-content button:last-child {border-bottom: none; } /*no border after video since ia last child in drop down menu*/
+.dropdown-content button:hover {background:#bcdcff;}
+
+/* the confirmation: feedback is sent */
+#feedbackSent{
+    display: flex;
+    flex-direction: column;
+    gap: 12px; /*same as #feedbackForm*/
+}
+
+#feedbackSent .content {
+    background:#0f4a89;
+    color: #ffffff;
+    border-radius: 24px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;   
+}
+
+#feedbackSent .p1{
+    margin: 0;
+    font-size: 30px;
+    font-weight: bold;
+}
+
+#feedbackSent .content small {
+    color: #ffffff;
+    font-size: 22px;
+}
+
+/* white pill that ada feedback ID */
+#feedbackSent .p2{
+    margin: 16px 0 0;
+    padding: 10px 20px;
+    background: #ffffff;
+    color: #0f4a89;
+    border-radius: 999px;
+    font-weight: bold;
+    font-size:26px;
+}
+
+/* not clickable green Sent! button */
+#feedbackSent .btn {
+    background:#73d99f;
+    cursor: default;
+}

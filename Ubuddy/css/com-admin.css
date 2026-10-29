@@ -1,0 +1,223 @@
+.tab {
+  background: var(--navy);
+  color: var(--white);
+
+  font-size: 12px;
+  font-weight: 600;
+
+  padding: 9px 18px;
+
+  border-radius: 16px 16px 0 0;
+
+  text-decoration: none;
+}
+
+
+/* change the background of Home's tab to navy */
+.tab-icon {
+  width: 40px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--navy);
+
+  border-radius: 12px 12px 0 0;
+
+  text-decoration: none;
+  color: var(--white);
+}
+
+/* change the background of Committee Admin's tab to white */
+.tab-icon-committee {
+  width: 40px;
+  height: 36px;
+
+  display: grid;
+  place-items: center;
+
+  background: var(--white);
+
+  border-radius: 12px 12px 0 0;
+
+  text-decoration: none;
+  color: var(--grey);
+}
+
+/* dropdown menu for committee admin */
+.dropdown{
+    position: relative; /*connect the menu to the button*/
+}
+
+.dropdown-content{
+    display: none;
+    position: absolute;
+    top: 100%; /*no gap, directly under the button*/
+    left: 0;
+    min-width: 160px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    overflow: hidden;
+    z-index: 10;
+}
+
+/* hover on desktop, focus/tap on touch and keyboard (for mobile ig)*/
+.dropdown:hover .dropdown-content,
+.dropdown:focus-within .dropdown-content{
+    display:block;
+}
+/* Select Club Name: */
+.dropdown-content p {
+    margin: 0;
+    padding: 10px 14px;
+    font-size: 15.3px;
+    font-weight: bold;
+    color:#0f4a89;
+    border-bottom: 1px solid #bcdcff;
+}
+/* Club Name*/
+.dropdown-content a {
+    display: block;
+    padding: 10px 14px;
+    border-bottom: 1px solid #bcdcff; /*give border after club name*/
+    text-decoration: none;
+    font-size: 15.3px; 
+    color:#0f4a89;
+}
+
+.dropdown-content a:last-child {border-bottom: none; } 
+.dropdown-content a:hover {background:#bcdcff;}
+
+.committee-admin-title { text-align: center; margin:0; color: #0f4a89;}
+.club-name {text-align: center; margin: 0 0 12px; color:#519bec;}
+
+/* committee card */
+.committee-card{
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #bcdcff;
+    border-radius: 30px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+}
+
+.committee-icon {font-size: 100px; color:#0f4a89; }
+.committee-details{
+    flex: 1;
+    background: #fff;
+    border-radius: 24px;
+    padding: 12px 20px;
+}
+
+.committee-details h3 {margin: 0; color: #0f4a89;}
+.committee-details p {margin:0;font-size: 13.9px;}
+.committee-details .p1{ font-size: 15.4px; color:#519bec;}
+.committee-details .p2{ color: #696767;}
+.committee-details .p3{margin-top: 12px; font-weight: bold; color:#6f6e6e;}
+
+/* two column layout:member name and reg no */
+.committee-admin-layout{
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 16px;
+    align-items: start;
+}
+
+/* left side of column :member list*/
+.member-list{
+    background: #519bec;
+    border-radius: 30px;
+    padding: 20px;
+    color: #fff;
+}
+.member-list h2{margin: 0 0 12px;}
+
+.table-wrap {
+  max-height: 380px;
+  overflow-y: auto;
+  background: #fff;
+  border-radius: 16px;
+}
+.table-wrap table { width: 100%; border-collapse: collapse; color: #0f4a89; }
+.table-wrap th {
+  position: sticky; top: 0;          /* header stays visible while scrolling */
+  background: #bcdcff;
+  text-align: left;
+}
+.table-wrap th, .table-wrap td { padding: 8px 12px; }
+.table-wrap td { border-top: 1px solid #dbe9f7; }
+
+/* right side */
+.admin-side { display: flex; flex-direction: column; gap: 12px; }
+
+.side-btn {
+  display: block;
+  text-align: center;
+  background: #4a9bea;
+  color: #fff;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 14px;
+  border-radius: 999px;
+}
+.side-btn:hover { filter: brightness(0.95); }
+
+/* events panel */
+.upcoming-events {
+  background: #808080;
+  border-radius: 30px;
+  padding: 16px;
+  color: #fff;
+}
+.events-header { display: flex; justify-content: space-between; align-items: center; }
+.events-header h2 { margin: 0; font-size: 16px; }
+
+.addbtn {
+  width: 28px; height: 28px;
+  display: grid; place-items: center;
+  background: #fff; color: #808080;
+  border-radius: 50%;
+  font-weight: 700;
+  text-decoration: none;
+}
+
+.events-list {
+  margin-top: 12px;
+  max-height: 300px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.event-details {
+  background: #fff;
+  color: #696767;
+  border-radius: 16px;
+  padding: 12px;
+  position: relative;
+}
+.event-details h3 { margin: 0; font-size: 15px; }
+.event-details p  { margin: 0 0 28px; font-size: 12px; }
+
+.edit-eventbtn {
+  position: absolute;
+  right: 10px; bottom: 10px;
+  background: #696767;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 700;
+  text-decoration: none;
+  padding: 4px 12px;
+  border-radius: 999px;
+}
+
+/* stack on small screens */
+@media (max-width: 700px) {
+  .committee-admin-layout { grid-template-columns: 1fr; }
+}
+
+
+
