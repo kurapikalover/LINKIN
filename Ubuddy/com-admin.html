@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>ÜBuddy</title>
+
+  <!-- Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Home and notification icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home,notifications,calendar_month,groups_2,frame_person_mic,document_scanner,feedback,diversity_3">
+
+  <!-- Base CSS -->
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/com-admin.css">
+
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- =========================
+         TOP TABS
+    ========================== -->
+    <nav class="tabs">
+
+      <a href="../pages/homepage.php" class="tab-icon material-symbols-outlined">
+        home
+      </a>
+
+      <a href="notification.html" class="tab-icon-bell material-symbols-outlined">
+        notifications
+      </a>
+
+      <div class="dropdown">
+       <!-- drop down menu club name(s) when hover committee -->
+      <a href="com-admin.html" class="tab-icon-committee active material-symbols-outlined">
+        diversity_3</a>
+
+        <div class="dropdown-content">
+            <p> Select Club:</p>
+            <a href="com-admin.html?id=1">Club Name</a>
+            <a href="com-admin.html?id=2">Club Name</a>         
+        </div>
+      </div>
+                    
+      <span class="spacer"></span>
+
+      <a href="myactivity.html" class="tab">
+        My Activity
+      </a>
+
+      <a href="myapplication.html" class="tab">
+        My Applications
+      </a>
+
+      <a href="#" class="tab">
+        My Achievements
+      </a>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN WHITE SHEET
+    ========================== -->
+    <div class="sheet">
+
+      <!-- =========================
+           HEADER
+      ========================== -->
+      <header class="header">
+
+        <!-- Logo -->
+        <div class="logo">
+          ÜBuddy
+          <small>Let UBuddy be your buddy</small>
+        </div>
+
+
+        <!-- Student Profile -->
+        <div class="user">
+
+          <div class="user-info">
+            <strong>Student Name</strong>
+
+            <small>
+              24B6023 ·
+              <a href="#">View Profile</a>
+            </small>
+          </div>
+
+          <div class="avatar">
+            <!-- Profile image will go here later -->
+          </div>
+
+        </div>
+
+      </header>
+
+
+      <!-- =========================
+           PAGE CONTENT
+           Individual pages go here
+      ========================== -->
+      <main class="page-content">
+        <div class="committee-admin-page">
+
+          <a href="../pages/homepage.php" class="back-button">← Home</a>
+          <h1 class="committee-admin-title">Committee Admin</h1>
+          <h2 class="club-name">Club Name</h2>
+
+          <!-- Committee card-->
+          <section class="committee-card">
+            <span class="material-symbols-outlined committee-icon">diversity_3</span>
+            <div class="committee-details">
+                <h3>Student Name</h3>
+                <p class="p1">2XBXXXX</p>
+                <p class="p2">Faculty Name</p>
+                <p class="p3">Committee Type</p>
+            </div>
+        </section>
+
+        <div class="committee-admin-layout">
+
+          <!-- LEFT: Member list of the club -->
+          <section class="member-list">
+            <h2> Member List</h2>
+            <div class="table-wrap">
+                <table>
+                   <thead>
+                    <tr><th>Name</th><th>Reg. No</th></tr>
+                   </thead> 
+                   <tbody id="memberRows">
+                    <!-- rows are added by PHP or JS -->
+                        <!-- hardcoded -->
+                       <tr><td>Aisyah Rahman</td><td>24B1001</td></tr>
+                        <tr><td>Daniel Lim</td><td>24B1002</td></tr>
+                        <tr><td>Nurul Huda</td><td>24B1003</td></tr>
+                        <tr><td>Lila Razali</td><td>25B1001</td></tr>
+                        <tr><td> Aminah Arif</td><td>25B1002</td></tr>
+                        <tr><td>Aida Azni</td><td>25B1003</td></tr>
+                   </tbody>
+                </table>
+            </div>
+        </section>
+
+          <!--RIGHT SIDE: -->
+          <aside class="admin-side">
+
+           <!-- Edit Club details -->
+           <a href="edit-club.php?club_id=1" class="side-btn">Edit Club Details</a>
+          <!-- View Applications -->
+           <a href="#" class="side-btn">View Applications</a>     
+          
+          <!-- Upcoming Events -->
+          <section class="upcoming-events">
+            <div class="events-header">
+            <h2>Upcoming Events</h2>
+            <!-- add event button -->
+            <a href="#" class="addbtn" aria-label="Add event">+</a>
+            </div>
+
+            <div class="events-list" id="eventsList">
+                <article class="event-details">
+                <h3>Event Name</h3>
+                <p>Date <br> Location </p>
+                <a href="#" class="edit-eventbtn">Edit event</a>
+                </article>
+                <article class="event-details">
+                <h3>Event Name</h3>
+                <p>Date <br> Location </p>
+                <a href="#" class="edit-eventbtn">Edit event</a>
+                </article>
+                <!-- more events -->
+            </div>
+          </section>
+          </aside>
+        </div>
+        </div>
+          
+
+      </main>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
