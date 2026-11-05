@@ -1,100 +1,128 @@
+
+/* =========================
+   NAVIGATION TABS
+========================= */
+
 .tab {
-  background: var(--navy);
-  color: var(--white);
-
-  font-size: 12px;
-  font-weight: 600;
-
-  padding: 9px 18px;
-
-  border-radius: 16px 16px 0 0;
-
-  text-decoration: none;
+    background: var(--navy);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 9px 18px;
+    border-radius: 16px 16px 0 0;
+    text-decoration: none;
 }
 
-
-/* change the background of Home's tab to navy */
+/* HOME TAB */
 .tab-icon {
-  width: 40px;
-  height: 36px;
-
-  display: grid;
-  place-items: center;
-
-  background: var(--navy);
-
-  border-radius: 12px 12px 0 0;
-
-  text-decoration: none;
-  color: var(--white);
+    width: 40px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    background: var(--dark-grey);
+    border-radius: 12px 12px 0 0;
+    text-decoration: none;
+    color: var(--white);
 }
 
-/* change the background of Committee Admin's tab to white */
-.tab-icon-committee {
-  width: 40px;
-  height: 36px;
-
-  display: grid;
-  place-items: center;
-
-  background: var(--white);
-
-  border-radius: 12px 12px 0 0;
-
-  text-decoration: none;
-  color: var(--grey);
+/* HOME TAB ACTIVE */
+.tab-icon.active {
+    background: var(--orange);
+    color: var(--white);
 }
 
-/* dropdown menu for committee admin */
-.dropdown{
-    position: relative; /*connect the menu to the button*/
+/* COMMITTEE ADMIN TAB */
+.committee-admin-dropdown .tab-icon {
+    background: var(--dark-grey);
+    color: var(--white);
+    transition: background-color 0.2s ease;
 }
 
-.dropdown-content{
-    display: none;
+/* COMMITTEE ADMIN HOVER */
+.committee-admin-dropdown .tab-icon:hover {
+    background: #5a5d63;
+}
+
+/* COMMITTEE ADMIN ACTIVE */
+.committee-admin-dropdown .tab-icon.active {
+    background: var(--orange);
+    color: var(--white);
+}
+
+
+/* =========================
+   COMMITTEE ADMIN DROPDOWN
+========================= */
+
+.committee-admin-dropdown {
+    position: relative;
+}
+
+.committee-admin-menu {
     position: absolute;
-    top: 100%; /*no gap, directly under the button*/
+    top: 100%;
     left: 0;
     min-width: 160px;
     background: #ffffff;
     border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     overflow: hidden;
     z-index: 10;
 }
 
-/* hover on desktop, focus/tap on touch and keyboard (for mobile ig)*/
-.dropdown:hover .dropdown-content,
-.dropdown:focus-within .dropdown-content{
-    display:block;
+.committee-admin-menu[hidden] {
+    display: none;
 }
-/* Select Club Name: */
-.dropdown-content p {
+
+.committee-admin-menu p {
     margin: 0;
     padding: 10px 14px;
     font-size: 15.3px;
     font-weight: bold;
-    color:#0f4a89;
+    color: #0f4a89;
     border-bottom: 1px solid #bcdcff;
 }
-/* Club Name*/
-.dropdown-content a {
+
+.committee-admin-menu a {
     display: block;
     padding: 10px 14px;
-    border-bottom: 1px solid #bcdcff; /*give border after club name*/
+    border-bottom: 1px solid #bcdcff;
     text-decoration: none;
-    font-size: 15.3px; 
-    color:#0f4a89;
+    font-size: 15.3px;
+    color: #0f4a89;
 }
 
-.dropdown-content a:last-child {border-bottom: none; } 
-.dropdown-content a:hover {background:#bcdcff;}
+.committee-admin-menu a:last-child {
+    border-bottom: none;
+}
 
-.committee-admin-title { text-align: center; margin:0; color: #0f4a89;}
-.club-name {text-align: center; margin: 0 0 12px; color:#519bec;}
+.committee-admin-menu a:hover {
+    background: #bcdcff;
+}
 
-/* committee card */
-.committee-card{
+
+/* =========================
+   PAGE TITLE AND CLUB NAME
+========================= */
+
+.committee-admin-title {
+    text-align: center;
+    margin: 0;
+    color: #0f4a89;
+}
+
+.club-name {
+    text-align: center;
+    margin: 0 0 12px;
+    color: #519bec;
+}
+
+
+/* =========================
+   COMMITTEE CARD
+========================= */
+
+.committee-card {
     display: flex;
     align-items: center;
     gap: 20px;
@@ -104,120 +132,266 @@
     margin-bottom: 16px;
 }
 
-.committee-icon {font-size: 100px; color:#0f4a89; }
-.committee-details{
+.committee-icon {
+    font-size: 100px;
+    color: #0f4a89;
+}
+
+.committee-details {
     flex: 1;
     background: #fff;
     border-radius: 24px;
     padding: 12px 20px;
 }
 
-.committee-details h3 {margin: 0; color: #0f4a89;}
-.committee-details p {margin:0;font-size: 13.9px;}
-.committee-details .p1{ font-size: 15.4px; color:#519bec;}
-.committee-details .p2{ color: #696767;}
-.committee-details .p3{margin-top: 12px; font-weight: bold; color:#6f6e6e;}
+.committee-details h3 {
+    margin: 0;
+    color: #0f4a89;
+}
 
-/* two column layout:member name and reg no */
-.committee-admin-layout{
+.committee-details p {
+    margin: 0;
+    font-size: 13.9px;
+}
+
+.committee-details .p1 {
+    font-size: 15.4px;
+    color: #519bec;
+}
+
+.committee-details .p2 {
+    color: #696767;
+}
+
+.committee-details .p3 {
+    margin-top: 12px;
+    font-weight: bold;
+    color: #6f6e6e;
+}
+
+
+/* =========================
+   TWO COLUMN LAYOUT
+========================= */
+
+.committee-admin-layout {
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 16px;
     align-items: start;
 }
 
-/* left side of column :member list*/
-.member-list{
+
+/* =========================
+   MEMBER LIST
+========================= */
+
+.member-list {
     background: #519bec;
     border-radius: 30px;
     padding: 20px;
     color: #fff;
 }
-.member-list h2{margin: 0 0 12px;}
 
+.member-list h2 {
+    margin: 0 0 12px;
+}
+
+/* MEMBER TABLE */
 .table-wrap {
-  max-height: 380px;
-  overflow-y: auto;
-  background: #fff;
-  border-radius: 16px;
+    max-height: 380px;
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 16px;
 }
-.table-wrap table { width: 100%; border-collapse: collapse; color: #0f4a89; }
+
+.table-wrap table {
+    width: 100%;
+    border-collapse: collapse;
+    color: #0f4a89;
+}
+
 .table-wrap th {
-  position: sticky; top: 0;          /* header stays visible while scrolling */
-  background: #bcdcff;
-  text-align: left;
+    position: sticky;
+    top: 0;
+    background: #bcdcff;
+    text-align: left;
 }
-.table-wrap th, .table-wrap td { padding: 8px 12px; }
-.table-wrap td { border-top: 1px solid #dbe9f7; }
 
-/* right side */
-.admin-side { display: flex; flex-direction: column; gap: 12px; }
+.table-wrap th,
+.table-wrap td {
+    padding: 8px 12px;
+}
 
+.table-wrap td {
+    border-top: 1px solid #dbe9f7;
+}
+
+
+/* =========================
+   MEMBER SEARCH AND FILTERS
+========================= */
+
+.member-controls {
+    display: flex;
+    gap: 12px;
+    margin: 15px 0 20px;
+    flex-wrap: wrap;
+}
+
+.member-controls input,
+.member-controls select {
+    padding: 10px 14px;
+    border: 1px solid #bcdcff;
+    border-radius: 10px;
+    background-color: #ffffff;
+    color: #172A46;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.member-controls input {
+    flex: 2;
+    min-width: 220px;
+}
+
+.member-controls select {
+    flex: 1;
+    min-width: 150px;
+}
+
+.member-controls input:focus,
+.member-controls select:focus {
+    outline: none;
+    border-color: #426fb1;
+    box-shadow: 0 0 0 2px rgba(66, 111, 177, 0.15);
+}
+
+
+/* =========================
+   RIGHT SIDE
+========================= */
+
+.admin-side {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+/* SIDE BUTTONS */
 .side-btn {
-  display: block;
-  text-align: center;
-  background: #4a9bea;
-  color: #fff;
-  font-weight: 700;
-  text-decoration: none;
-  padding: 14px;
-  border-radius: 999px;
+    display: block;
+    text-align: center;
+    background: #4a9bea;
+    color: #fff;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 14px;
+    border-radius: 999px;
 }
-.side-btn:hover { filter: brightness(0.95); }
 
-/* events panel */
+.side-btn:hover {
+    filter: brightness(0.95);
+}
+
+
+/* =========================
+   UPCOMING EVENTS
+========================= */
+
 .upcoming-events {
-  background: #808080;
-  border-radius: 30px;
-  padding: 16px;
-  color: #fff;
+    background: #808080;
+    border-radius: 30px;
+    padding: 16px;
+    color: #fff;
 }
-.events-header { display: flex; justify-content: space-between; align-items: center; }
-.events-header h2 { margin: 0; font-size: 16px; }
 
+.events-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.events-header h2 {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* ADD EVENT BUTTON */
 .addbtn {
-  width: 28px; height: 28px;
-  display: grid; place-items: center;
-  background: #fff; color: #808080;
-  border-radius: 50%;
-  font-weight: 700;
-  text-decoration: none;
+    width: 28px;
+    height: 28px;
+    display: grid;
+    place-items: center;
+    background: #fff;
+    color: #808080;
+    border-radius: 50%;
+    font-weight: 700;
+    text-decoration: none;
 }
 
+/* EVENT LIST */
 .events-list {
-  margin-top: 12px;
-  max-height: 300px;
-  overflow-y: auto;
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
+    margin-top: 12px;
+    max-height: 300px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
+
 .event-details {
-  background: #fff;
-  color: #696767;
-  border-radius: 16px;
-  padding: 12px;
-  position: relative;
+    background: #fff;
+    color: #696767;
+    border-radius: 16px;
+    padding: 12px;
+    position: relative;
 }
-.event-details h3 { margin: 0; font-size: 15px; }
-.event-details p  { margin: 0 0 28px; font-size: 12px; }
 
+.event-details h3 {
+    margin: 0;
+    font-size: 15px;
+}
+
+.event-details p {
+    margin: 0 0 28px;
+    font-size: 12px;
+}
+
+/* EDIT EVENT BUTTON */
 .edit-eventbtn {
-  position: absolute;
-  right: 10px; bottom: 10px;
-  background: #696767;
-  color: #fff;
-  font-size: 12px;
-  font-weight: 700;
-  text-decoration: none;
-  padding: 4px 12px;
-  border-radius: 999px;
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    background: #696767;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 4px 12px;
+    border-radius: 999px;
 }
 
-/* stack on small screens */
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
 @media (max-width: 700px) {
-  .committee-admin-layout { grid-template-columns: 1fr; }
+    .committee-admin-layout {
+        grid-template-columns: 1fr;
+    }
 }
 
+@media (max-width: 600px) {
+    .member-controls {
+        flex-direction: column;
+    }
 
+    .member-controls input,
+    .member-controls select {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}
 

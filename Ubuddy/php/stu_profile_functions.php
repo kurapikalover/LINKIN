@@ -27,26 +27,36 @@ function getStudentProfile(PDO $pdo, $userId): ?array
 // ========================================
 // GET STUDENT CLUBS
 // ========================================
+// ========================================
+// GET STUDENT CLUBS
+// ========================================
 function getStudentClubs(PDO $pdo, $userId): array
 {
     $stmt = $pdo->prepare(
         'SELECT
             c.club_id,
             c.club_name,
-            m.membership_type
+            m.membership_type,
+            m.join_date,
+            m.membership_status,
+            p.position_name AS role
          FROM membership m
          JOIN club c
            ON c.club_id = m.club_id
-         WHERE m.user_id = :user_id'
+         LEFT JOIN position p
+           ON p.position_id = m.position_id
+         WHERE m.user_id = :user_id
+           AND m.membership_status = :status
+         ORDER BY c.club_name'
     );
 
     $stmt->execute([
-        'user_id' => $userId
+        'user_id' => $userId,
+        'status' => 'Enrolled'
     ]);
 
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
 }
-
 
 // ========================================
 // GET RECENT APPLICATIONS

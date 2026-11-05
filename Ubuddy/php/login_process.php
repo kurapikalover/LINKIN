@@ -29,17 +29,51 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($user && password_verify($enteredPassword, $user['password'])) {
 
-            // Check the account type before creating a login session
+            // Default destination
+            $destination = null;
+
+            // Check account type
             if ($user['user_type'] === 'System Admin') {
+
                 $destination = 'admin.php';
+
             } elseif ($user['user_type'] === 'Student') {
-                $destination = 'homepage.php';
+
+                // Check whether the student is a committee admin
+                $adminSql = "
+                    SELECT c.club_id
+                    FROM membership m
+                    JOIN club c ON m.club_id = c.club_id
+                    WHERE m.user_id = :user_id
+                      AND m.membership_status = 'Enrolled'
+                      AND m.is_admin = TRUE
+                    ORDER BY c.club_name
+                    LIMIT 1
+                ";
+
+                $adminStmt = $pdo->prepare($adminSql);
+                $adminStmt->execute([
+                    'user_id' => $user['user_id']
+                ]);
+
+                $adminClub = $adminStmt->fetch(PDO::FETCH_ASSOC);
+
+                if ($adminClub) {
+                    // Committee admin goes to their admin page
+                    $destination = 'com-admin.php?id=' .
+                        urlencode($adminClub['club_id']);
+                } else {
+                    // Regular student goes to homepage
+                    $destination = 'homepage.php';
+                }
+
             } else {
                 $error = 'Your account type is not recognised.';
-                $destination = null;
             }
 
+            // Create login session and redirect
             if ($destination !== null) {
+
                 session_regenerate_id(true);
 
                 $_SESSION['user_id'] = $user['user_id'];
@@ -52,7 +86,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
         } else {
-            // Store the error and return to the login page
+            // Invalid login details
             $_SESSION['login_error'] = 'Invalid email or password.';
             header('Location: login.php');
             exit;

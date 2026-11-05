@@ -1,0 +1,424 @@
+
+/* =========================
+   TOP TABS
+========================= */
+
+/* Home tab */
+.tab-icon {
+    width: 40px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    background: var(--dark-grey);
+    border-radius: 12px 12px 0 0;
+    text-decoration: none;
+    color: var(--white);
+}
+
+/* Notification tab - current page */
+.tab-icon-bell {
+    width: 40px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    background: var(--white);
+    border-radius: 12px 12px 0 0;
+    text-decoration: none;
+    color: var(--navy);
+    position: relative;
+}
+
+/* Committee Admin tab */
+.tab-icon-committee {
+    width: 40px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    background: var(--dark-grey);
+    border-radius: 12px 12px 0 0;
+    text-decoration: none;
+    color: var(--white);
+}
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+    text-decoration: none;
+}
+
+.back-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    flex-shrink: 0;
+    border-radius: 50%;
+    background-color: #426fb1;
+    color: var(--white);
+    transition: background-color 0.2s ease;
+}
+
+.back-icon .material-symbols-outlined {
+    font-size: 22px;
+    line-height: 1;
+}
+
+.back-text {
+    color: #426fb1;
+    font-family: "Poppins", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover .back-icon {
+    background-color: #263f63;
+}
+
+.back-link:hover .back-text {
+    color: #263f63;
+}
+
+/* =========================
+   PAGE TITLE
+========================= */
+
+.notifications-title {
+    margin: 0 0 20px;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 700;
+}
+
+/* =========================
+   NOTIFICATION LAYOUT
+========================= */
+
+.notifications-layout {
+    width: 100%;
+    max-width: 900px;
+    background-color: #bcdcff;
+    padding: 20px;
+    margin: 15px auto;
+    box-sizing: border-box;
+    border-radius: 40px;
+}
+
+/* =========================
+   NOTIFICATION LIST
+========================= */
+
+.notification-list {
+    max-height: 350px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 8px;
+    box-sizing: border-box;
+    scrollbar-color: #ffffff transparent;
+}
+
+/* =========================
+   INDIVIDUAL NOTIFICATION
+========================= */
+
+.info-notification {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 20px;
+
+    background-color: #fff;
+    padding: 15px 55px 55px 15px;
+    margin: 0;
+
+    box-sizing: border-box;
+    border-radius: 40px;
+
+    --type-color: var(--navy);
+
+    text-decoration: none;
+    color: inherit;
+    cursor: pointer;
+
+    transition: background-color 0.2s ease,
+                transform 0.2s ease;
+
+    flex-shrink: 0;
+    overflow: visible;
+}
+
+/* Notification hover effect */
+.info-notification:hover {
+    background-color: #eef3fa;
+    transform: translateY(-2px);
+}
+
+/* =========================
+   NOTIFICATION TYPE COLOURS
+========================= */
+
+.info-notification.interview {
+    --type-color: #ab2303;
+}
+
+.info-notification.application {
+    --type-color: #7b3fa0;
+}
+
+.info-notification.event {
+    --type-color: #46869a;
+}
+
+.info-notification.membership {
+    --type-color: #0f4a89;
+}
+
+.info-notification.feedback {
+    --type-color: #ff8db9;
+}
+
+/* =========================
+   NOTIFICATION ICON
+========================= */
+
+.notification-icon {
+    font-size: 70px;
+    color: var(--type-color);
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+/* =========================
+   NOTIFICATION CONTENT
+========================= */
+
+.notification-content {
+    flex: 1;
+    min-width: 0;
+    text-align: left;
+}
+
+/* Notification heading and date */
+.notification-header {
+    display: flex;
+    align-items: baseline;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.notification-header h2 {
+    margin: 0;
+    color: var(--type-color);
+    font-size: 20px;
+}
+
+.notification-time {
+    color: #b4b4b4;
+    font-size: 13px;
+    font-weight: 500;
+}
+
+.notification-time::before {
+    content: "•";
+    margin-right: 8px;
+    color: #b4b4b4;
+}
+
+/* Notification message */
+.notification-content p {
+    margin: 6px 0 0;
+    color: #696767;
+}
+
+/* =========================
+   UNREAD INDICATOR
+========================= */
+
+.info-notification .badge {
+    position: absolute;
+    top: 15px;
+    right: 20px;
+
+    width: 16px;
+    height: 16px;
+
+    background-color: #ff5722;
+    border: 3px solid #ffffff;
+    border-radius: 50%;
+
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+
+    box-sizing: content-box;
+    z-index: 2;
+}
+
+/* =========================
+   NAVIGATION ARROW BUTTON
+========================= */
+
+.info-notification a.notification-arrow {
+    position: absolute;
+    bottom: 12px;
+    right: 15px;
+
+    width: 36px;
+    height: 36px;
+    min-width: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #426fb1;
+    color: #ffffff;
+
+    border: none;
+    border-radius: 50%;
+    padding: 0;
+    margin: 0;
+
+    text-decoration: none;
+    box-sizing: border-box;
+
+    transition: background-color 0.2s ease,
+                transform 0.2s ease;
+}
+
+/* Arrow icon */
+.info-notification a.notification-arrow .material-symbols-outlined {
+    font-size: 21px;
+    color: #ffffff;
+    line-height: 1;
+}
+
+/* Arrow hover effect */
+.info-notification a.notification-arrow:hover {
+    background-color: #263f63;
+    color: #ffffff;
+    transform: translateX(3px);
+}
+
+/* Keyboard focus */
+.info-notification a.notification-arrow:focus-visible {
+    outline: 3px solid #648bc2;
+    outline-offset: 3px;
+}
+
+/* =========================
+   EMPTY STATE
+========================= */
+
+.empty-state {
+    text-align: center;
+    padding: 30px 15px;
+    color: var(--navy);
+}
+
+.empty-state .material-symbols-outlined {
+    font-size: 50px;
+}
+
+.empty-state h3 {
+    margin: 10px 0;
+}
+
+.empty-state p {
+    margin: 0;
+    color: #696767;
+}
+
+/* =========================
+   KEYBOARD ACCESSIBILITY
+========================= */
+
+.info-notification:focus-visible {
+    outline: 3px solid #648bc2;
+    outline-offset: 3px;
+}
+
+/* Read notification */
+.info-notification.is-read {
+    opacity: 0.8;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+
+    .notifications-title {
+        font-size: 32px;
+    }
+
+    .notifications-layout {
+        padding: 12px;
+        border-radius: 25px;
+    }
+
+    .notification-list {
+        max-height: 350px;
+        padding: 8px;
+    }
+
+    .info-notification {
+        gap: 12px;
+        padding: 12px 45px 50px 12px;
+        border-radius: 25px;
+    }
+
+    .notification-icon {
+        font-size: 45px;
+    }
+
+    .notification-header h2 {
+        font-size: 16px;
+    }
+
+    .notification-content p {
+        font-size: 13px;
+    }
+
+    .notification-time {
+        font-size: 11px;
+    }
+
+    /* Unread indicator */
+    .info-notification .badge {
+        width: 14px;
+        height: 14px;
+        top: 12px;
+        right: 15px;
+        border-width: 2px;
+    }
+
+    /* Arrow button */
+    .info-notification a.notification-arrow {
+        width: 32px;
+        height: 32px;
+        min-width: 32px;
+        bottom: 10px;
+        right: 12px;
+    }
+
+    .info-notification a.notification-arrow .material-symbols-outlined {
+        font-size: 19px;
+    }
+
+    /* Top tabs */
+    .tab-icon,
+    .tab-icon-bell,
+    .tab-icon-committee {
+        width: 36px;
+        height: 34px;
+    }
+}

@@ -1,0 +1,395 @@
+
+/* =========================
+   NAVIGATION TABS
+========================= */
+
+.tab {
+    background: var(--navy);
+    color: var(--white);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 9px 18px;
+    border-radius: 16px 16px 0 0;
+    text-decoration: none;
+}
+
+/* Home tab */
+.tab-icon {
+    width: 40px;
+    height: 36px;
+    display: grid;
+    place-items: center;
+    background: var(--navy);
+    border-radius: 12px 12px 0 0;
+    text-decoration: none;
+    color: var(--white);
+}
+
+/* My Activity active tab */
+a.tab[href="myactivity.php"],
+a.tab[href="myactivity.html"] {
+    background: var(--white);
+    color: var(--navy);
+    font-size: 12px;
+    font-weight: 600;
+    padding: 9px 18px;
+    border-radius: 16px 16px 0 0;
+    text-decoration: none;
+}
+
+
+/* =========================
+   BACK BUTTON
+========================= */
+
+.page-content > .back-link {
+    align-self: flex-start;
+    margin-bottom: 10px;
+}
+
+
+/* =========================
+   PAGE TITLE
+========================= */
+
+.myactivity-page {
+    width: 100%;
+}
+
+.myactivity-title {
+    margin: 0 0 20px;
+    text-align: center;
+    font-size: 50px;
+    font-weight: 700;
+}
+
+
+/* =========================
+   MAIN CONTAINER
+========================= */
+
+.container {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 10px;
+    align-items: stretch;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   CLUBS AND EVENTS PANEL
+========================= */
+
+.clubsandevents-layout {
+    flex: 2 1 0;
+    min-width: 0;
+    min-height: 350px;
+    height: auto;
+    background-color: #bcdcff;
+    padding: 20px;
+    margin: 15px;
+    box-sizing: border-box;
+    border-radius: 40px;
+    corner-shape: squircle;
+}
+
+
+/* =========================
+   MEMBERSHIPS PANEL
+========================= */
+
+.memberships-layout {
+    flex: 1 1 0;
+    min-width: 0;
+    min-height: 350px;
+    height: auto;
+    background-color: #bcdcff;
+    padding: 20px;
+    margin: 15px;
+    box-sizing: border-box;
+    border-radius: 40px;
+    corner-shape: squircle;
+}
+
+
+/* Responsive panel spacing */
+.clubsandevents-layout,
+.memberships-layout {
+    padding: clamp(10px, 2vw, 20px);
+    margin: clamp(5px, 1vw, 15px);
+}
+
+
+/* =========================
+   PANEL HEADINGS
+========================= */
+
+.clubsandevents-layout h2,
+.memberships-layout h2 {
+    margin: 0 0 15px;
+}
+
+
+/* =========================
+   SCROLLABLE LISTS
+========================= */
+
+.clubsandevents-list,
+.memberships-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-height: 500px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-color: #ffffff transparent;
+    scrollbar-width: thin;
+    padding: 5px 8px 5px 5px;
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   CLUB EVENT INFORMATION
+========================= */
+
+.info-section {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    width: 100%;
+    flex-shrink: 0;
+    background-color: #ffffff;
+    padding: 15px;
+    margin: 0;
+    box-sizing: border-box;
+    border-radius: 40px;
+    corner-shape: squircle;
+}
+
+
+/* Club name and event status */
+.inline-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 4px 12px;
+    width: 100%;
+}
+
+.inline-row h3 {
+    margin: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+
+/* =========================
+   EVENT STATUS BADGES
+========================= */
+
+.inline-row span {
+    display: inline-block;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* Upcoming */
+.inline-row .upcoming {
+    background-color: #e2f3e7;
+    color: #21663a;
+}
+
+/* Ongoing */
+.inline-row .ongoing {
+    background-color: #fff1cc;
+    color: #855b00;
+}
+
+/* Completed */
+.inline-row .completed {
+    background-color: #e9edf2;
+    color: #4b5563;
+}
+
+/* Cancelled */
+.inline-row .cancelled {
+    background-color: #fde8e8;
+    color: #991b1b;
+}
+
+
+/* =========================
+   EVENT DETAILS
+========================= */
+
+.details-section {
+    align-self: flex-start;
+    margin: 0;
+    padding: 0;
+    text-align: left;
+}
+
+.details-section p {
+    margin: 0 0 5px;
+    font-weight: bold;
+    color: #696767;
+}
+
+.details-section small {
+    display: block;
+    color: #b4b4b4;
+}
+
+
+/* =========================
+   MEMBERSHIP INFORMATION
+========================= */
+
+.memberships-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    gap: 10px;
+    width: 100%;
+    flex-shrink: 0;
+    background-color: #ffffff;
+    padding: 20px 15px;
+    margin: 0;
+    box-sizing: border-box;
+    border-radius: 40px;
+    corner-shape: squircle;
+}
+
+
+/* =========================
+   CLUB LOGO
+========================= */
+
+.logo-container {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    overflow: hidden;
+    border: 4px solid #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+    flex-shrink: 0;
+}
+
+.club-logo {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+
+/* =========================
+   MEMBERSHIP DETAILS
+========================= */
+
+.memberships-info .details-section {
+    min-width: 0;
+    width: 100%;
+    text-align: center;
+    overflow-wrap: anywhere;
+}
+
+.memberships-info .details-section h3 {
+    margin: 0 0 5px;
+    color: #0f4a89;
+    font-size: clamp(15px, 1.5vw, 20px);
+}
+
+.memberships-info .details-section p {
+    margin: 0;
+    color: #6f6e6e;
+    font-size: 14px;
+}
+
+
+/* Committee position */
+.memberships-info .details-section .p1 {
+    color: #88bef9;
+    font-size: 14px;
+}
+
+
+/* Joined date */
+.memberships-info .details-section p.p2 {
+    white-space: normal;
+    margin-top: 12px;
+    color: #b4b4b4;
+    font-size: 12px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   EMPTY RESULTS
+========================= */
+
+.clubsandevents-list > p,
+.memberships-list > p {
+    padding: 15px;
+    margin: 10px;
+    color: #696767;
+    text-align: center;
+}
+
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 700px) {
+
+    .container {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .clubsandevents-layout,
+    .memberships-layout {
+        flex: 1 1 100%;
+        width: 100%;
+        min-height: 350px;
+        height: auto;
+        margin: 10px 0;
+        padding: 15px;
+    }
+
+    .clubsandevents-list,
+    .memberships-list {
+        max-height: 400px;
+    }
+
+    .logo-container {
+        width: 100px;
+        height: 100px;
+    }
+
+    .myactivity-title {
+        font-size: clamp(32px, 8vw, 50px);
+    }
+
+}
+
+@media (max-width: 400px) {
+
+    .logo-container {
+        width: 65px;
+        height: 65px;
+    }
+
+    .memberships-info .details-section p.p2 {
+        white-space: normal;
+    }
+
+}

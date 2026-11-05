@@ -1,35 +1,80 @@
+
 const form = document.getElementById("feedbackForm");
-const sent = document.getElementById("feedbackSent");
 const fileInput = document.getElementById("fileInput");
 const fileName = document.getElementById("fileName");
 
-// Dropdown: choose Image or Video, then open the file picker
+let selectedFiles = [];
+
+// Dropdown: choose Image or Video, then open the file picker.
 document.querySelectorAll(".dropdown-content button").forEach(btn => {
-  btn.addEventListener("click", () => {
-    fileInput.accept = btn.dataset.type;   // limits the picker to images or videos
-    fileInput.click();
-  });
+    btn.addEventListener("click", () => {
+        fileInput.accept = btn.dataset.type;
+        fileInput.click();
+    });
 });
 
-// Show the chosen file's name
+// Update the file input and display the selected files.
+function updateFileList() {
+
+    const dataTransfer = new DataTransfer();
+
+    selectedFiles.forEach(file => {
+        dataTransfer.items.add(file);
+    });
+
+    fileInput.files = dataTransfer.files;
+
+    // Clear the previous file list.
+    fileName.innerHTML = "";
+
+    selectedFiles.forEach((file, index) => {
+
+        // Container for each selected file.
+        const fileItem = document.createElement("span");
+        fileItem.className = "selected-file";
+
+        // File name.
+        const name = document.createElement("span");
+        name.textContent = file.name;
+        name.className = "selected-file-name";
+
+        // Remove button.
+        const removeButton = document.createElement("button");
+        removeButton.type = "button";
+        removeButton.textContent = "×";
+        removeButton.className = "remove-file";
+        removeButton.setAttribute("aria-label", `Remove ${file.name}`);
+
+        // Remove this file when clicked.
+        removeButton.addEventListener("click", () => {
+            selectedFiles.splice(index, 1);
+            updateFileList();
+        });
+
+        fileItem.appendChild(name);
+        fileItem.appendChild(removeButton);
+
+        fileName.appendChild(fileItem);
+    });
+}
+
+// Add newly selected files.
 fileInput.addEventListener("change", () => {
-  fileName.textContent = fileInput.files[0] ? fileInput.files[0].name : "";
+
+    const newFiles = Array.from(fileInput.files);
+
+    newFiles.forEach(file => {
+
+        if (selectedFiles.length >= 5) {
+            alert("You can upload a maximum of 5 files.");
+            return;
+        }
+
+        selectedFiles.push(file);
+    });
+
+    updateFileList();
 });
 
-// Send
-form.addEventListener("submit", (e) => {
-  e.preventDefault();                       // stop the page from reloading
-
-  const text = document.getElementById("typeFeedback").value.trim();
-  const file = fileInput.files[0];
-
-  // TODO: send `text` and `file` to the backend here (see below)
-  //right now fake feedback id since alum connect to supabase 
-  //also check dari supabase storage after submit the feedback, can see student id/name or not (check anonymous)
-
-  document.getElementById("feedbackId").textContent =
-    "FB-" + Date.now().toString().slice(-6);   // placeholder ID
-
-  form.hidden = true;
-  sent.hidden = false;
-});
+// Form submission is handled by PHP.
+// Do not prevent the default form submission.

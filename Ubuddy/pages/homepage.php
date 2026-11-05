@@ -4,6 +4,17 @@ require_once __DIR__ . '/../php/db.php';
 require_once __DIR__ . '/../php/functions.php';
 require_once __DIR__ . '/../php/club_queries.php';
 require_once __DIR__ . '/../php/event_queries.php';
+require_once __DIR__ . '/../php/com_admin_funct.php';
+
+// Get logged-in user
+$userId = $_SESSION['user_id'] ?? null;
+
+// Get clubs the user is a committee admin of
+$adminClubs = [];
+
+if ($userId !== null) {
+    $adminClubs = getAdminClubs($pdo, $userId);
+}
 
 $latestNews = getLatestNews($pdo);
 $allClubs = getAllClubs($pdo);
@@ -31,7 +42,13 @@ $allEvents = getAllEvents($pdo);
 <body>
  
 
-  <?php pageHeader(); ?>
+  <?php
+  pageHeader(
+    $_SESSION['name'] ?? 'Student',
+    $userId,
+    $adminClubs
+  );
+  ?>
 
 
 
@@ -229,9 +246,9 @@ $allEvents = getAllEvents($pdo);
         Help us make this website better by voicing your thoughts!
       </p>
 
-      <button type="button" class="btn btn-large">
-        Leave Feedback
-      </button>
+      <a href="feedback.php" class="btn btn-large">
+          Leave Feedback
+      </a>
 
       <small>
         Any suggestions? Complaints? Bugs? We got you, buddy!

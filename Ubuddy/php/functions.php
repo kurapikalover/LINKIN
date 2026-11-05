@@ -1,6 +1,8 @@
 
 <?php
 
+require_once __DIR__ . '/notification_functions.php';
+
 if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
@@ -10,12 +12,7 @@ if (session_status() === PHP_SESSION_NONE) {
    PAGE HEADER
 ========================= */
 
-
-/* =========================
-   PAGE HEADER
-========================= */
-
-function pageHeader($studentName = null, $studentId = null)
+function pageHeader($studentName = null, $studentId = null, $adminClubs = [])
 {
     // Use the logged-in user's details from the session.
     $studentName = $studentName ?? $_SESSION['name'] ?? 'Student Name';
@@ -23,6 +20,18 @@ function pageHeader($studentName = null, $studentId = null)
 
     // Identify the current page for active-tab styling.
     $currentPage = basename($_SERVER['PHP_SELF'] ?? '');
+
+    // Get the number of unread notifications.
+    global $pdo;
+
+    $unreadCount = 0;
+
+    if (isset($pdo) && isset($_SESSION['user_id'])) {
+        $unreadCount = getUnreadNotificationCount(
+            $pdo,
+            $_SESSION['user_id']
+        );
+    }
 
     $isHome = $currentPage === 'homepage.php';
 
@@ -33,6 +42,8 @@ function pageHeader($studentName = null, $studentId = null)
 
     $isClubs = $currentPage === 'club_page.php';
     $isEvents = $currentPage === 'event_page.php';
+
+    $isCommitteeAdmin = $currentPage === 'com-admin.php';
 
     $isMyActivity = in_array($currentPage, [
         'my_activity.php',
@@ -61,14 +72,63 @@ function pageHeader($studentName = null, $studentId = null)
             </a>
 
             <!-- Notifications -->
+            <!-- Notifications -->
             <a
-                href="#"
+                href="../pages/notification.php"
                 class="tab-icon-bell <?= $isNotifications ? 'active' : '' ?>"
                 aria-label="Notifications"
                 <?= $isNotifications ? 'aria-current="page"' : '' ?>
             >
                 <span class="material-symbols-outlined">notifications</span>
+
+                <?php if ($unreadCount > 0): ?>
+                    <span class="notification-dot"></span>
+                <?php endif; ?>
             </a>
+
+            <!-- Committee Admin Dropdown -->
+            <?php if (!empty($adminClubs)): ?>
+
+                <div class="committee-admin-dropdown">
+
+                    <button
+                        type="button"
+                        class="tab-icon <?= $isCommitteeAdmin ? 'active' : '' ?>"
+                        aria-label="Committee Admin"
+                        id="committeeAdminButton"
+                        aria-expanded="false"
+                        aria-controls="committeeAdminMenu"
+                    >
+                        <span class="material-symbols-outlined">
+                            diversity_3
+                        </span>
+                    </button>
+
+                    <div
+                        class="committee-admin-menu"
+                        id="committeeAdminMenu"
+                        hidden
+                    >
+
+                        <p>Select a Club</p>
+
+                        <?php foreach ($adminClubs as $club): ?>
+
+                            <a href="../pages/com-admin.php?id=<?= urlencode($club['club_id']) ?>">
+                                <?= htmlspecialchars(
+                                    $club['club_name'],
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>
+                            </a>
+
+                        <?php endforeach; ?>
+
+                    </div>
+
+                </div>
+
+            <?php endif; ?>
 
             <span class="spacer"></span>
 
@@ -92,7 +152,7 @@ function pageHeader($studentName = null, $studentId = null)
 
             <!-- My Activity -->
             <a
-                href="#"
+                href="../pages/myactivity.php"
                 class="tab <?= $isMyActivity ? 'active' : '' ?>"
                 <?= $isMyActivity ? 'aria-current="page"' : '' ?>
             >
@@ -194,8 +254,6 @@ function pageHeader($studentName = null, $studentId = null)
 }
 
 
-
-
 /* =========================
    PAGE FOOTER
 ========================= */
@@ -207,6 +265,7 @@ function pageFooter()
         </div> <!-- .sheet -->
 
     </div> <!-- .page -->
+
         <script src="../js/profile_dropdown.js"></script>
 
     <?php

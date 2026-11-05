@@ -5,6 +5,7 @@ session_start();
 require_once __DIR__ . '/../php/db.php';
 require_once __DIR__ . '/../php/functions.php';
 require_once __DIR__ . '/../php/stu_profile_functions.php';
+require_once __DIR__ . '/../php/com_admin_funct.php';
 
 // Check whether the user is logged in.
 if (!isset($_SESSION['user_id'])) {
@@ -13,6 +14,8 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $userId = $_SESSION['user_id'];
+// Get clubs the user is a committee admin of.
+$adminClubs = getAdminClubs($pdo, $userId);
 
 // Retrieve profile information.
 $profile = getStudentProfile($pdo, $userId);
@@ -27,8 +30,31 @@ $clubs = getStudentClubs($pdo, $userId);
 $applications = getRecentApplications($pdo, $userId);
 $achievements = getStudentAchievements($pdo, $userId);
 
+// Only display approved and pending achievements.
+$visibleAchievements = array_values(array_filter(
+    $achievements,
+    function ($achievement) {
+        $status = strtolower(trim($achievement['achievement_status']));
+
+        return in_array($status, ['approved', 'pending'], true);
+    }
+));
+
+// Get unique achievement categories for the filter.
+$achievementCategories = [];
+
+foreach ($visibleAchievements as $achievement) {
+    $category = trim($achievement['achievement_type']);
+
+    if ($category !== '') {
+        $achievementCategories[$category] = $category;
+    }
+}
+
+sort($achievementCategories, SORT_NATURAL | SORT_FLAG_CASE);
+
 // Display the shared page header.
-pageHeader($profile['name'], $profile['user_id']);
+pageHeader($profile['name'], $profile['user_id'],$adminClubs);
 ?>
 
 <?php pageIcons(); ?>
@@ -38,18 +64,13 @@ pageHeader($profile['name'], $profile['user_id']);
 <link rel="stylesheet" href="../css/profile-common.css">
 <link rel="stylesheet" href="../css/stu_profile.css">
 
-
 <div class="profile-page">
 
+    <!-- PAGE TITLE -->
     <div class="profile-page-title">
         <div>
             <h1>My Profile</h1>
-            <p>Manage your personal information and achievements.</p>
         </div>
-
-        <a href="stu_profile_edit.php" class="btn btn-secondary">
-            Edit Profile
-        </a>
     </div>
 
     <!-- PROFILE SUMMARY -->
@@ -115,16 +136,41 @@ pageHeader($profile['name'], $profile['user_id']);
 
                 <?php foreach ($clubs as $club): ?>
 
-                    <div class="profile-list-card">
-                        <div>
+                    <div class="profile-list-card club-card">
+
+                        <!-- Club Logo -->
+                        <div class="club-logo">
+                            <span class="material-symbols-outlined"
+                                  aria-hidden="true">groups</span>
+                        </div>
+
+                        <!-- Club Name and Position -->
+                        <div class="club-info">
                             <h3>
                                 <?= profileEscape($club['club_name']) ?>
                             </h3>
 
                             <p>
-                                <?= profileEscape($club['role']) ?>
+                                <?= profileEscape($club['role'] ?? 'Member') ?>
                             </p>
                         </div>
+
+                        <!-- Joined Date and Status -->
+                        <div class="club-details">
+
+                            <span class="club-joined-date">
+                                Joined:
+                                <?= !empty($club['join_date'])
+                                    ? date('d M Y', strtotime($club['join_date']))
+                                    : 'N/A' ?>
+                            </span>
+
+                            <span class="club-status">
+                                <?= profileEscape($club['membership_status']) ?>
+                            </span>
+
+                        </div>
+
                     </div>
 
                 <?php endforeach; ?>
@@ -173,9 +219,9 @@ pageHeader($profile['name'], $profile['user_id']);
                         </div>
 
                         <span class="achievement-status <?= profileEscape(
-                            profileStatusClass($application['status'])
+                            profileStatusClass($application['application_status'])
                         ) ?>">
-                            <?= profileEscape($application['status']) ?>
+                            <?= profileEscape($application['application_status']) ?>
                         </span>
 
                     </div>
@@ -201,7 +247,7 @@ pageHeader($profile['name'], $profile['user_id']);
     <!-- MY ACHIEVEMENTS -->
     <section class="profile-section">
 
-        <div class="section-heading">
+        <div class="section-heading achievement-heading">
             <div>
                 <h2>My Achievements</h2>
                 <p>Share your academic, club, and personal achievements.</p>
@@ -212,99 +258,153 @@ pageHeader($profile['name'], $profile['user_id']);
             </a>
         </div>
 
-        <?php if (!empty($achievements)): ?>
+        <?php if (!empty($visibleAchievements)): ?>
 
-            <div class="achievement-list">
+            <!-- ACHIEVEMENT SEARCH AND FILTER -->
+            <div class="achievement-controls">
 
-                <?php foreach ($achievements as $achievement): ?>
+                <div class="achievement-search">
+                    <span class="material-symbols-outlined"
+                          aria-hidden="true">search</span>
 
-                    <div class="achievement-card">
+                    <input
+                        type="text"
+                        id="achievementSearch"
+                        placeholder="Search achievements..."
+                        aria-label="Search achievements"
+                    >
+                </div>
 
-                        <div class="achievement-card-top">
+                <div class="achievement-filter">
+                    <select
+                        id="achievementCategory"
+                        aria-label="Filter achievements by category"
+                    >
+                        <option value="all">All Categories</option>
 
-                            <div>
-                                <h3>
-                                    <?= profileEscape(
-                                        $achievement['achievement_title']
-                                    ) ?>
-                                </h3>
+                        <?php foreach ($achievementCategories as $category): ?>
+                            <option value="<?= profileEscape(
+                                strtolower($category)
+                            ) ?>">
+                                <?= profileEscape($category) ?>
+                            </option>
+                        <?php endforeach; ?>
 
-                                <p class="achievement-meta">
-                                    <?= profileEscape(
-                                        $achievement['achievement_type']
-                                    ) ?>
+                    </select>
+                </div>
 
-                                    <?php if (!empty(
-                                        $achievement['achievement_date']
-                                    )): ?>
-                                        ·
+            </div>
+
+            <!-- ACHIEVEMENT COUNT -->
+            <p class="achievement-count">
+                Showing
+                <span id="achievementVisibleCount">
+                    <?= count($visibleAchievements) ?>
+                </span>
+                of <?= count($visibleAchievements) ?> achievements
+            </p>
+
+            <!-- SCROLLABLE ACHIEVEMENT LIST -->
+            <div class="achievement-scroll">
+
+                <div class="achievement-list" id="achievementList">
+
+                    <?php foreach ($visibleAchievements as $achievement): ?>
+
+                        <div
+                            class="achievement-card"
+                            data-title="<?= profileEscape(
+                                strtolower($achievement['achievement_title'])
+                            ) ?>"
+                            data-category="<?= profileEscape(
+                                strtolower($achievement['achievement_type'])
+                            ) ?>"
+                        >
+
+                            <div class="achievement-card-top">
+
+                                <div>
+                                    <h3>
                                         <?= profileEscape(
-                                            $achievement['achievement_date']
+                                            $achievement['achievement_title']
                                         ) ?>
-                                    <?php endif; ?>
-                                </p>
+                                    </h3>
+
+                                    <p class="achievement-meta">
+                                        <span class="achievement-category">
+                                            <?= profileEscape(
+                                                $achievement['achievement_type']
+                                            ) ?>
+                                        </span>
+
+                                        <?php if (!empty(
+                                            $achievement['achievement_date']
+                                        )): ?>
+                                            <span class="achievement-date">
+                                                ·
+                                                <?= profileEscape(
+                                                    $achievement['achievement_date']
+                                                ) ?>
+                                            </span>
+                                        <?php endif; ?>
+                                    </p>
+                                </div>
+
+                                <span class="achievement-status <?= profileEscape(
+                                    profileStatusClass(
+                                        $achievement['achievement_status']
+                                    )
+                                ) ?>">
+                                    <?= profileEscape(
+                                        $achievement['achievement_status']
+                                    ) ?>
+                                </span>
+
                             </div>
 
-                            <span class="achievement-status <?= profileEscape(
-                                profileStatusClass(
-                                    $achievement['achievement_status']
-                                )
-                            ) ?>">
-                                <?= profileEscape(
-                                    $achievement['achievement_status']
-                                ) ?>
-                            </span>
+                            <?php if (!empty(
+                                $achievement['achievement_description']
+                            )): ?>
+
+                                <p>
+                                    <?= nl2br(profileEscape(
+                                        $achievement['achievement_description']
+                                    )) ?>
+                                </p>
+
+                            <?php endif; ?>
+
+                            <?php if (!empty($achievement['evidence_url'])): ?>
+
+                                <p class="achievement-evidence">
+                                    <a
+                                        href="<?= profileEscape(
+                                            $achievement['evidence_url']
+                                        ) ?>"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                    >
+                                        View Evidence
+                                    </a>
+                                </p>
+
+                            <?php endif; ?>
 
                         </div>
 
-                        <?php if (!empty(
-                            $achievement['achievement_description']
-                        )): ?>
+                    <?php endforeach; ?>
 
-                            <p>
-                                <?= nl2br(profileEscape(
-                                    $achievement['achievement_description']
-                                )) ?>
-                            </p>
+                </div>
 
-                        <?php endif; ?>
+                <!-- No search results message -->
+                <div class="empty-state achievement-no-results"
+                     id="achievementNoResults"
+                     hidden>
 
-                        <?php if (
-                            strtolower(
-                                trim($achievement['achievement_status'])
-                            ) === 'rejected'
-                            && !empty($achievement['review_feedback'])
-                        ): ?>
+                    <h3>No achievements found</h3>
+                    <p>Try changing your search or category filter.</p>
 
-                            <div class="review-reason">
-                                <strong>Feedback:</strong>
-
-                                <?= profileEscape(
-                                    $achievement['review_feedback']
-                                ) ?>
-                            </div>
-
-                        <?php endif; ?>
-
-                        <?php if (!empty($achievement['evidence_url'])): ?>
-
-                            <p class="achievement-evidence">
-                                <a
-                                    href="<?= profileEscape(
-                                        $achievement['evidence_url']
-                                    ) ?>"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                >
-                                    View Evidence
-                                </a>
-                            </p>
-
-                        <?php endif; ?>
-
-                    </div>
-
-                <?php endforeach; ?>
+                </div>
 
             </div>
 
@@ -315,7 +415,7 @@ pageHeader($profile['name'], $profile['user_id']);
                       aria-hidden="true">emoji_events</span>
 
                 <h3>No achievements yet</h3>
-                <p>You have not submitted any achievements yet.</p>
+                <p>You have not submitted any approved or pending achievements yet.</p>
                 <p>Add an achievement to have it reviewed.</p>
             </div>
 
@@ -324,6 +424,72 @@ pageHeader($profile['name'], $profile['user_id']);
     </section>
 
 </div>
+
+<!-- ACHIEVEMENT SEARCH AND FILTER SCRIPT -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const searchInput = document.getElementById('achievementSearch');
+    const categoryFilter = document.getElementById('achievementCategory');
+    const achievementCards = document.querySelectorAll(
+        '.achievement-card'
+    );
+    const visibleCount = document.getElementById(
+        'achievementVisibleCount'
+    );
+    const noResults = document.getElementById(
+        'achievementNoResults'
+    );
+    const achievementList = document.getElementById(
+        'achievementList'
+    );
+
+    // Stop if the student has no achievements.
+    if (!searchInput || !categoryFilter || !achievementList) {
+        return;
+    }
+
+    function filterAchievements() {
+
+        const searchValue = searchInput.value
+            .trim()
+            .toLowerCase();
+
+        const selectedCategory = categoryFilter.value;
+
+        let visibleAchievements = 0;
+
+        achievementCards.forEach(function (card) {
+
+            const title = card.dataset.title;
+            const category = card.dataset.category;
+
+            const matchesSearch = title.includes(searchValue);
+
+            const matchesCategory =
+                selectedCategory === 'all' ||
+                category === selectedCategory;
+
+            if (matchesSearch && matchesCategory) {
+                card.style.display = '';
+                visibleAchievements++;
+            } else {
+                card.style.display = 'none';
+            }
+
+        });
+
+        visibleCount.textContent = visibleAchievements;
+
+        noResults.hidden = visibleAchievements !== 0;
+        achievementList.hidden = visibleAchievements === 0;
+    }
+
+    searchInput.addEventListener('input', filterAchievements);
+    categoryFilter.addEventListener('change', filterAchievements);
+
+});
+</script>
 
 <?php
 // Display the shared page footer.

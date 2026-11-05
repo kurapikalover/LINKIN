@@ -144,6 +144,7 @@
 ========================= */
 
 .tab-icon-bell {
+  position: relative;
   display: grid;
   place-items: center;
   width: 40px;
@@ -158,6 +159,24 @@
 .tab-icon-bell.active {
   background: var(--orange);
   color: var(--white);
+}
+
+/* Notification dot */
+.notification-dot {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  width: 9px;
+  height: 9px;
+  background-color: #f28c28;
+  border: 2px solid var(--white);
+  border-radius: 50%;
+}
+
+/* Notification bell keyboard focus */
+.tab-icon-bell:focus-visible {
+  outline: 3px solid #648bc2;
+  outline-offset: 3px;
 }
 
 /* =========================
@@ -343,125 +362,186 @@
   }
 }
 
-
 /* =========================
    SHARED CARD HOVER EFFECT
 ========================= */
 
 .club-card,
 .event-card {
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 .club-card:hover,
 .event-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
 }
-
 
 /* ========================================
    PROFILE DROPDOWN
 ======================================== */
 
 .profile-dropdown {
-    position: relative;
-    display: flex;
-    align-items: center;
+  position: relative;
+  display: flex;
+  align-items: center;
 }
 
 /* Clickable profile icon */
 .profile-dropdown .avatar {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 44px;
-    height: 44px;
-    padding: 0;
-    border: none;
-    border-radius: 50%;
-    background: #426fb1;
-    color: #ffffff;
-    cursor: pointer;
-    transition: background-color 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #426fb1;
+  color: #ffffff;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
 }
 
 .profile-dropdown .avatar:hover {
-    background: #263F63;
+  background: #263F63;
 }
 
 .profile-dropdown .avatar:focus-visible {
-    outline: 3px solid #648bc2;
-    outline-offset: 3px;
+  outline: 3px solid #648bc2;
+  outline-offset: 3px;
 }
 
 .profile-dropdown .avatar .material-symbols-outlined {
-    font-size: 30px;
+  font-size: 30px;
 }
 
 /* Dropdown panel */
 .profile-dropdown-menu {
-    position: absolute;
-    top: calc(100% + 10px);
-    right: 0;
-    z-index: 1000;
-
-    width: 190px;
-    padding: 6px;
-
-    background: #ffffff;
-    border: 1px solid #e2e7ef;
-    border-radius: 10px;
-    box-shadow: 0 8px 24px rgba(23, 42, 70, 0.16);
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  z-index: 1000;
+  width: 190px;
+  padding: 6px;
+  background: #ffffff;
+  border: 1px solid #e2e7ef;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(23, 42, 70, 0.16);
 }
 
 /* Respect the hidden attribute */
 .profile-dropdown-menu[hidden] {
-    display: none !important;
+  display: none !important;
 }
 
 /* Dropdown links */
 .profile-dropdown-menu a {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-
-    padding: 12px;
-    border-radius: 7px;
-
-    color: #172A46;
-    font-family: inherit;
-    font-size: 14px;
-    font-weight: 500;
-    text-decoration: none;
-
-    transition:
-        background-color 0.2s ease,
-        color 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  border-radius: 7px;
+  color: #172A46;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 500;
+  text-decoration: none;
+  transition:
+    background-color 0.2s ease,
+    color 0.2s ease;
 }
 
 .profile-dropdown-menu a .material-symbols-outlined {
-    font-size: 21px;
-    color: #426fb1;
+  font-size: 21px;
+  color: #426fb1;
 }
 
 .profile-dropdown-menu a:hover {
-    background: #eef3fa;
+  background: #eef3fa;
 }
 
 /* Log Out option */
 .profile-dropdown-menu a.logout-option {
-    margin-top: 4px;
-    padding-top: 13px;
-    border-top: 1px solid #e2e7ef;
-    border-radius: 0 0 7px 7px;
-    color: #c2413b;
+  margin-top: 4px;
+  padding-top: 13px;
+  border-top: 1px solid #e2e7ef;
+  border-radius: 0 0 7px 7px;
+  color: #c2413b;
 }
 
 .profile-dropdown-menu a.logout-option .material-symbols-outlined {
-    color: #c2413b;
+  color: #c2413b;
 }
 
 .profile-dropdown-menu a.logout-option:hover {
-    background: #fff1f0;
+  background: #fff1f0;
+}
+
+/* =========================
+   COMMITTEE ADMIN DROPDOWN
+========================= */
+
+.committee-admin-dropdown {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+}
+
+/* Committee Admin button */
+.committee-admin-dropdown .tab-icon {
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  background: var(--dark-grey);
+  color: var(--white);
+}
+
+.committee-admin-dropdown .tab-icon:focus-visible {
+  outline: 3px solid #648bc2;
+  outline-offset: 3px;
+}
+
+/* Dropdown panel */
+.committee-admin-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  left: 0;
+  z-index: 1000;
+  min-width: 200px;
+  padding: 8px;
+  background: #ffffff;
+  border: 1px solid #e2e7ef;
+  border-radius: 10px;
+  box-shadow: 0 8px 24px rgba(23, 42, 70, 0.16);
+}
+
+/* Respect hidden attribute */
+.committee-admin-menu[hidden] {
+  display: none !important;
+}
+
+/* Dropdown heading: Select a Club */
+.committee-admin-menu p {
+  margin: 5px 10px 8px;
+  color: #0F4A89;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+/* Club options */
+.committee-admin-menu a {
+  display: block;
+  padding: 10px;
+  border-radius: 7px;
+  color: #0F4A89;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 400;
+  text-decoration: none;
+  transition: background-color 0.2s ease;
+}
+
+.committee-admin-menu a:hover {
+  background: #eef3fa;
 }

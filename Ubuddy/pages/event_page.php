@@ -1,10 +1,20 @@
-
 <?php
 require_once __DIR__ . '/../php/db.php';
 require_once __DIR__ . '/../php/functions.php';
 require_once __DIR__ . '/../php/shared_functions.php';
 require_once __DIR__ . '/../php/event_functions.php';
 require_once __DIR__ . '/../php/event_queries.php';
+require_once __DIR__ . '/../php/com_admin_funct.php';
+
+// Get logged-in user
+$userId = $_SESSION['user_id'] ?? null;
+
+// Get clubs the user is a committee admin of
+$adminClubs = [];
+
+if ($userId !== null) {
+    $adminClubs = getAdminClubs($pdo, $userId);
+}
 
 $events = [];
 $error = '';
@@ -36,7 +46,13 @@ try {
 
 <body>
 
-    <?php pageHeader(); ?>
+    <?php
+    pageHeader(
+        $_SESSION['name'] ?? 'Student',
+        $userId,
+        $adminClubs
+    );
+    ?>
 
     <div class="sheet">
 

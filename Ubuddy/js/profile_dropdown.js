@@ -1,35 +1,87 @@
 
 document.addEventListener("DOMContentLoaded", function () {
-    const button = document.getElementById("profileDropdownButton");
-    const menu = document.getElementById("profileDropdownMenu");
 
-    if (!button || !menu) return;
+    /* =========================
+       PROFILE DROPDOWN
+    ========================= */
 
-    function closeMenu() {
-        menu.hidden = true;
-        button.setAttribute("aria-expanded", "false");
+    const profileButton = document.getElementById("profileDropdownButton");
+    const profileMenu = document.getElementById("profileDropdownMenu");
+
+    if (profileButton && profileMenu) {
+
+        function closeProfileMenu() {
+            profileMenu.hidden = true;
+            profileButton.setAttribute("aria-expanded", "false");
+        }
+
+        profileButton.addEventListener("click", function (event) {
+            event.stopPropagation();
+
+            profileMenu.hidden = !profileMenu.hidden;
+
+            profileButton.setAttribute(
+                "aria-expanded",
+                String(!profileMenu.hidden)
+            );
+        });
+
+        document.addEventListener("click", function (event) {
+            if (!event.target.closest("#profileDropdown")) {
+                closeProfileMenu();
+            }
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                closeProfileMenu();
+                profileButton.focus();
+            }
+        });
     }
 
-    button.addEventListener("click", function (event) {
-        event.stopPropagation();
 
-        menu.hidden = !menu.hidden;
-        button.setAttribute(
-            "aria-expanded",
-            String(!menu.hidden)
-        );
-    });
+    /* =========================
+       COMMITTEE ADMIN DROPDOWN
+    ========================= */
 
-    document.addEventListener("click", function (event) {
-        if (!event.target.closest("#profileDropdown")) {
-            closeMenu();
+    const committeeButton = document.getElementById("committeeAdminButton");
+    const committeeMenu = document.getElementById("committeeAdminMenu");
+
+    if (committeeButton && committeeMenu) {
+
+        function closeCommitteeMenu() {
+            committeeMenu.hidden = true;
+
+            committeeButton.setAttribute(
+                "aria-expanded",
+                "false"
+            );
         }
-    });
 
-    document.addEventListener("keydown", function (event) {
-        if (event.key === "Escape") {
-            closeMenu();
-            button.focus();
-        }
-    });
+        committeeButton.addEventListener("click", function (event) {
+            event.stopPropagation();
+
+            committeeMenu.hidden = !committeeMenu.hidden;
+
+            committeeButton.setAttribute(
+                "aria-expanded",
+                String(!committeeMenu.hidden)
+            );
+        });
+
+        document.addEventListener("click", function (event) {
+            if (!event.target.closest(".committee-admin-dropdown")) {
+                closeCommitteeMenu();
+            }
+        });
+
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Escape") {
+                closeCommitteeMenu();
+                committeeButton.focus();
+            }
+        });
+    }
+
 });
