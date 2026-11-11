@@ -1,0 +1,234 @@
+
+/* [hidden] { display: none !important; } */
+
+/* SYSTEM ADMIN TAB ACTIVE */
+.tab-icon.active {
+    background: var(--white);
+    color: var(--navy);
+}
+
+/* =========================
+   PAGE TITLE AND CLUB NAME
+========================= */
+
+.system-admin-title {
+    text-align: center;
+    margin: 0;
+    color: #0f4a89;
+}
+
+/* =========================
+   SYSTEM ADMIN CARD
+========================= */
+
+.admin-card {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: #bcdcff;
+    border-radius: 30px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+}
+
+.system-admin-icon {
+    font-size: 100px;
+    color: #0f4a89;
+}
+
+.admin-details {
+    flex: 1;
+    background: #fff;
+    border-radius: 24px;
+    padding: 12px 20px;
+}
+
+.admin-details h3{
+    margin: 0;
+    color: #0f4a89;   
+}
+
+.admin-details small{
+     font-size: 15.4px;
+     color: #519bec;  
+}
+
+.view-feedback{
+  height: px;
+  background-color:#519bec;;
+  padding: 20px;
+  margin: 15px;
+  box-sizing: border-box;
+  border-radius: 40px;
+  corner-shape: squircle; /* Smooths out the curvature like an iOS app icon */ 
+}
+
+.view-feedback h1{
+ margin: 0 0 12px;  
+ color:#fff;
+}
+
+/* from shared css */
+.search-input {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 20px;
+  /* change background to white */
+  background: var(--white);
+}
+
+.search-input input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #519bec;
+  font: 20px "Poppins", sans-serif;
+}
+
+.search-input input::placeholder {
+  color: var(--navy);
+  opacity: 0.6;
+}
+.filter-btn {
+  border: none;
+  background: none;
+  color: var(--white);
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.filter-btn:hover {
+  color: var(--orange);
+}
+
+
+.feedback-content{
+  background-color: #fff;
+  padding: 15px 20px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  border-radius: 40px;
+  corner-shape: squircle;
+
+  /* two columns: feedback id and feedback entry on left, date and archive button on the right */
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-areas:
+    "id    date"
+    "entry entry"
+    "files archive";
+  column-gap: 16px;
+  row-gap: 6px;
+  align-items: end;
+}
+
+.feedback-content h3 {grid-area: id;  margin: 0; color: #0f4a89; align-self: start;}
+.feedback-content p   { margin: 0; color: #696767; }
+.feedback-content .p1 { grid-area: date; text-align: right; align-self: start; }
+.feedback-content .p2 { grid-area: entry;}
+
+.view-files-btn {
+  grid-area: files;
+  justify-self: start;
+  background: #fff;
+  color: #696767;
+  border: 1px solid #b4b4b4;
+  border-radius: 999px;
+  padding: 4px 16px;
+  font-family: inherit;
+  font-size: 13px;
+  cursor: pointer;
+}
+.view-files-btn:hover { background: #f1f1f1; }
+
+/* .archive-btn  { grid-column: 2; align-self: end; justify-self: end; } */
+
+.archive-btn{
+    grid-area: archive;
+    justify-self: end;
+    border: none;
+    border-radius: 999px;
+      padding: 6px 24px;   /* smaller than before */
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: bold;
+    color:#ffffff;
+    cursor: pointer;   
+    background: #69DB6D;
+}
+
+.archive-btn:hover { filter: brightness(0.95); }
+
+.assign-role{
+  background-color:#858585;
+  padding: 20px;
+  margin: 15px;
+  box-sizing: border-box;
+  border-radius: 40px;
+  corner-shape: squircle; /* Smooths out the curvature like an iOS app icon */
+}
+
+.assign-role h1{
+ margin: 0 0 12px; 
+ color: #fff;
+}
+
+.assign-role form{
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.assign-role label {
+  color: #fff;
+  font-size: 20px;
+  font-weight: 700;
+  margin-top: 6px;
+}
+
+.assign-role input,
+.assign-role select {
+  width: 100%;
+  box-sizing: border-box;
+  padding: 10px 18px;
+  background: #fff;
+  color: #0f4a89;
+  border: none;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 14px;
+}
+
+/* Role and Club side by side */
+.role-club-row {
+  display: flex;
+  gap: 16px;
+}
+.role-club-row .field {
+  flex: 1; 
+  /* flex: 0 0 calc(50% - 8px); ani if mau mcm sma like design  */ 
+  min-width: 0;                 /* lets both shrink on narrow screens */
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.confirm-btn {
+  align-self: center;
+  margin-top: 16px;
+  padding: 10px 48px;
+  background: #000;
+  color: #fff;
+  border: none;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.confirm-btn:hover { filter: brightness(1.3); }
