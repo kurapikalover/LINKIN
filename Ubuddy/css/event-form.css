@@ -1,0 +1,296 @@
+
+/* =========================
+   EVENT FORM CONTAINER
+========================= */
+
+.event-form-container {
+    max-width: 850px;
+    width: calc(100% - 40px);
+    margin: 35px auto 50px;
+    padding: 35px 40px;
+
+    background: #F4F7FC;
+    border: 1px solid #D8E3F2;
+    border-radius: 16px;
+
+    box-shadow: 0 5px 18px rgba(23, 42, 70, 0.08);
+    box-sizing: border-box;
+}
+
+
+/* =========================
+   HEADING
+========================= */
+
+.event-form-container h2 {
+    color: #172A46;
+    font-size: 26px;
+    font-weight: 600;
+    margin: 22px 0 8px;
+}
+
+.form-subtitle {
+    color: #858D99;
+    font-size: 14px;
+    margin-bottom: 28px;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   BACK LINK
+========================= */
+
+.back-link {
+    display: inline-block;
+    color: #426FB1;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 14px;
+    transition: color 0.2s ease;
+}
+
+.back-link:hover {
+    color: #263F63;
+    text-decoration: underline;
+}
+
+
+/* =========================
+   FORM GROUPS
+========================= */
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+    flex: 1;
+    min-width: 0;
+}
+
+.form-group label {
+    color: #172A46;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 8px;
+}
+
+
+/* INPUT AND TEXTAREA */
+
+.form-group input,
+.form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+
+    background: #FFFFFF;
+    border: 1px solid #C7D4E5;
+    border-radius: 8px;
+
+    color: #172A46;
+    font-family: inherit;
+    font-size: 14px;
+
+    box-sizing: border-box;
+    transition: border-color 0.2s ease,
+                box-shadow 0.2s ease;
+}
+
+
+/* FOCUS EFFECT */
+
+.form-group input:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #426FB1;
+    box-shadow: 0 0 0 3px rgba(66, 111, 177, 0.12);
+}
+
+
+/* PLACEHOLDER */
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+    color: #A0AAB8;
+}
+
+
+/* TEXTAREA */
+
+.form-group textarea {
+    resize: vertical;
+    min-height: 110px;
+    line-height: 1.5;
+}
+
+
+/* =========================
+   DATE ROW
+========================= */
+
+.form-row {
+    display: flex;
+    gap: 20px;
+}
+
+.form-row .form-group {
+    min-width: 0;
+}
+
+
+/* =========================
+   AUTOMATIC EVENT STATUS NOTE
+========================= */
+
+.event-status-note {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+
+    background: #EAF2FC;
+    border: 1px solid #D3E2F5;
+    border-radius: 10px;
+
+    padding: 13px 15px;
+    margin-top: 5px;
+    margin-bottom: 20px;
+
+    color: #426FB1;
+}
+
+.event-status-note span {
+    font-size: 20px;
+    flex-shrink: 0;
+}
+
+.event-status-note p {
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+
+/* =========================
+   FORM ACTIONS
+========================= */
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 12px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #D8E3F2;
+}
+
+
+/* SHARED BUTTON STYLING */
+
+.cancel-button,
+.submit-button {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+
+    padding: 11px 24px;
+    border-radius: 8px;
+
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+
+    cursor: pointer;
+    text-decoration: none;
+
+    transition: background 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+}
+
+
+/* CANCEL BUTTON */
+
+.cancel-button {
+    background: #FFFFFF;
+    color: #426FB1;
+    border: 1px solid #C7D4E5;
+}
+
+.cancel-button:hover {
+    background: #EAF0F8;
+    border-color: #A9BDD8;
+}
+
+
+/* SUBMIT BUTTON */
+
+.submit-button {
+    background: #426FB1;
+    color: #FFFFFF;
+    border: none;
+}
+
+.submit-button:hover {
+    background: #263F63;
+}
+
+.submit-button:active,
+.cancel-button:active {
+    transform: scale(0.98);
+}
+
+
+/* =========================
+   ERROR MESSAGE
+========================= */
+
+.error-message {
+    background: #FDECEC;
+    border: 1px solid #E9B6B6;
+    color: #A52A2A;
+
+    padding: 12px 18px;
+    border-radius: 8px;
+
+    margin-bottom: 22px;
+    font-size: 13px;
+}
+
+.error-message p {
+    margin: 4px 0;
+}
+
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 600px) {
+
+    .event-form-container {
+        width: calc(100% - 24px);
+        margin: 20px auto 35px;
+        padding: 24px 20px;
+    }
+
+    .event-form-container h2 {
+        font-size: 23px;
+    }
+
+    .form-row {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .form-actions {
+        flex-direction: column-reverse;
+        align-items: stretch;
+    }
+
+    .cancel-button,
+    .submit-button {
+        width: 100%;
+        box-sizing: border-box;
+    }
+}

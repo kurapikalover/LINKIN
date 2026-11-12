@@ -3,6 +3,7 @@
    NAVIGATION TABS
 ========================= */
 
+/* Default inactive tab */
 .tab {
     background: var(--navy);
     color: var(--white);
@@ -13,28 +14,16 @@
     text-decoration: none;
 }
 
-/* Home tab */
-.tab-icon {
-    width: 40px;
-    height: 36px;
-    display: grid;
-    place-items: center;
-    background: var(--navy);
-    border-radius: 12px 12px 0 0;
-    text-decoration: none;
-    color: var(--white);
-}
-
-/* My Activity active tab */
-a.tab[href="myactivity.php"],
-a.tab[href="myactivity.html"] {
+/* My Activity tab - active */
+.tab[href*="myactivity"] {
     background: var(--white);
     color: var(--navy);
-    font-size: 12px;
-    font-weight: 600;
-    padding: 9px 18px;
-    border-radius: 16px 16px 0 0;
-    text-decoration: none;
+}
+
+/* Home tab - active (for homepage) */
+.tab-icon.active {
+    background: var(--white);
+    color: var(--navy);
 }
 
 
@@ -191,6 +180,7 @@ a.tab[href="myactivity.html"] {
    EVENT STATUS BADGES
 ========================= */
 
+/* General status badge */
 .inline-row span {
     display: inline-block;
     padding: 5px 12px;

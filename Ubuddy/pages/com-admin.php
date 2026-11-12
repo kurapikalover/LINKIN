@@ -23,6 +23,24 @@ $userId = $_SESSION['user_id'];
 
 
 // =========================
+// SUCCESS MESSAGE
+// =========================
+
+// Retrieve the message once, then remove it from the session.
+$successMessage = $_SESSION['success_message'] ?? null;
+unset($_SESSION['success_message']);
+
+
+// =========================
+// CSRF TOKEN
+// =========================
+
+if (empty($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
+
+
+// =========================
 // GET ADMIN CLUBS
 // =========================
 
@@ -65,7 +83,10 @@ if (!in_array($selectedClubId, $allowedClubIds, true)) {
 $clubName = '';
 $admin = [];
 $members = [];
-$upcomingEvents = [];
+$clubEvents = [];
+
+$activeEvents = [];
+$pastEvents = [];
 
 
 // =========================
@@ -87,10 +108,27 @@ if ($selectedClubId > 0) {
         $selectedClubId
     );
 
-    $upcomingEvents = getUpcomingEvents(
+    // Get all events belonging to this club.
+    $clubEvents = getClubEvents(
         $pdo,
         $selectedClubId
     );
+
+    // Separate active events from past and cancelled events.
+    foreach ($clubEvents as $event) {
+
+        $status = strtolower($event['event_status'] ?? '');
+
+        if (in_array($status, ['upcoming', 'ongoing'], true)) {
+
+            $activeEvents[] = $event;
+
+        } elseif (in_array($status, ['completed', 'cancelled'], true)) {
+
+            $pastEvents[] = $event;
+
+        }
+    }
 }
 
 
@@ -177,6 +215,33 @@ pageHeader(
             <h2 class="club-name">
                 <?= e($clubName) ?>
             </h2>
+
+
+            <!-- =========================
+                 SUCCESS MESSAGE
+            ========================== -->
+
+            <?php if (!empty($successMessage)): ?>
+
+                <div class="event-success" id="eventSuccess">
+
+                    <span>
+                        <?= e($successMessage) ?>
+                    </span>
+
+                    <button
+                        type="button"
+                        class="close-success"
+                        onclick="document.getElementById('eventSuccess').remove()"
+                        aria-label="Close success message"
+                        title="Close"
+                    >
+                        &times;
+                    </button>
+
+                </div>
+
+            <?php endif; ?>
 
 
             <!-- =========================
@@ -365,37 +430,49 @@ pageHeader(
                 <aside class="admin-side">
 
 
-                    <!-- EDIT CLUB DETAILS -->
+                    <!-- VIEW CLUB DETAILS -->
 
-                    <a href="edit-club.php?club_id=<?= e($selectedClubId) ?>"
-                       class="side-btn">
+                    <a
+                        href="club.php?id=<?= (int) $selectedClubId ?>&from=com-admin&admin_club_id=<?= (int) $selectedClubId ?>"
+                        class="side-btn"
+                    >
 
-                        Edit Club Details
+                        <i class="fa-solid fa-eye"></i>
+                        View Club Details
 
                     </a>
 
 
                     <!-- VIEW APPLICATIONS -->
 
-                    <a href="com-applications.php?club_id=<?= e($selectedClubId) ?>"
-                       class="side-btn">
+                    <a
+                        href="com-applications.php?club_id=<?= (int) $selectedClubId ?>"
+                        class="side-btn"
+                    >
 
                         View Applications
 
                     </a>
 
 
-                    <!-- UPCOMING EVENTS -->
+                    <!-- =========================
+                         ALL EVENTS
+                    ========================== -->
 
                     <section class="upcoming-events">
 
+                        <!-- EVENTS HEADER -->
+
                         <div class="events-header">
 
-                            <h2>Upcoming Events</h2>
+                            <h2>Events</h2>
 
-                            <a href="add-event.php?club_id=<?= e($selectedClubId) ?>"
-                               class="addbtn"
-                               aria-label="Add event">
+                            <a
+                                href="add-event.php?club_id=<?= (int) $selectedClubId ?>"
+                                class="addbtn"
+                                aria-label="Add event"
+                                title="Add Event"
+                            >
 
                                 +
 
@@ -404,68 +481,337 @@ pageHeader(
                         </div>
 
 
-                        <div class="events-list" id="eventsList">
+                        <!-- SHARED EVENT SEARCH -->
 
-                            <?php if (!empty($upcomingEvents)): ?>
+                        <div class="event-search">
 
-                                <?php foreach ($upcomingEvents as $event): ?>
+                            <span class="material-symbols-outlined">
+                                search
+                            </span>
 
-                                    <article class="event-details">
-
-                                        <h3>
-                                            <?= e($event['event_name']) ?>
-                                        </h3>
-
-                                        <p>
-
-                                            <?php
-
-                                            $startDate = date(
-                                                'd M Y',
-                                                strtotime($event['start_date'])
-                                            );
-
-                                            $endDate = date(
-                                                'd M Y',
-                                                strtotime($event['end_date'])
-                                            );
-
-                                            if ($event['start_date'] === $event['end_date']) {
-
-                                                echo e($startDate);
-
-                                            } else {
-
-                                                echo e($startDate . ' - ' . $endDate);
-
-                                            }
-
-                                            ?>
-
-                                            <br>
-
-                                            <?= e($event['location'] ?? 'Location not specified') ?>
-
-                                        </p>
-
-                                        <a href="edit-event.php?event_id=<?= e($event['event_id']) ?>"
-                                           class="edit-eventbtn">
-
-                                            Edit event
-
-                                        </a>
-
-                                    </article>
-
-                                <?php endforeach; ?>
-
-                            <?php else: ?>
-
-                                <p>No upcoming events.</p>
-
-                            <?php endif; ?>
+                            <input
+                                type="text"
+                                id="eventSearch"
+                                placeholder="Search events by name..."
+                                aria-label="Search all events"
+                            >
 
                         </div>
+
+
+                        <!-- =========================
+                             ACTIVE EVENTS
+                        ========================== -->
+
+                        <div class="event-section">
+
+                            <h3 class="event-section-title">
+                                Active Events
+                            </h3>
+
+
+                            <div
+                                class="events-list event-scroll-list"
+                                id="activeEventsList"
+                            >
+
+                                <?php if (!empty($activeEvents)): ?>
+
+                                    <?php foreach ($activeEvents as $event): ?>
+
+                                        <article
+                                            class="event-details event-card"
+                                            data-event-name="<?= e(strtolower($event['event_name'])) ?>"
+                                        >
+
+                                            <!-- EVENT NAME -->
+
+                                            <h3>
+                                                <?= e($event['event_name']) ?>
+                                            </h3>
+
+
+                                            <!-- EVENT DATE AND LOCATION -->
+
+                                            <p>
+
+                                                <?php
+
+                                                $startDate = date(
+                                                    'd M Y',
+                                                    strtotime($event['start_date'])
+                                                );
+
+                                                $endDate = date(
+                                                    'd M Y',
+                                                    strtotime($event['end_date'])
+                                                );
+
+                                                echo e(
+                                                    $event['start_date'] === $event['end_date']
+                                                        ? $startDate
+                                                        : $startDate . ' - ' . $endDate
+                                                );
+
+                                                ?>
+
+                                                <br>
+
+                                                <?= e(
+                                                    $event['location'] ?? 'Location not specified'
+                                                ) ?>
+
+                                            </p>
+
+
+                                            <!-- EVENT DESCRIPTION -->
+
+                                            <?php if (!empty($event['description'])): ?>
+
+                                                <p class="event-description">
+                                                    <?= e($event['description']) ?>
+                                                </p>
+
+                                            <?php endif; ?>
+
+
+                                            <!-- EVENT STATUS -->
+
+                                            <span class="event-status <?= e($event['event_status']) ?>">
+                                                <?= e(ucfirst($event['event_status'])) ?>
+                                            </span>
+
+
+                                            <!-- EVENT ACTION BUTTONS -->
+
+                                            <div class="event-actions">
+
+                                                <a
+                                                    href="event_detail.php?id=<?= (int) $event['event_id'] ?>&from=com-admin&admin_club_id=<?= (int) $selectedClubId ?>"
+                                                    class="view-eventbtn"
+                                                >
+                                                    View
+                                                </a>
+
+
+                                                <form
+                                                    action="delete-event.php"
+                                                    method="POST"
+                                                    onsubmit="return confirm('Are you sure you want to delete this event?');"
+                                                >
+
+                                                    <input
+                                                        type="hidden"
+                                                        name="event_id"
+                                                        value="<?= (int) $event['event_id'] ?>"
+                                                    >
+
+                                                    <input
+                                                        type="hidden"
+                                                        name="csrf_token"
+                                                        value="<?= e($_SESSION['csrf_token']) ?>"
+                                                    >
+
+                                                    <button
+                                                        type="submit"
+                                                        class="delete-eventbtn"
+                                                    >
+                                                        Delete
+                                                    </button>
+
+                                                </form>
+
+                                            </div>
+
+                                        </article>
+
+                                    <?php endforeach; ?>
+
+                                <?php else: ?>
+
+                                    <p class="no-events">
+                                        No upcoming or ongoing events.
+                                    </p>
+
+                                <?php endif; ?>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- =========================
+                             PAST & CANCELLED EVENTS
+                        ========================== -->
+
+                        <div class="event-section past-events-section">
+
+                            <button
+                                type="button"
+                                class="past-events-toggle"
+                                id="pastEventsToggle"
+                                aria-expanded="false"
+                                aria-controls="pastEventsContent"
+                            >
+
+                                <span>Past & Cancelled Events</span>
+
+                                <span class="material-symbols-outlined dropdown-arrow">
+                                    expand_more
+                                </span>
+
+                            </button>
+
+
+                            <!-- COLLAPSIBLE CONTENT -->
+
+                            <div
+                                id="pastEventsContent"
+                                class="past-events-content"
+                                hidden
+                            >
+
+                                <div
+                                    class="events-list event-scroll-list"
+                                    id="pastEventsList"
+                                >
+
+                                    <?php if (!empty($pastEvents)): ?>
+
+                                        <?php foreach ($pastEvents as $event): ?>
+
+                                            <article
+                                                class="event-details event-card"
+                                                data-event-name="<?= e(strtolower($event['event_name'])) ?>"
+                                            >
+
+                                                <!-- EVENT NAME -->
+
+                                                <h3>
+                                                    <?= e($event['event_name']) ?>
+                                                </h3>
+
+
+                                                <!-- EVENT DATE AND LOCATION -->
+
+                                                <p>
+
+                                                    <?php
+
+                                                    $startDate = date(
+                                                        'd M Y',
+                                                        strtotime($event['start_date'])
+                                                    );
+
+                                                    $endDate = date(
+                                                        'd M Y',
+                                                        strtotime($event['end_date'])
+                                                    );
+
+                                                    echo e(
+                                                        $event['start_date'] === $event['end_date']
+                                                            ? $startDate
+                                                            : $startDate . ' - ' . $endDate
+                                                    );
+
+                                                    ?>
+
+                                                    <br>
+
+                                                    <?= e(
+                                                        $event['location'] ?? 'Location not specified'
+                                                    ) ?>
+
+                                                </p>
+
+
+                                                <!-- EVENT DESCRIPTION -->
+
+                                                <?php if (!empty($event['description'])): ?>
+
+                                                    <p class="event-description">
+                                                        <?= e($event['description']) ?>
+                                                    </p>
+
+                                                <?php endif; ?>
+
+
+                                                <!-- EVENT STATUS -->
+
+                                                <span class="event-status <?= e($event['event_status']) ?>">
+                                                    <?= e(ucfirst($event['event_status'])) ?>
+                                                </span>
+
+
+                                                <!-- EVENT ACTION BUTTONS -->
+
+                                                <div class="event-actions">
+
+                                                    <a
+                                                          href="event_detail.php?id=<?= (int) $event['event_id'] ?>&from=com-admin&admin_club_id=<?= (int) $selectedClubId ?>"
+                                                        class="view-eventbtn"
+                                                    >
+                                                        View
+                                                    </a>
+
+
+                                                    <form
+                                                        action="delete-event.php"
+                                                        method="POST"
+                                                        onsubmit="return confirm('Are you sure you want to delete this event?');"
+                                                    >
+
+                                                        <input
+                                                            type="hidden"
+                                                            name="event_id"
+                                                            value="<?= (int) $event['event_id'] ?>"
+                                                        >
+
+                                                        <input
+                                                            type="hidden"
+                                                            name="csrf_token"
+                                                            value="<?= e($_SESSION['csrf_token']) ?>"
+                                                        >
+
+                                                        <button
+                                                            type="submit"
+                                                            class="delete-eventbtn"
+                                                        >
+                                                            Delete
+                                                        </button>
+
+                                                    </form>
+
+                                                </div>
+
+                                            </article>
+
+                                        <?php endforeach; ?>
+
+                                    <?php else: ?>
+
+                                        <p class="no-events">
+                                            No completed or cancelled events.
+                                        </p>
+
+                                    <?php endif; ?>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- SHARED SEARCH RESULTS MESSAGE -->
+
+                        <p
+                            class="event-no-results"
+                            id="eventNoResults"
+                            hidden
+                        >
+                            No matching events found.
+                        </p>
 
                     </section>
 
@@ -480,15 +826,7 @@ pageHeader(
 </main>
 
 
-<?php
-
-// =========================
-// FOOTER
-// =========================
-
-pageFooter();
-
-?>
+<?php pageFooter(); ?>
 
 </body>
 </html>

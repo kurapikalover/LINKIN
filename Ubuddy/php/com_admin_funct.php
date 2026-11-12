@@ -90,20 +90,32 @@ function getClubMembers($pdo, $clubId)
    GET UPCOMING EVENTS
 ========================= */
 
-function getUpcomingEvents($pdo, $clubId)
-{
+
+function getClubEvents($pdo, $clubId) {
     $sql = "
         SELECT
             event_id,
             event_name,
+            description,
             start_date,
             end_date,
-            location
+            location,
+            CASE
+                WHEN event_status = 'cancelled' THEN 'cancelled'
+                WHEN CURRENT_DATE < start_date THEN 'upcoming'
+                WHEN CURRENT_DATE BETWEEN start_date AND end_date THEN 'ongoing'
+                WHEN CURRENT_DATE > end_date THEN 'completed'
+            END AS event_status
         FROM event
         WHERE club_id = :club_id
-          AND event_status = 'upcoming'
-          AND start_date >= CURRENT_DATE
-        ORDER BY start_date ASC
+        ORDER BY
+            CASE
+                WHEN event_status = 'cancelled' THEN 4
+                WHEN CURRENT_DATE < start_date THEN 1
+                WHEN CURRENT_DATE BETWEEN start_date AND end_date THEN 2
+                WHEN CURRENT_DATE > end_date THEN 3
+            END,
+            start_date ASC
     ";
 
     $stmt = $pdo->prepare($sql);

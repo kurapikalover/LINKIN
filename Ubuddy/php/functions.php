@@ -296,10 +296,28 @@ function backLink($url, $label)
     $safeLabel = htmlspecialchars($label, ENT_QUOTES, 'UTF-8');
 
     echo '
-        <a href="' . $safeUrl . '" class="back-link">
-            <span class="back-icon">
-                <span class="material-symbols-outlined">arrow_back</span>
+        <a
+            href="' . $safeUrl . '"
+            class="back-link"
+            onclick="
+                if (window.history.length > 1) {
+                    const previousPage = document.referrer;
+
+                    if (previousPage) {
+                        const previousUrl = new URL(previousPage);
+
+                        if (previousUrl.origin === window.location.origin) {
+                            window.history.back();
+                            return false;
+                        }
+                    }
+                }
+            "
+        >
+            <span class="material-symbols-outlined back-icon">
+                arrow_back
             </span>
+
             <span class="back-text">' . $safeLabel . '</span>
         </a>
     ';

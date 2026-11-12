@@ -1,5 +1,7 @@
 
 <?php
+session_start();
+
 require_once __DIR__ . '/../php/db.php';
 require_once __DIR__ . '/../php/functions.php';
 require_once __DIR__ . '/../php/club_queries.php';
@@ -16,10 +18,28 @@ if ($userId !== null) {
     $adminClubs = getAdminClubs($pdo, $userId);
 }
 
+// Get clubs the student has joined, including previous memberships
+$clubStmt = $pdo->prepare(
+    'SELECT DISTINCT c.club_id, c.club_name
+     FROM membership m
+     INNER JOIN club c ON m.club_id = c.club_id
+     WHERE m.user_id = :user_id
+     ORDER BY c.club_name'
+);
+
+$clubStmt->execute([
+    'user_id' => $userId
+]);
+
+$studentClubs = $clubStmt->fetchAll(PDO::FETCH_ASSOC);
+$hasStudentClubs = !empty($studentClubs);
+
+// Homepage content
 $latestNews = getLatestNews($pdo);
 $allClubs = getAllClubs($pdo);
 $allEvents = getAllEvents($pdo);
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -37,6 +57,7 @@ $allEvents = getAllEvents($pdo);
   <link rel="stylesheet" href="../css/home.css">
   <link rel="stylesheet" href="../css/news.css">
   <link rel="stylesheet" href="../css/filter.css">
+  <link rel="stylesheet" href="../css/feedback.css">
 </head>
 
 <body>
@@ -237,26 +258,278 @@ $allEvents = getAllEvents($pdo);
     </div>
 
 
+
     <!-- 5. FEEDBACK -->
     <section class="feedback">
 
-      <h2>We'd love to hear your voice</h2>
+        <h2>We'd love to hear your voice</h2>
 
-      <p>
-        Help us make this website better by voicing your thoughts!
-      </p>
+        <p>
+            Help us make this website better by voicing your thoughts!
+        </p>
 
-      <a href="feedback.php" class="btn btn-large">
-          Leave Feedback
-      </a>
+        <button
+            type="button"
+            id="openFeedbackModal"
+            class="btn btn-large"
+        >
+            Leave Feedback
+        </button>
 
-      <small>
-        Any suggestions? Complaints? Bugs? We got you, buddy!
-      </small>
+        <small>
+            Any suggestions? Complaints? Bugs? We got you, buddy!
+        </small>
 
     </section>
 
   
+    <!-- FEEDBACK MODAL -->
+    <div
+        id="feedbackModal"
+        class="feedback-modal"
+        hidden
+    >
+
+        <div
+            class="feedback-modal-content"
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="modalTitle"
+        >
+
+            <!-- Close button -->
+            <button
+                type="button"
+                id="closeFeedbackModal"
+                class="close-modal-btn"
+                aria-label="Close feedback form"
+            >
+                &times;
+            </button>
+
+
+            <!-- STEP 1: Select feedback category -->
+            <section id="categoryStep">
+
+                <h2 id="modalTitle">
+                    What would you like to give feedback about?
+                </h2>
+
+                <p>Select a category to continue.</p>
+
+                <div class="category-options">
+
+                    <button
+                        type="button"
+                        class="category-btn"
+                        data-category="Website Issues & Suggestions"
+                    >
+                        <span class="category-name">
+                            Website Issues & Suggestions
+                        </span>
+
+                        <small>
+                            Report website problems or share suggestions.
+                        </small>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="category-btn"
+                        data-category="Club Complaints & Concerns"
+                    >
+                        <span class="category-name">
+                            Club Complaints & Concerns
+                        </span>
+
+                        <small>
+                            Share concerns about club activities or management.
+                        </small>
+                    </button>
+
+
+                    <button
+                        type="button"
+                        class="category-btn"
+                        data-category="Club Feedback"
+                        <?= !$hasStudentClubs ? 'disabled' : '' ?>
+                    >
+                        <span class="category-name">
+                            Club Feedback
+                        </span>
+
+                        <small>
+                            <?php if ($hasStudentClubs): ?>
+                                Share suggestions, questions or feedback about a club.
+                            <?php else: ?>
+                                Join a club before submitting Club Feedback.
+                            <?php endif; ?>
+                        </small>
+                    </button>
+
+                </div>
+
+            </section>
+
+
+            <!-- STEP 2: Feedback form -->
+            <section id="formStep" hidden>
+
+                <button
+                    type="button"
+                    id="backToCategories"
+                    class="back-category-btn"
+                >
+                    &larr; Change category
+                </button>
+
+                <h2 id="selectedCategoryTitle"></h2>
+
+                <form
+                    id="feedbackForm"
+                    action="feedback.php"
+                    method="POST"
+                    enctype="multipart/form-data"
+                >
+
+                    <!-- Selected category -->
+                    <input
+                        type="hidden"
+                        id="recipientType"
+                        name="recipient_type"
+                    >
+
+
+                    <!-- Club selection -->
+                    <div id="clubSelection" hidden>
+
+                        <label for="recipientClub">
+                            Select Club
+                        </label>
+
+                        <select
+                            id="recipientClub"
+                            name="recipient_club_id"
+                        >
+
+                            <option value="">
+                                -- Select a club --
+                            </option>
+
+                            <?php foreach ($studentClubs as $club): ?>
+
+                                <option value="<?= (int) $club['club_id'] ?>">
+                                    <?= htmlspecialchars(
+                                        $club['club_name'],
+                                        ENT_QUOTES,
+                                        'UTF-8'
+                                    ) ?>
+                                </option>
+
+                            <?php endforeach; ?>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- Feedback title -->
+                    <label for="feedbackTitle">
+                        Feedback Title
+                    </label>
+
+                    <input
+                        type="text"
+                        id="feedbackTitle"
+                        name="feedback_title"
+                        maxlength="150"
+                        placeholder="Enter a short title"
+                        required
+                    >
+
+
+                    <!-- Feedback description -->
+                    <label for="typeFeedback">
+                        Description
+                    </label>
+
+                    <textarea
+                        id="typeFeedback"
+                        name="feedback_text"
+                        placeholder="Describe your feedback here..."
+                        required
+                    ></textarea>
+
+
+                    <!-- Upload files -->
+                    <div class="actions">
+
+                        <div class="dropdown">
+
+                            <button
+                                type="button"
+                                class="dropbtn"
+                            >
+                                Upload Files
+                            </button>
+
+                            <div class="dropdown-content">
+
+                                <p>Select File Type:</p>
+
+                                <button
+                                    type="button"
+                                    data-type="image/*"
+                                >
+                                    Image
+                                </button>
+
+                                <button
+                                    type="button"
+                                    data-type="video/*"
+                                >
+                                    Video
+                                </button>
+
+                            </div>
+
+                        </div>
+
+                        <button
+                            type="submit"
+                            class="btn btn-large"
+                            id="submitFeedback"
+                        >
+                            Send
+                        </button>
+
+                    </div>
+
+
+                    <input
+                        type="file"
+                        id="fileInput"
+                        name="attachments[]"
+                        accept="image/*,video/*"
+                        multiple
+                        hidden
+                    >
+
+                    <small id="fileName"></small>
+
+                    <small class="upload-note">
+                        You can upload up to 5 images or videos.
+                        Each file must be 50 MB or smaller.
+                    </small>
+
+                </form>
+
+            </section>
+
+        </div>
+
+    </div>
 
   <?php pageFooter(); ?>
 
@@ -285,6 +558,7 @@ $allEvents = getAllEvents($pdo);
   <script src="../js/home.js"></script>
   <script src="../js/home_filter.js"></script>
   <script src="../js/home_scroll.js"></script>
+  <script src="../js/feedback.js"></script>
 
 </body>
 </html>

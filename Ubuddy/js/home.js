@@ -56,7 +56,7 @@ function renderClubCard(club) {
 
   return `
     <a
-      href="../pages/club.php?id=${clubId}"
+      href="../pages/club.php?id=${clubId}&from=home"
       class="club-card"
       data-category="${categoryName}"
       data-search="${escapeHTML(
@@ -156,3 +156,4 @@ function renderCards() {
 
 // Run the rendering function
 renderCards();
+

@@ -14,10 +14,9 @@ if (!isset($_SESSION['user_id'])) {
 }
 
 $userId = $_SESSION['user_id'];
-// Get clubs the user is a committee admin of.
-$adminClubs = getAdminClubs($pdo, $userId);
 
-// Retrieve the user's profile.
+// Retrieve user information.
+$adminClubs = getAdminClubs($pdo, $userId);
 $profile = getStudentProfile($pdo, $userId);
 
 if (!$profile) {
@@ -25,18 +24,97 @@ if (!$profile) {
     exit('User profile not found.');
 }
 
+// Available feedback categories.
+$feedbackCategories = [
+    'Website Issues & Suggestions',
+    'Club Complaints & Concerns',
+    'Club Feedback'
+];
+
 $feedbackSent = false;
 $feedbackId = null;
 $errorMessage = '';
 
+// Preserve submitted values.
+$selectedCategory = $_POST['recipient_type'] ?? '';
+$feedbackTitle = $_POST['feedback_title'] ?? '';
+$feedbackText = $_POST['feedback_text'] ?? '';
+
+// Retrieve clubs the student has joined.
+// This includes current and previous memberships,
+// provided previous membership records are retained.
+$clubStmt = $pdo->prepare(
+    'SELECT DISTINCT c.club_id, c.club_name
+     FROM membership m
+     INNER JOIN club c ON m.club_id = c.club_id
+     WHERE m.user_id = :user_id
+     ORDER BY c.club_name'
+);
+
+$clubStmt->execute([
+    'user_id' => $userId
+]);
+
+$studentClubs = $clubStmt->fetchAll(PDO::FETCH_ASSOC);
+
+$hasStudentClubs = !empty($studentClubs);
+
+// Handle feedback submission.
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
-    $feedbackText = trim($_POST['feedback_text'] ?? '');
+    $feedbackTitle = trim($feedbackTitle);
+    $feedbackText = trim($feedbackText);
+    $selectedCategory = trim($selectedCategory);
 
-    // Check that feedback is not empty.
-    if ($feedbackText === '') {
+    $recipientClubId = null;
+
+    // Validate feedback category.
+    if (!in_array($selectedCategory, $feedbackCategories, true)) {
+        $errorMessage = 'Please select a valid feedback category.';
+    }
+
+    // Validate feedback title.
+    elseif ($feedbackTitle === '') {
+        $errorMessage = 'Please enter a feedback title.';
+    }
+
+    elseif (mb_strlen($feedbackTitle) > 150) {
+        $errorMessage = 'The feedback title must not exceed 150 characters.';
+    }
+
+    // Validate feedback description.
+    elseif ($feedbackText === '') {
         $errorMessage = 'Please enter your feedback.';
-    } else {
+    }
+
+    // Validate club selection for Club Feedback.
+    elseif ($selectedCategory === 'Club Feedback') {
+
+        if (!$hasStudentClubs) {
+            $errorMessage = 'You need to join a club before submitting Club Feedback.';
+        } else {
+
+            $recipientClubId = filter_var(
+                $_POST['recipient_club_id'] ?? null,
+                FILTER_VALIDATE_INT
+            );
+
+            $validClubIds = array_map(
+                'intval',
+                array_column($studentClubs, 'club_id')
+            );
+
+            if (
+                $recipientClubId === false ||
+                !in_array($recipientClubId, $validClubIds, true)
+            ) {
+                $errorMessage = 'Please select a club you have joined.';
+            }
+        }
+    }
+
+    // Continue only if the form is valid.
+    if ($errorMessage === '') {
 
         $uploadedFiles = [];
         $savedFiles = [];
@@ -46,11 +124,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Upload folder.
             $uploadDirectory = dirname(__DIR__) . '/uploads/feedback/';
 
-            if (!is_dir($uploadDirectory) || !is_writable($uploadDirectory)) {
-                throw new RuntimeException('The feedback upload folder is unavailable.');
-            }
-
-            // Allowed file types and their extensions.
+            // Allowed file types and extensions.
             $allowedTypes = [
                 'image/jpeg'      => 'jpg',
                 'image/png'       => 'png',
@@ -61,7 +135,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'video/quicktime' => 'mov'
             ];
 
-            $maxFileSize = 50 * 1024 * 1024; // 50 MB per file
+            $maxFileSize = 50 * 1024 * 1024;
             $maxFiles = 5;
 
             // Process uploaded files, if any.
@@ -73,7 +147,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $fileCount = count($_FILES['attachments']['name']);
 
                 if ($fileCount > $maxFiles) {
-                    throw new RuntimeException('You can upload a maximum of 5 files.');
+                    throw new RuntimeException(
+                        'You can upload a maximum of 5 files.'
+                    );
+                }
+
+                if (!is_dir($uploadDirectory) || !is_writable($uploadDirectory)) {
+                    throw new RuntimeException(
+                        'The feedback upload folder is unavailable.'
+                    );
                 }
 
                 $fileInfo = new finfo(FILEINFO_MIME_TYPE);
@@ -88,7 +170,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     }
 
                     if ($fileError !== UPLOAD_ERR_OK) {
-                        throw new RuntimeException('There was a problem uploading a file.');
+                        throw new RuntimeException(
+                            'There was a problem uploading a file.'
+                        );
                     }
 
                     $temporaryPath = $_FILES['attachments']['tmp_name'][$i];
@@ -117,7 +201,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $destination = $uploadDirectory . $newFileName;
 
                     if (!move_uploaded_file($temporaryPath, $destination)) {
-                        throw new RuntimeException('Unable to save an uploaded file.');
+                        throw new RuntimeException(
+                            'Unable to save an uploaded file.'
+                        );
                     }
 
                     $savedFiles[] = $destination;
@@ -130,33 +216,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 }
             }
 
-            // Save feedback and attachment records together.
+            // Save feedback and attachments together.
             $pdo->beginTransaction();
 
-            // Insert feedback.
+            // Insert feedback record.
             $stmt = $pdo->prepare(
                 'INSERT INTO feedback
-                    (user_id, feedback_text)
+                    (
+                        user_id,
+                        feedback_title,
+                        feedback_text,
+                        recipient_type,
+                        recipient_club_id
+                    )
                  VALUES
-                    (:user_id, :feedback_text)
+                    (
+                        :user_id,
+                        :feedback_title,
+                        :feedback_text,
+                        :recipient_type,
+                        :recipient_club_id
+                    )
                  RETURNING feedback_id'
             );
 
             $stmt->execute([
                 'user_id' => $userId,
-                'feedback_text' => $feedbackText
+                'feedback_title' => $feedbackTitle,
+                'feedback_text' => $feedbackText,
+                'recipient_type' => $selectedCategory,
+                'recipient_club_id' => $recipientClubId
             ]);
 
             $feedbackId = $stmt->fetchColumn();
 
-            // Insert attachment information.
+            // Insert attachment records.
             if (!empty($uploadedFiles)) {
 
                 $attachmentStmt = $pdo->prepare(
                     'INSERT INTO feedback_attachment
-                        (feedback_id, file_name, file_path, file_type)
+                        (
+                            feedback_id,
+                            file_name,
+                            file_path,
+                            file_type
+                        )
                      VALUES
-                        (:feedback_id, :file_name, :file_path, :file_type)'
+                        (
+                            :feedback_id,
+                            :file_name,
+                            :file_path,
+                            :file_type
+                        )'
                 );
 
                 foreach ($uploadedFiles as $file) {
@@ -180,7 +291,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $pdo->rollBack();
             }
 
-            // Remove uploaded files if the database operation fails.
+            // Remove uploaded files if submission fails.
             foreach ($savedFiles as $filePath) {
                 if (file_exists($filePath)) {
                     unlink($filePath);
@@ -194,7 +305,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-// Display the shared page header.
+// Reopen the modal if the submitted form has errors.
+$showForm = (
+    $_SERVER['REQUEST_METHOD'] === 'POST' &&
+    !$feedbackSent
+);
 ?>
 
 <!DOCTYPE html>
@@ -216,7 +331,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 <body>
 
 <?php
-// Display the shared page header.
 pageHeader(
     $profile['name'],
     $profile['user_id'],
@@ -230,9 +344,11 @@ pageHeader(
 
     <div class="feedback-page">
 
-        <h1 class="feedback-title">User Feedback Form</h1>
+        <h1 class="feedback-title">Give Feedback</h1>
 
-        <small>All feedbacks will be sent anonymously</small>
+        <small>
+            Your feedback helps us improve ÜBuddy.
+        </small>
 
         <?php if ($feedbackSent): ?>
 
@@ -244,87 +360,347 @@ pageHeader(
                     <p class="p1">Your feedback has been sent!</p>
 
                     <small>
-                        Thank you, buddy, for helping us improve the website.
+                        Thank you, buddy, for helping us improve ÜBuddy.
                     </small>
 
                     <p class="p2">
                         Feedback ID:
                         <span id="feedbackId">
-                            <?= htmlspecialchars((string) $feedbackId, ENT_QUOTES, 'UTF-8') ?>
+                            <?= htmlspecialchars(
+                                (string) $feedbackId,
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
                         </span>
                     </p>
 
                 </div>
 
                 <div class="actions">
+
                     <button type="button" class="btn btn-large" disabled>
                         Sent!
                     </button>
+
                 </div>
 
             </div>
 
         <?php else: ?>
 
-            <!-- Feedback error message -->
+            <!-- Error message -->
             <?php if (!empty($errorMessage)): ?>
                 <p class="feedback-error">
-                    <?= htmlspecialchars($errorMessage, ENT_QUOTES, 'UTF-8') ?>
+                    <?= htmlspecialchars(
+                        $errorMessage,
+                        ENT_QUOTES,
+                        'UTF-8'
+                    ) ?>
                 </p>
             <?php endif; ?>
 
-            <!-- Feedback form -->
-            <form id="feedbackForm"
-                  method="POST"
-                  enctype="multipart/form-data">
+            <!-- Button to open feedback modal -->
+            <button
+                type="button"
+                id="openFeedbackModal"
+                class="give-feedback-btn"
+            >
+                Give Feedback
+            </button>
 
-                <textarea
-                    id="typeFeedback"
-                    name="feedback_text"
-                    placeholder="Type here"
-                    required><?= htmlspecialchars($_POST['feedback_text'] ?? '', ENT_QUOTES, 'UTF-8') ?></textarea>
+            <!-- Feedback Modal -->
+            <div
+                id="feedbackModal"
+                class="feedback-modal"
+                <?= $showForm ? '' : 'hidden' ?>
+            >
 
-                <div class="actions">
+                <div
+                    class="feedback-modal-content"
+                    role="dialog"
+                    aria-modal="true"
+                    aria-labelledby="modalTitle"
+                >
 
-                    <div class="dropdown">
+                    <!-- Close button -->
+                    <button
+                        type="button"
+                        id="closeFeedbackModal"
+                        class="close-modal-btn"
+                        aria-label="Close feedback form"
+                    >
+                        &times;
+                    </button>
 
-                        <button type="button" class="dropbtn">
-                            Upload Files
-                        </button>
 
-                        <div class="dropdown-content">
+                    <!-- STEP 1: Select feedback category -->
+                    <section
+                        id="categoryStep"
+                        <?= $showForm ? 'hidden' : '' ?>
+                    >
 
-                            <p>Select File Type:</p>
+                        <h2 id="modalTitle">
+                            What would you like to give feedback about?
+                        </h2>
 
-                            <button type="button" data-type="image/*">
-                                Image
+                        <p>Select a category to continue.</p>
+
+                        <div class="category-options">
+
+                            <button
+                                type="button"
+                                class="category-btn"
+                                data-category="Website Issues & Suggestions"
+                            >
+                                <span class="category-name">
+                                    Website Issues & Suggestions
+                                </span>
+
+                                <small>
+                                    Report website problems or share suggestions.
+                                </small>
                             </button>
 
-                            <button type="button" data-type="video/*">
-                                Video
+
+                            <button
+                                type="button"
+                                class="category-btn"
+                                data-category="Club Complaints & Concerns"
+                            >
+                                <span class="category-name">
+                                    Club Complaints & Concerns
+                                </span>
+
+                                <small>
+                                    Share concerns about club activities or management.
+                                </small>
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="category-btn"
+                                data-category="Club Feedback"
+                                <?= !$hasStudentClubs ? 'disabled' : '' ?>
+                            >
+                                <span class="category-name">
+                                    Club Feedback
+                                </span>
+
+                                <small>
+                                    <?php if ($hasStudentClubs): ?>
+                                        Share suggestions, questions or feedback about a club.
+                                    <?php else: ?>
+                                        Join a club before submitting Club Feedback.
+                                    <?php endif; ?>
+                                </small>
                             </button>
 
                         </div>
 
-                    </div>
+                    </section>
 
-                    <button type="submit" class="btn btn-large">
-                        Send
-                    </button>
+
+                    <!-- STEP 2: Feedback form -->
+                    <section
+                        id="formStep"
+                        <?= $showForm ? '' : 'hidden' ?>
+                    >
+
+                        <button
+                            type="button"
+                            id="backToCategories"
+                            class="back-category-btn"
+                        >
+                            &larr; Change category
+                        </button>
+
+                        <h2 id="selectedCategoryTitle">
+                            <?= htmlspecialchars(
+                                $selectedCategory,
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?>
+                        </h2>
+
+                        <form
+                            id="feedbackForm"
+                            method="POST"
+                            enctype="multipart/form-data"
+                        >
+
+                            <!-- Selected category -->
+                            <input
+                                type="hidden"
+                                id="recipientType"
+                                name="recipient_type"
+                                value="<?= htmlspecialchars(
+                                    $selectedCategory,
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>"
+                            >
+
+
+                            <!-- Club selection -->
+                            <div
+                                id="clubSelection"
+                                <?= $selectedCategory === 'Club Feedback' ? '' : 'hidden' ?>
+                            >
+
+                                <label for="recipientClub">
+                                    Select Club
+                                </label>
+
+                                <?php if (!empty($studentClubs)): ?>
+
+                                    <select
+                                        id="recipientClub"
+                                        name="recipient_club_id"
+                                        <?= $selectedCategory === 'Club Feedback' ? 'required' : '' ?>
+                                    >
+
+                                        <option value="">
+                                            -- Select a club --
+                                        </option>
+
+                                        <?php foreach ($studentClubs as $club): ?>
+
+                                            <option
+                                                value="<?= (int) $club['club_id'] ?>"
+                                                <?= (
+                                                    isset($_POST['recipient_club_id']) &&
+                                                    (int) $_POST['recipient_club_id'] === (int) $club['club_id']
+                                                ) ? 'selected' : '' ?>
+                                            >
+                                                <?= htmlspecialchars(
+                                                    $club['club_name'],
+                                                    ENT_QUOTES,
+                                                    'UTF-8'
+                                                ) ?>
+                                            </option>
+
+                                        <?php endforeach; ?>
+
+                                    </select>
+
+                                <?php else: ?>
+
+                                    <p>
+                                        You have not joined any clubs yet, so you cannot
+                                        submit Club Feedback.
+                                    </p>
+
+                                <?php endif; ?>
+
+                            </div>
+
+
+                            <!-- Feedback title -->
+                            <label for="feedbackTitle">
+                                Feedback Title
+                            </label>
+
+                            <input
+                                type="text"
+                                id="feedbackTitle"
+                                name="feedback_title"
+                                maxlength="150"
+                                placeholder="Enter a short title"
+                                value="<?= htmlspecialchars(
+                                    $feedbackTitle,
+                                    ENT_QUOTES,
+                                    'UTF-8'
+                                ) ?>"
+                                required
+                            >
+
+
+                            <!-- Feedback description -->
+                            <label for="typeFeedback">
+                                Description
+                            </label>
+
+                            <textarea
+                                id="typeFeedback"
+                                name="feedback_text"
+                                placeholder="Describe your feedback here..."
+                                required
+                            ><?= htmlspecialchars(
+                                $feedbackText,
+                                ENT_QUOTES,
+                                'UTF-8'
+                            ) ?></textarea>
+
+
+                            <!-- Upload files -->
+                            <div class="actions">
+
+                                <div class="dropdown">
+
+                                    <button
+                                        type="button"
+                                        class="dropbtn"
+                                    >
+                                        Upload Files
+                                    </button>
+
+                                    <div class="dropdown-content">
+
+                                        <p>Select File Type:</p>
+
+                                        <button
+                                            type="button"
+                                            data-type="image/*"
+                                        >
+                                            Image
+                                        </button>
+
+                                        <button
+                                            type="button"
+                                            data-type="video/*"
+                                        >
+                                            Video
+                                        </button>
+
+                                    </div>
+
+                                </div>
+
+                                <button
+                                    type="submit"
+                                    class="btn btn-large"
+                                    id="submitFeedback"
+                                >
+                                    Send
+                                </button>
+
+                            </div>
+
+
+                            <input
+                                type="file"
+                                id="fileInput"
+                                name="attachments[]"
+                                accept="image/*,video/*"
+                                multiple
+                                hidden
+                            >
+
+                            <small id="fileName"></small>
+
+                            <small class="upload-note">
+                                You can upload up to 5 images or videos.
+                                Each file must be 50 MB or smaller.
+                            </small>
+
+                        </form>
+
+                    </section>
 
                 </div>
 
-                <input
-                    type="file"
-                    id="fileInput"
-                    name="attachments[]"
-                    accept="image/*,video/*"
-                    multiple
-                    hidden>
-
-                <small id="fileName"></small>
-
-            </form>
+            </div>
 
         <?php endif; ?>
 

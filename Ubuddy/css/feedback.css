@@ -3,12 +3,16 @@
     display: none !important;
 }
 
+/* =========================
+   FEEDBACK PAGE
+========================= */
+
 .feedback-page {
-    max-width: 600px;
+    max-width: 650px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
-    gap: 8px;
+    gap: 12px;
 }
 
 /* Back button from shared.css */
@@ -25,9 +29,266 @@
     color: #0f4a89;
 }
 
-.feedback-page small {
+.feedback-page > small {
     color: #696767;
+    font-size: 16px;
+}
+
+/* Section headings */
+.feedback-page h2 {
+    margin: 12px 0;
+    color: #172A46;
     font-size: 22px;
+}
+
+
+/* =========================
+   GIVE FEEDBACK BUTTON
+========================= */
+
+.give-feedback-btn {
+    align-self: flex-start;
+
+    margin-top: 18px;
+    padding: 12px 28px;
+
+    background: #426fb1;
+    color: #ffffff;
+
+    border: none;
+    border-radius: 999px;
+
+    font-family: inherit;
+    font-size: 16px;
+    font-weight: bold;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.give-feedback-btn:hover {
+    background: #263F63;
+    transform: translateY(-2px);
+}
+
+.give-feedback-btn:active {
+    background: #648bc2;
+    transform: translateY(0);
+}
+
+
+/* =========================
+   FEEDBACK MODAL
+========================= */
+
+/* Dark background behind modal */
+.feedback-modal {
+    position: fixed;
+    inset: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    background: rgba(15, 30, 50, 0.65);
+
+    z-index: 9999;
+}
+
+/* Prevent background scrolling */
+body.modal-open {
+    overflow: hidden;
+}
+
+/* Modal box */
+.feedback-modal-content {
+    position: relative;
+
+    width: 100%;
+    max-width: 600px;
+    max-height: 85vh;
+
+    padding: 32px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+    border-radius: 20px;
+
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.25);
+
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #8EACD6 transparent;
+
+    animation: modalAppear 0.25s ease;
+}
+
+/* Modal animation */
+@keyframes modalAppear {
+    from {
+        opacity: 0;
+        transform: translateY(15px) scale(0.98);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* Close button */
+.close-modal-btn {
+    position: absolute;
+    top: 14px;
+    right: 18px;
+
+    width: 36px;
+    height: 36px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #EAF0F8;
+    color: #172A46;
+
+    border: none;
+    border-radius: 50%;
+
+    font-size: 25px;
+    line-height: 1;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.close-modal-btn:hover {
+    background: #d5e2f2;
+    color: #0f4a89;
+}
+
+.close-modal-btn:focus-visible {
+    outline: 3px solid #519bec;
+    outline-offset: 2px;
+}
+
+/* Add space below modal heading */
+.feedback-modal-content h2 {
+    padding-right: 30px;
+}
+
+
+/* =========================
+   STEP 1: CATEGORY SELECTION
+========================= */
+
+#categoryStep {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.category-options {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* Category buttons */
+.category-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+
+    width: 100%;
+    padding: 20px 22px;
+
+    background: #ffffff;
+    border: 2px solid #C7D4E5;
+    border-radius: 16px;
+
+    text-align: left;
+    font-family: inherit;
+
+    cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.category-btn:hover {
+    background: #EAF0F8;
+    border-color: #519bec;
+    transform: translateY(-2px);
+}
+
+.category-btn:focus-visible {
+    outline: 3px solid #519bec;
+    outline-offset: 3px;
+}
+
+/* Disabled category button */
+.category-btn:disabled {
+    background: #F2F4F7;
+    border-color: #D9DEE7;
+    cursor: not-allowed;
+    opacity: 0.65;
+    transform: none;
+}
+
+.category-btn:disabled:hover {
+    background: #F2F4F7;
+    border-color: #D9DEE7;
+    transform: none;
+}
+
+/* Category title */
+.category-name {
+    color: #172A46;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+/* Category description */
+.category-btn small {
+    color: #696767;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+
+/* =========================
+   STEP 2: FEEDBACK FORM
+========================= */
+
+#formStep {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+/* Change category button */
+.back-category-btn {
+    align-self: flex-start;
+
+    padding: 8px 0;
+
+    background: none;
+    border: none;
+
+    color: #519bec;
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: bold;
+
+    cursor: pointer;
+}
+
+.back-category-btn:hover {
+    color: #0f4a89;
+    text-decoration: underline;
 }
 
 /* Feedback form */
@@ -37,28 +298,81 @@
     gap: 12px;
 }
 
+/* Form labels */
+#feedbackForm label {
+    color: #172A46;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+/* Text input and club dropdown */
+#feedbackTitle,
+#recipientClub {
+    width: 100%;
+    padding: 12px 16px;
+
+    box-sizing: border-box;
+
+    background: #ffffff;
+    border: 2px solid #C7D4E5;
+    border-radius: 12px;
+
+    color: #172A46;
+    font-family: inherit;
+    font-size: 15px;
+}
+
+#feedbackTitle:focus,
+#recipientClub:focus {
+    outline: none;
+    border-color: #519bec;
+}
+
+/* Feedback description */
 #typeFeedback {
     width: 100%;
     height: 200px;
     min-height: 0;
+
     resize: none;
     overflow-y: auto;
+
     scrollbar-width: thin;
     scrollbar-color: #4a9bea transparent;
+
     padding: 14px 18px;
     box-sizing: border-box;
-    border: 3px solid #0f4a89;
-    border-radius: 24px;
+
+    border: 2px solid #0f4a89;
+    border-radius: 20px;
+
     font-family: inherit;
-    font-size: 16px;
+    font-size: 15px;
 }
 
 #typeFeedback:focus {
     outline: none;
-    border-color: #0f4a89;
+    border-color: #519bec;
 }
 
-/* Upload files and send button */
+/* Club selection section */
+#clubSelection {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+#clubSelection p {
+    margin: 0;
+    color: #696767;
+    font-size: 14px;
+}
+
+
+/* =========================
+   UPLOAD FILES AND SEND
+========================= */
+
 .actions {
     display: flex;
     justify-content: flex-end;
@@ -71,10 +385,13 @@
 .dropbtn {
     border: none;
     border-radius: 999px;
+
     padding: 8px 24px;
+
     font-family: inherit;
-    font-size: 17px;
+    font-size: 16px;
     font-weight: bold;
+
     color: #ffffff;
     cursor: pointer;
 }
@@ -91,7 +408,16 @@
     filter: brightness(0.95);
 }
 
-/* Upload file dropdown */
+.btn:disabled {
+    opacity: 0.8;
+    cursor: default;
+}
+
+
+/* =========================
+   UPLOAD FILE DROPDOWN
+========================= */
+
 .dropdown {
     position: relative;
 }
@@ -99,12 +425,17 @@
 .dropdown-content {
     display: none;
     position: absolute;
+
     top: 100%;
     left: 0;
+
     min-width: 160px;
+
     background: #ffffff;
     border-radius: 12px;
+
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+
     overflow: hidden;
     z-index: 10;
 }
@@ -118,8 +449,10 @@
 .dropdown-content p {
     margin: 0;
     padding: 10px 14px;
-    font-size: 15.3px;
+
+    font-size: 14px;
     font-weight: bold;
+
     color: #0f4a89;
     border-bottom: 1px solid #bcdcff;
 }
@@ -128,13 +461,17 @@
 .dropdown-content button {
     display: block;
     width: 100%;
+
     padding: 10px 14px;
+
     background: none;
     border: none;
     border-bottom: 1px solid #bcdcff;
+
     text-align: left;
     font-family: inherit;
-    font-size: 15.3px;
+    font-size: 14px;
+
     color: #0f4a89;
     cursor: pointer;
 }
@@ -147,6 +484,13 @@
     background: #bcdcff;
 }
 
+/* Upload note */
+.upload-note {
+    color: #696767;
+    font-size: 12px;
+}
+
+
 /* =========================
    SELECTED FILES
 ========================= */
@@ -155,7 +499,9 @@
     display: flex;
     flex-wrap: wrap;
     gap: 8px;
+
     margin-top: 4px;
+
     color: #696767;
     font-size: 14px;
 }
@@ -165,11 +511,14 @@
     display: inline-flex;
     align-items: center;
     gap: 8px;
+
     max-width: 100%;
     padding: 6px 10px;
+
     background-color: #EAF0F8;
     border: 1px solid #C7D4E5;
     border-radius: 8px;
+
     color: #172A46;
     font-size: 13px;
     box-sizing: border-box;
@@ -202,7 +551,6 @@
     line-height: 1;
 
     cursor: pointer;
-
     transition: background-color 0.2s ease;
 }
 
@@ -215,6 +563,7 @@
     outline-offset: 2px;
 }
 
+
 /* =========================
    ERROR MESSAGE
 ========================= */
@@ -222,11 +571,14 @@
 .feedback-error {
     margin: 8px 0;
     padding: 12px 16px;
+
     background: #ffe3e3;
     color: #a32121;
+
     border-radius: 12px;
     font-size: 14px;
 }
+
 
 /* =========================
    FEEDBACK CONFIRMATION
@@ -241,8 +593,10 @@
 #feedbackSent .content {
     background: #0f4a89;
     color: #ffffff;
+
     border-radius: 24px;
     padding: 24px;
+
     display: flex;
     flex-direction: column;
     gap: 6px;
@@ -256,22 +610,81 @@
 
 #feedbackSent .content small {
     color: #ffffff;
-    font-size: 22px;
+    font-size: 16px;
 }
 
 /* Feedback ID */
 #feedbackSent .p2 {
     margin: 16px 0 0;
     padding: 10px 20px;
+
     background: #ffffff;
     color: #0f4a89;
+
     border-radius: 999px;
+
     font-weight: bold;
-    font-size: 26px;
+    font-size: 20px;
 }
 
 /* Sent button */
 #feedbackSent .btn {
     background: #73d99f;
     cursor: default;
+}
+
+
+/* =========================
+   RESPONSIVE DESIGN
+========================= */
+
+@media (max-width: 600px) {
+
+    .feedback-page {
+        padding: 0 12px;
+    }
+
+    .feedback-title {
+        font-size: 30px;
+    }
+
+    .feedback-page h2 {
+        font-size: 19px;
+    }
+
+    .feedback-modal {
+        padding: 12px;
+    }
+
+    .feedback-modal-content {
+        padding: 26px 20px;
+        max-height: 90vh;
+        border-radius: 16px;
+    }
+
+    .category-btn {
+        padding: 16px;
+    }
+
+    .category-name {
+        font-size: 16px;
+    }
+
+    .actions {
+        gap: 10px;
+    }
+
+    .btn,
+    .dropbtn {
+        padding: 8px 18px;
+        font-size: 14px;
+    }
+
+    #feedbackSent .p1 {
+        font-size: 24px;
+    }
+
+    #feedbackSent .p2 {
+        font-size: 17px;
+    }
 }

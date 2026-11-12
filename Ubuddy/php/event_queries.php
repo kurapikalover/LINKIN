@@ -93,7 +93,12 @@ function getEventById(PDO $pdo, int $eventId): array|false
             e.start_date,
             e.end_date,
             e.location,
-            e.event_status,
+            CASE
+                WHEN e.event_status = 'cancelled' THEN 'cancelled'
+                WHEN CURRENT_DATE < e.start_date THEN 'upcoming'
+                WHEN CURRENT_DATE BETWEEN e.start_date AND e.end_date THEN 'ongoing'
+                WHEN CURRENT_DATE > e.end_date THEN 'completed'
+            END AS event_status,
             e.club_id,
             c.club_name
         FROM public.event AS e
@@ -110,6 +115,5 @@ function getEventById(PDO $pdo, int $eventId): array|false
 
     return $stmt->fetch(PDO::FETCH_ASSOC);
 }
-
 
 ?>

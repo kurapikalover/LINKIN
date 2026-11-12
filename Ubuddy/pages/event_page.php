@@ -122,7 +122,7 @@ try {
                         <?php foreach ($events as $event): ?>
 
                             <a
-                                href="event_detail.php?id=<?= urlencode((string) $event['event_id']) ?>"
+                                href="event_detail.php?id=<?= (int) $event['event_id'] ?>&from=events"
                                 class="event-card"
                                 data-search="<?= escapeHtml(
                                     $event['event_name'] . ' ' .

@@ -130,6 +130,7 @@
     border-radius: 30px;
     padding: 16px 20px;
     margin-bottom: 16px;
+    box-shadow: 0 3px 10px rgba(23, 42, 70, 0.08);
 }
 
 .committee-icon {
@@ -177,7 +178,7 @@
 .committee-admin-layout {
     display: grid;
     grid-template-columns: 2fr 1fr;
-    gap: 16px;
+    gap: 20px;
     align-items: start;
 }
 
@@ -191,6 +192,7 @@
     border-radius: 30px;
     padding: 20px;
     color: #fff;
+    box-shadow: 0 3px 10px rgba(23, 42, 70, 0.08);
 }
 
 .member-list h2 {
@@ -203,6 +205,8 @@
     overflow-y: auto;
     background: #fff;
     border-radius: 16px;
+    scrollbar-width: thin;
+    scrollbar-color: #8EACD6 #F1F5FA;
 }
 
 .table-wrap table {
@@ -214,17 +218,22 @@
 .table-wrap th {
     position: sticky;
     top: 0;
+    z-index: 1;
     background: #bcdcff;
     text-align: left;
 }
 
 .table-wrap th,
 .table-wrap td {
-    padding: 8px 12px;
+    padding: 11px 12px;
 }
 
 .table-wrap td {
     border-top: 1px solid #dbe9f7;
+}
+
+.table-wrap tbody tr:hover {
+    background: #F1F6FC;
 }
 
 
@@ -288,15 +297,18 @@
     text-decoration: none;
     padding: 14px;
     border-radius: 999px;
+    transition: background-color 0.2s ease,
+                transform 0.2s ease;
 }
 
 .side-btn:hover {
     filter: brightness(0.95);
+    transform: translateY(-2px);
 }
 
 
 /* =========================
-   UPCOMING EVENTS
+   EVENTS CARD
 ========================= */
 
 .upcoming-events {
@@ -304,12 +316,15 @@
     border-radius: 30px;
     padding: 16px;
     color: #fff;
+    box-shadow: 0 3px 10px rgba(23, 42, 70, 0.08);
 }
 
+/* EVENTS HEADER */
 .events-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    margin-bottom: 18px;
 }
 
 .events-header h2 {
@@ -319,57 +334,360 @@
 
 /* ADD EVENT BUTTON */
 .addbtn {
-    width: 28px;
-    height: 28px;
+    width: 30px;
+    height: 30px;
     display: grid;
     place-items: center;
     background: #fff;
     color: #808080;
     border-radius: 50%;
+    font-size: 20px;
     font-weight: 700;
     text-decoration: none;
+    transition: background-color 0.2s ease,
+                transform 0.2s ease;
 }
 
-/* EVENT LIST */
+.addbtn:hover {
+    background: #bcdcff;
+    transform: scale(1.08);
+}
+
+
+/* =========================
+   EVENT SEARCH
+========================= */
+
+.event-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 10px 14px;
+    margin-bottom: 18px;
+    background: #F8FAFD;
+    border: 1px solid #C7D4E5;
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.event-search span {
+    color: #858D99;
+    font-size: 21px;
+}
+
+.event-search input {
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: #172A46;
+    font-family: 'Poppins', sans-serif;
+    font-size: 13px;
+}
+
+.event-search input::placeholder {
+    color: #858D99;
+}
+
+.event-search:focus-within {
+    border-color: #426fb1;
+    box-shadow: 0 0 0 2px rgba(66, 111, 177, 0.15);
+}
+
+
+/* =========================
+   EVENT SECTIONS
+========================= */
+
+.event-section {
+    width: 100%;
+}
+
+/* SECTION HEADING */
+.event-section-title {
+    margin: 0 0 10px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #fff;
+}
+
+/* PAST EVENTS SECTION */
+.past-events-section {
+    margin-top: 16px;
+    padding-top: 14px;
+    border-top: 1px solid rgba(255, 255, 255, 0.35);
+}
+
+
+/* =========================
+   EVENT LIST
+========================= */
+
 .events-list {
     margin-top: 12px;
-    max-height: 300px;
-    overflow-y: auto;
     display: flex;
     flex-direction: column;
     gap: 10px;
+    padding-right: 4px;
 }
 
+/* SHOW APPROXIMATELY TWO EVENT CARDS */
+.event-scroll-list {
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #D0D0D0 #696969;
+}
+
+/* CHROME / EDGE SCROLLBAR */
+.event-scroll-list::-webkit-scrollbar {
+    width: 6px;
+}
+
+.event-scroll-list::-webkit-scrollbar-track {
+    background: #696969;
+    border-radius: 10px;
+}
+
+.event-scroll-list::-webkit-scrollbar-thumb {
+    background: #D0D0D0;
+    border-radius: 10px;
+}
+
+.event-scroll-list::-webkit-scrollbar-thumb:hover {
+    background: #bcdcff;
+}
+
+/* EVENT CARD */
 .event-details {
+    flex-shrink: 0;
     background: #fff;
     color: #696767;
+    border: 1px solid #e5e5e5;
     border-radius: 16px;
-    padding: 12px;
-    position: relative;
+    padding: 14px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.08);
 }
 
 .event-details h3 {
-    margin: 0;
+    margin: 0 0 8px;
+    color: #0f4a89;
     font-size: 15px;
 }
 
 .event-details p {
-    margin: 0 0 28px;
+    margin: 0 0 8px;
     font-size: 12px;
+    line-height: 1.5;
+    overflow-wrap: anywhere;
 }
 
-/* EDIT EVENT BUTTON */
-.edit-eventbtn {
-    position: absolute;
-    right: 10px;
-    bottom: 10px;
-    background: #696767;
+/* EVENT DESCRIPTION */
+.event-description {
+    color: #696767;
+    font-size: 12px;
+    margin-top: 8px !important;
+}
+
+/* EVENT STATUS */
+.event-status {
+    display: inline-block;
+    background: #EAF2FC;
+    color: #0f4a89;
+    font-size: 11px;
+    font-weight: 700;
+    padding: 4px 10px;
+    border-radius: 999px;
+    margin-top: 5px;
+}
+
+/* STATUS COLOURS */
+.event-status.upcoming {
+    background: #EAF2FC;
+    color: #0f4a89;
+}
+
+.event-status.ongoing {
+    background: #E5F5EA;
+    color: #287A3D;
+}
+
+.event-status.completed {
+    background: #EEEEEE;
+    color: #696767;
+}
+
+.event-status.cancelled {
+    background: #FCE8E8;
+    color: #B42318;
+}
+
+/* EMPTY EVENT MESSAGE */
+.no-events {
+    font-size: 13px;
+    text-align: center;
+    padding: 12px 5px;
+    margin: 0;
+}
+
+/* SHARED SEARCH EMPTY MESSAGE */
+.event-no-results {
+    color: #fff;
+    font-size: 13px;
+    text-align: center;
+    padding: 12px 5px;
+    margin: 10px 0 0;
+}
+
+.event-no-results[hidden] {
+    display: none;
+}
+
+
+/* =========================
+   PAST & CANCELLED DROPDOWN
+========================= */
+
+/* DROPDOWN TOGGLE */
+.past-events-toggle {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 4px 0;
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-family: 'Poppins', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    text-align: left;
+    cursor: pointer;
+}
+
+.past-events-toggle:hover {
+    color: #bcdcff;
+}
+
+/* DROPDOWN ARROW */
+.dropdown-arrow {
+    color: #fff;
+    transition: transform 0.2s ease;
+}
+
+.past-events-toggle[aria-expanded="true"] .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+/* DROPDOWN CONTENT */
+.past-events-content {
+    margin-top: 10px;
+}
+
+.past-events-content[hidden] {
+    display: none;
+}
+
+
+/* =========================
+   EVENT ACTION BUTTONS
+========================= */
+
+.event-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+    margin-top: 12px;
+}
+
+/* VIEW EVENT BUTTON */
+.view-eventbtn {
+    display: inline-block;
+    background: #426fb1;
     color: #fff;
     font-size: 12px;
     font-weight: 700;
     text-decoration: none;
-    padding: 4px 12px;
+    padding: 6px 13px;
     border-radius: 999px;
+    transition: background-color 0.2s ease,
+                transform 0.2s ease;
+}
+
+.view-eventbtn:hover {
+    background: #263F63;
+    transform: translateY(-2px);
+}
+
+/* DELETE EVENT FORM */
+.event-actions form {
+    margin: 0;
+}
+
+/* DELETE EVENT BUTTON */
+.delete-eventbtn {
+    display: inline-block;
+    background: #FCE8E8;
+    color: #B42318;
+    border: none;
+    cursor: pointer;
+    font-family: inherit;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 6px 13px;
+    border-radius: 999px;
+    transition: background-color 0.2s ease,
+                color 0.2s ease,
+                transform 0.2s ease;
+}
+
+.delete-eventbtn:hover {
+    background: #B42318;
+    color: #fff;
+    transform: translateY(-2px);
+}
+
+
+/* =========================
+   SUCCESS MESSAGE
+========================= */
+
+.event-success {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+
+    background: #E7F5EA;
+    color: #287A3D;
+
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-bottom: 15px;
+
+    font-size: 14px;
+}
+
+/* CLOSE SUCCESS MESSAGE BUTTON */
+.close-success {
+    background: transparent;
+    border: none;
+
+    color: #287A3D;
+    font-size: 22px;
+    font-weight: 600;
+
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.close-success:hover {
+    color: #175C2A;
 }
 
 
@@ -377,13 +695,43 @@
    RESPONSIVE DESIGN
 ========================= */
 
-@media (max-width: 700px) {
+@media (max-width: 900px) {
+
     .committee-admin-layout {
         grid-template-columns: 1fr;
     }
+
+    .admin-side {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        align-items: start;
+    }
+
+    .upcoming-events {
+        grid-column: 1 / -1;
+    }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
+
+    .committee-card {
+        gap: 12px;
+        padding: 14px;
+        border-radius: 20px;
+    }
+
+    .committee-icon {
+        font-size: 65px;
+    }
+
+    .committee-details {
+        padding: 12px;
+    }
+
+    .upcoming-events {
+        border-radius: 20px;
+    }
+
     .member-controls {
         flex-direction: column;
     }
@@ -391,7 +739,34 @@
     .member-controls input,
     .member-controls select {
         width: 100%;
+        min-width: 0;
         box-sizing: border-box;
+    }
+
+    .admin-side {
+        display: flex;
+    }
+
+    .event-scroll-list {
+        max-height: 300px;
     }
 }
 
+@media (max-width: 400px) {
+
+    .committee-card {
+        align-items: flex-start;
+    }
+
+    .committee-icon {
+        font-size: 48px;
+    }
+
+    .event-actions {
+        justify-content: flex-start;
+    }
+
+    .past-events-toggle {
+        font-size: 14px;
+    }
+}

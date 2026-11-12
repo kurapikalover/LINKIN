@@ -121,7 +121,7 @@ try {
                         ?>
 
                         <a
-                            href="club.php?id=<?= (int) $club['club_id'] ?>"
+                            href="club.php?id=<?= (int) $club['club_id'] ?>&from=clubs"
                             class="club-card"
                             data-category="<?= escapeHtml($categoryName) ?>"
                             data-search="<?= escapeHtml(

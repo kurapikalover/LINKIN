@@ -31,23 +31,71 @@
     overflow-wrap: anywhere;
 }
 
-/* Decorative circles */
+/* Event title and edit button */
+.event-title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
 
+.event-title-row h1 {
+    flex: 1;
+    min-width: 0;
+}
+
+/* Edit Event button */
+.edit-event-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 9px 15px;
+    border: none;
+    border-radius: 8px;
+    background: #426fb1;
+    color: white;
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    white-space: nowrap;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.edit-event-btn:hover {
+    background: #263F63;
+}
+
+.edit-event-btn .material-symbols-outlined {
+    font-size: 18px;
+}
+
+/* Event status */
+.event-status {
+    display: inline-block;
+    margin: 8px 0 0;
+    padding: 6px 13px;
+    border-radius: 20px;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+/* Decorative circles */
 .event-circles {
-  display: flex;
-  gap: 8px;
-  margin: 20px 0 30px;
+    display: flex;
+    gap: 8px;
+    margin: 20px 0 30px;
 }
 
 .event-circles span {
-  width: 13px;
-  height: 13px;
-
-  border-radius: 50%;
-  background: var(--navy);
+    width: 13px;
+    height: 13px;
+    border-radius: 50%;
+    background: var(--navy);
 }
-
-
 
 /* Individual information sections */
 .event-info-section {
@@ -227,6 +275,251 @@
 }
 
 /* ========================================
+   SUCCESS NOTIFICATION
+======================================== */
+
+.event-success {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    background: #E7F5EA;
+    color: #287A3D;
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin: 20px 15px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+}
+
+.close-success {
+    background: transparent;
+    border: none;
+    color: #287A3D;
+    font-size: 22px;
+    cursor: pointer;
+    padding: 0 4px;
+    line-height: 1;
+    flex-shrink: 0;
+}
+
+.close-success:hover {
+    color: #175C2A;
+}
+
+/* ========================================
+   EDIT EVENT MODAL
+======================================== */
+
+/* Modal background */
+.event-modal {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    background: rgba(23, 42, 70, 0.55);
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.event-modal.is-open {
+    display: flex;
+}
+
+/* Modal content */
+.event-modal-content {
+    width: 100%;
+    max-width: 650px;
+    max-height: 90vh;
+    overflow-y: auto;
+    background: white;
+    border-radius: 16px;
+    padding: 28px;
+    box-sizing: border-box;
+    box-shadow: 0 10px 35px rgba(0, 0, 0, 0.2);
+}
+
+/* Modal heading */
+.event-modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 22px;
+}
+
+.event-modal-header h2 {
+    margin: 0 0 5px;
+    color: #172A46;
+    font-family: "Poppins", sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.event-modal-header p {
+    margin: 0;
+    color: #858D99;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+}
+
+.event-modal-close {
+    border: none;
+    background: transparent;
+    color: #858D99;
+    font-size: 28px;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.event-modal-close:hover {
+    color: #172A46;
+}
+
+/* ========================================
+   EDIT EVENT FORM
+======================================== */
+
+.event-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 18px;
+}
+
+.event-form-group label {
+    color: #172A46;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.event-form-group input,
+.event-form-group textarea {
+    width: 100%;
+    padding: 11px 13px;
+    border: 1px solid #C7D4E5;
+    border-radius: 8px;
+    background: #F8FAFD;
+    color: #172A46;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+.event-form-group input:focus,
+.event-form-group textarea:focus {
+    outline: none;
+    border-color: #426fb1;
+}
+
+.event-form-group textarea {
+    resize: vertical;
+}
+
+/* Start and end dates */
+.event-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+/* ========================================
+   CANCEL EVENT OPTION
+======================================== */
+
+.event-cancel-option {
+    padding: 14px;
+    background: #F8FAFD;
+    border: 1px solid #E0E7F0;
+    border-radius: 10px;
+    margin-bottom: 22px;
+}
+
+.event-cancel-option label {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    color: #172A46;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.event-cancel-option input {
+    accent-color: #426fb1;
+}
+
+.event-cancel-option p {
+    margin: 8px 0 0 24px;
+    color: #858D99;
+    font-family: "Poppins", sans-serif;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+/* ========================================
+   MODAL ACTION BUTTONS
+======================================== */
+
+.event-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+}
+
+.event-cancel-btn,
+.event-save-btn {
+    padding: 10px 18px;
+    border-radius: 8px;
+    font-family: "Poppins", sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.event-cancel-btn {
+    background: white;
+    color: #172A46;
+    border: 1px solid #C7D4E5;
+}
+
+.event-cancel-btn:hover {
+    background: #F1F4F8;
+}
+
+.event-save-btn {
+    background: #426fb1;
+    color: white;
+    border: none;
+}
+
+.event-save-btn:hover {
+    background: #263F63;
+}
+
+/* ========================================
+   FORM VALIDATION ERRORS
+======================================== */
+
+.event-form-errors {
+    background: #FDECEC;
+    color: #A83232;
+    border-radius: 8px;
+    padding: 10px 15px;
+    margin-bottom: 18px;
+    font-family: "Poppins", sans-serif;
+    font-size: 13px;
+}
+
+.event-form-errors p {
+    margin: 4px 0;
+}
+
+/* ========================================
    TABLET
 ======================================== */
 
@@ -283,6 +576,15 @@
         font-size: 32px;
     }
 
+    .event-title-row {
+        align-items: flex-start;
+    }
+
+    .edit-event-btn {
+        padding: 8px 11px;
+        font-size: 12px;
+    }
+
     .event-main-image {
         height: 240px;
     }
@@ -317,5 +619,32 @@
     .event-not-found {
         margin: 25px 10px;
         padding: 25px 15px;
+    }
+
+    /* Modal */
+    .event-modal {
+        padding: 12px;
+    }
+
+    .event-modal-content {
+        padding: 20px;
+    }
+
+    .event-modal-header h2 {
+        font-size: 21px;
+    }
+
+    .event-form-row {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .event-modal-actions {
+        flex-direction: column-reverse;
+    }
+
+    .event-cancel-btn,
+    .event-save-btn {
+        width: 100%;
     }
 }
