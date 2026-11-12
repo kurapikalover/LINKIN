@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>ÜBuddy</title>
+
+  <!-- Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Home and notification icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home,notifications">
+
+  <!-- Base CSS -->
+  <link rel="stylesheet" href="ubuddy-club-form.css">
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- =========================
+         TOP TABS
+    ========================== -->
+    <nav class="tabs">
+
+      <a href="#" class="tab-icon material-symbols-outlined">
+        home
+      </a>
+
+      <a href="#" class="tab-icon-bell material-symbols-outlined">
+        notifications
+      </a>
+
+      <span class="spacer"></span>
+
+      <a href="#" class="tab">
+        My Activity
+      </a>
+
+      <a href="#" class="tab">
+        My Applications
+      </a>
+
+      <a href="#" class="tab">
+        My Achievements
+      </a>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN WHITE SHEET
+    ========================== -->
+    <div class="sheet">
+
+      <!-- =========================
+           HEADER
+      ========================== -->
+      <header class="header">
+
+        <!-- Logo -->
+        <div class="logo">
+          ÜBuddy
+          <small>Let UBuddy be your buddy</small>
+        </div>
+
+
+        <!-- Student Profile -->
+        <div class="user">
+
+          <div class="user-info">
+            <strong>Student Name</strong>
+
+            <small>
+              2486023 ·
+              <a href="#">View Profile</a>
+            </small>
+          </div>
+
+          <div class="avatar">
+            <!-- Profile image will go here later -->
+          </div>
+
+        </div>
+
+      </header>
+
+
+      <!-- =========================
+           PAGE CONTENT
+           Individual pages go here
+      ========================== -->
+      <main class="page-content">
+          <button type="button" onclick="history.back()">Go Back</button>
+
+          <h1>Club Registration Form</h1>
+          <div style="border-top:2px solid #a9cdfc; margin: 10px;"></div>
+          <h2>Muslim Youth Club</h2>
+          
+          <form style="color:#697077;">
+            <p style="font-size: 20px; color:#697077;"><b>Phone number</b></p>
+            <input type="tel" id="phone" name="phone" placeholder="+673 XXX XXXX" required>
+
+            <p style="font-size: 20px; color:#697077;"><b>Apply as</b></p>
+                <input style="color:#697077;"
+                       type="radio"
+                       name="Membership role"
+                       value="member"> Member
+                <br>
+                <input type="radio"
+                      name="Membership role"
+                      value="committee"> Committee
+                <br>
+                <p style="font-size: 20px; color:#697077;"><b>What is your experience level?</b></p>
+          
+                <input style="color:#697077;"
+                       type="radio"
+                       name="Experience level"
+                       value="beginner"> Beginner
+                <br>
+                <input style="color:#697077;"
+                       type="radio"
+                       name="Experience level"
+                       value="intermediate"> Intermediate
+                <br>
+                <input style="color:#697077;"
+                       type="radio"
+                       name="Experience level"
+                       value="advanced"> Advanced
+                <br>
+
+
+              <p style="font-size: 20px; color:#697077;"><b>Position</b></p>
+              <div class="position">
+                <label for="position" style="color:#697077;">Please select your desired position following your preference.</label>
+                <br>
+                <label style="color:#697077;"><b>1st Choice</b></label>
+                <select name="1st Choice" id="firstchoice" style="color:#697077;">
+                  <option value="" selected disabled hidden>Select a position</option>
+                  <option value="president">President</option>
+                  <option value="vice-president">Vice President</option>
+                  <option value="secretary">Secretary</option>
+                  <option value="treasurer">Treasurer</option>
+                </select>
+
+                <br>
+                <label style="color:#697077;"><b>2nd Choice</b></label>
+                <select name="2nd Choice" id="secondchoice" style="color:#697077;">
+                  <option value="" selected disabled hidden>Select a position</option>
+                  <option value="president">President</option>
+                  <option value="vice-president">Vice President</option>
+                  <option value="secretary">Secretary</option>
+                  <option value="treasurer">Treasurer</option>
+                </select>
+
+                <br>
+                <label style="color:#697077;"><b>3rd Choice</b></label>
+                <select name="3rd Choice" id="thirdchoice" style="color:#697077;">
+                  <option value="" selected disabled hidden>Select a position</option>
+                  <option value="president">President</option>
+                  <option value="vice-president">Vice President</option>
+                  <option value="secretary">Secretary</option>
+                  <option value="treasurer">Treasurer</option>
+                </select>
+                </div>
+                <br>
+                <label for="position" style="font-size: 15px; color:#ff7a1a;">*Applying to these positions requires you to attend an interview</label>
+                
+                <br>
+                <button type="submit">Join Club</button>
+          </form>
+        </body>
+
+          
+          </div>
+
+        </div>
+      </main>
+
+    </div>
+
+  </div>
+
+</body>
+</html>
