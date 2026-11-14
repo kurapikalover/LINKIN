@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>ÜBuddy</title>
+
+  <!-- Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Home and notification icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home,notifications,calendar_month,groups_2,frame_person_mic,document_scanner,feedback,diversity_3,person_check,id_card,search,filter_alt">
+
+  <!-- Base CSS -->
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/com-application.css">
+
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- =========================
+         TOP TABS
+    ========================== -->
+    <nav class="tabs">
+
+      <a href="../pages/homepage.php" class="tab-icon material-symbols-outlined">home</a>
+
+      <a href="../pages/notification.php" class="tab-icon-bell material-symbols-outlined">notifications</a>
+
+      <div class="dropdown">
+       <!-- drop down menu club name(s) when hover committee -->
+      <a href="../pages/com-admin.php" class="tab-icon-committee active material-symbols-outlined">diversity_3</a>
+
+        <div class="dropdown-content">
+            <p> Select Club:</p>
+            <a href="com-admin.html?id=1">Club Name</a>
+            <a href="com-admin.html?id=2">Club Name</a>         
+        </div>
+      </div>
+                    
+      <span class="spacer"></span>
+
+      <a href="../pages/club_page.php" class="tab">
+        Clubs
+      </a>
+
+      <a href="../pages/event_page.php" class="tab">
+        Events
+      </a>
+
+      <a href="../pages/myactivity.php" class="tab">
+        My Activity
+      </a>
+
+      <a href="../pages/myapplication.php" class="tab">
+        My Applications
+      </a>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN WHITE SHEET
+    ========================== -->
+    <div class="sheet">
+
+      <!-- =========================
+           HEADER
+      ========================== -->
+      <header class="header">
+
+        <!-- Logo -->
+        <div class="logo">
+          ÜBuddy
+          <small>Let UBuddy be your buddy</small>
+        </div>
+
+
+        <!-- Student Profile -->
+        <div class="user">
+
+          <div class="user-info">
+            <strong>Student Name</strong>
+
+            <small>
+              24B6023 ·
+              <a href="../pages/stu_profile.php">View Profile</a>
+            </small>
+          </div>
+
+          <div class="avatar">
+            <!-- Profile image will go here later -->
+          </div>
+
+        </div>
+
+      </header>
+
+      <!-- =========================
+           PAGE CONTENT
+           Individual pages go here
+      ========================== -->
+      <main class="page-content">
+        <div class="view-application-page">
+
+          <a href="../pages/com-admin.php" class="back-button">← Committee Admin</a>
+          <h1 class="committee-admin-title">View Applications</h1>
+          <h2 class="club-name">Club Name</h2>
+
+
+        <div class="view-application-layout">
+            <!-- SEARCH AND FILTERS -->
+            <div class="search-bar">
+
+                <div class="search-input">
+
+                <span class="material-symbols-outlined search-icon">search
+                </span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search"
+                    aria-label="Search Student ID or name "
+                >
+                </div>
+
+                <button
+                    type="button"
+                    class="filter-btn material-symbols-outlined"
+                    id="toggleHomeFilter"
+                    aria-label="Show filters"
+                    aria-expanded="false"
+                    aria-controls="filterPanel"
+                >filter_alt
+                </button>
+            </div>
+
+          <!-- Student Apply info list -->
+          <section class="info-application">
+            <!-- Unread dot -->
+            <span class="badge"></span>
+
+            <div class="inline-row">
+                <h2> Student Name</h2>
+                <span class="apply-time"> DD/MM/YY </span> 
+            </div>
+            <div class="student-detail">
+                <!-- Student ID -->
+                <p class= "p1">2XBXXXX</p>
+                <!-- Faculty name -->
+                <p class= "p2">Faculty Name</p>
+
+                <!-- making separate in line row for membership type and accpt & rjct buttons -->
+                <div class="membership-type">
+                  <!-- Apply as member or committee (show their 3 choices) -->
+                  <div class="type-info">
+                  <p class= "p3">Member</p>
+                  </div>
+
+                  <div class="action-btns">
+                    <button type="button" class="accept-btn">Accept</button>
+                    <button type="button" class="reject-btn">Reject</button>
+                  </div> 
+                </div>
+            </div>
+          </section>
+
+          <section class="info-application">
+            <div class="inline-row">
+                <h2> Student Name</h2>
+                <span class="apply-time"> DD/MM/YY </span> 
+            </div>
+            <div class="student-detail">
+                <!-- Student ID -->
+                <p class= "p1">2XBXXXX</p>
+                <!-- Faculty name -->
+                <p class= "p2">Faculty Name</p>
+
+                <!-- making separate in line row for membership type and accpt & rjct buttons -->
+                <div class="membership-type">
+                  <div class="type-info">
+                <!-- Apply as member or committee (show their 3 choices) -->
+                    <p class= "p3">Member</p>
+                  </div>
+
+                  <div class="action-btns">
+                    <button type="button" class="accept-btn">Accept</button>
+                    <button type="button" class="reject-btn">Reject</button>
+                  </div>
+                </div>
+            </div>
+          </section>
+
+          <section class="info-application">
+            <div class="inline-row">
+                <h2> Student Name</h2>
+                <span class="apply-time"> DD/MM/YY </span> 
+            </div>
+            <div class="student-detail">
+                <!-- Student ID -->
+                <p class= "p1">2XBXXXX</p>
+                <!-- Faculty name -->
+                <p class= "p2">Faculty Name</p>
+
+                <div class="membership-type">
+                <!-- Apply as member or committee (show their 3 choices) -->
+                <div class="type-info">
+                    <p class= "p3">Committee</p>
+                    <!-- show their choices -->
+                    <table class="rank-table">
+                        <tbody id="positionRanks">
+                         <!-- rows are added by PHP or JS -->
+                        <!-- hardcoded -->
+                        <tr><td>1st</td><td>Vice President</td></tr>
+                        <tr><td>2nd</td><td>Treasurer</td></tr>
+                        <tr><td>3rd</td><td>Member of Media</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="action-btns">
+                <button type="button" class="acceptinterview-btn">Accept for Interview</button>
+                <button type="button" class="reject-btn">Reject</button>
+                </div>
+                </div>
+                </div>
+          </section>
+        </div>
+
+        <div class="interviewslist-layout">
+          <h1 class="committee-admin-title">Interviews</h1>
+
+            <!-- SEARCH AND FILTERS -->
+            <div class="search-bar">
+
+                <div class="search-input">
+
+                <span class="material-symbols-outlined search-icon">search
+                </span>
+
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="Search"
+                    aria-label="Search Student ID or name "
+                >
+                </div>
+
+                <button
+                    type="button"
+                    class="filter-btn material-symbols-outlined"
+                    id="toggleHomeFilter"
+                    aria-label="Show filters"
+                    aria-expanded="false"
+                    aria-controls="filterPanel"
+                >filter_alt
+                </button>
+            </div>
+
+            <!-- interviewee list details -->
+            <div id="interviewList">
+              <!-- existing interview-section cards rah sini -->
+              <div class="interview-section">
+                  <!-- interviewee details -->
+                  <div class="interviewee-details">
+                    <h3>Student Name</h3>
+                    <p class="p1">2XBXXXX</p>
+                    <p class="p2"> Faculty Name</p>
+                  </div>
+
+                  <!-- date, time and location of interview -->
+                  <div class="interview-details">
+                    <h3>DD/MM/YY</h3>
+                    <p>Time</p>
+                    <small>Location</small>
+                  </div>
+
+                  <!-- position choices and ranks  -->
+                  <div class="position-choices">
+                      <p class="p3">Committee</p>
+                      <!-- show their choices -->
+                      <table class="rank-table"><tbody id="positionRanks">
+                         <!-- rows are added by PHP or JS -->
+                        <!-- hardcoded -->
+                        <tr><td>1st</td><td>Vice President</td></tr>
+                        <tr><td>2nd</td><td>Treasurer</td></tr>
+                        <tr><td>3rd</td><td>Member of Media</td></tr>
+                        </tbody>
+                      </table>
+                  </div>
+
+                  <button type="button" class="expand-details-btn" aria-expanded="false">Expand Details</button>
+                  <!-- hidden until click expand-details button -->
+                  <div class="interview-extra" hidden>
+                    <!-- interviewer details -->
+                    <div class="interviewers">
+                      <p class="interviewers-title">Interviewer(s)</p>
+                      <p>StudentID Name </p>
+                      <p>StudentID Name </p>
+                     <p>StudentID Name </p>
+                  </div>
+
+                  <div class="action-btns">
+                    <div class="dropdown">
+                      <!-- drop down menu select role when hover accept button -->
+                      <button type="button"class="accept-btn">Accept</button>
+                      <div class="dropdown-content">
+                        <h3> Select Role</h3>
+                        <button type="button">Option 1</button>  
+                        <button type="button">Option 2</button> 
+                        <button type="button">Option 3</button> 
+                        <button type="button">Normal Member</button> 
+                      </div>
+                   </div>
+                  <button type="button" class="reject-btn">Reject</button>
+               </div>
+            </div> 
+            </div>
+
+            <template id="interviewTemplate">
+             <div class="interview-section">
+                <!-- interviewee details -->
+                <div class="interviewee-details">
+                  <h3 class="i-name"></h3>
+                  <p class="p1 i-id"></p>
+                  <p class="p2 i-faculty"></p>
+                </div>
+
+                <!-- date, time and location of interview -->
+                <div class="interview-details">
+                  <h3>To be set</h3>
+                  <p>Time</p>
+                  <small>Location</small>
+                </div>
+
+                <!-- position choices and ranks  -->
+                <div class="position-choices">
+                      <p class="p3">Committee</p>
+                      <!-- show their choices -->
+                      <table class="rank-table"><tbody class="i-ranks"></tbody></table>
+                </div>
+
+                <button type="button" class="expand-details-btn" aria-expanded="false">Expand Details</button>
+
+                <!-- hidden until click expand-details button -->
+                <div class="interview-extra" hidden>
+                    <!-- interviewer details -->
+                    <div class="interviewers">
+                      <p class="interviewers-title">Interviewer(s)</p>
+                      <p>Not assigned yet </p>
+                    </div>
+
+                    <div class="action-btns">
+                      <div class="dropdown">
+                        <!-- drop down menu select role when hover accept button -->
+                        <button type="button"class="accept-btn">Accept</button>
+                        <div class="dropdown-content">
+                          <h3> Select Role</h3>
+                          <button type="button">Option 1</button>  
+                          <button type="button">Option 2</button> 
+                          <button type="button">Option 3</button> 
+                          <button type="button">Normal Member</button> 
+                        </div>
+                    </div>
+                    <button type="button" class="reject-btn">Reject</button>
+                </div>
+          </div> 
+        </div>
+      </template>
+      </div>
+      </div>
+      </main>
+      </div>
+  </div>
+  <script src="../js/com-application.js"></script>
+</body>
+</html>

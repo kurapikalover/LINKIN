@@ -32,7 +32,7 @@
         home
       </a>
 
-      <a href="notification.html" class="tab-icon-bell material-symbols-outlined">
+      <a href="../pages/notification.php" class="tab-icon-bell material-symbols-outlined">
         notifications
       </a>
 
@@ -43,15 +43,15 @@
                  
       <span class="spacer"></span>
 
-      <a href="#" class="tab">
+      <a href="../pages/club_page.php" class="tab">
         Clubs
       </a>
 
-      <a href="#" class="tab">
+      <a href="../pages/event_page.php" class="tab">
         Events
       </a>
 
-      <a href="myactivity.html" class="tab">
+      <a href="../pages/myactivity.php" class="tab">
         My Activity
       </a>
 
@@ -87,7 +87,7 @@
 
             <small>
               ID???.
-              <a href="#">View Profile</a>
+            <a href="#">View Profile</a>
             </small>
           </div>
 
@@ -148,20 +148,25 @@
                   </button>
                 </div>
 
+                <div id="info">
                 <section class="feedback-content">
                   <h3>Feedback ID</h3>
                   <p class="p1">DD/MM/YY</p>
                   <p class="'p2">Feedback entry</p>
-                  <button type="button" class="archive-btn">Archive</button>
+                  <button type="button" id="archive-btn">Archive</button>
                 </section>
+                </div>
 
+                <div id="info">
                 <section class="feedback-content">
                   <h3>Feedback ID</h3>
                   <p class="p1">DD/MM/YY</p>
                   <p class="p2">Feedback entry</p>
                   <button type="button" class="view-files-btn">View Files</button>
-                  <button type="button" class="archive-btn">Archive</button>
-                </section>             
+                  <!-- <button type="button" id="archive-btn">Archive</button> -->
+                  <button type="button" id="archive-btn" onclick="document.getElementById('info').style.display='none'">Archive</button>
+                </section>   
+                </div>            
             </section>
 
             <!-- Assign role -->
@@ -172,6 +177,7 @@
                 <label for="roleUser">User</label>
                 <input type="text" id="roleUser" name="user" placeholder="Enter User ID or Name" required>
 
+                <!-- role and club same row -->
                 <div class="role-club-row">
                     <div class="field">
                       <label for="roleSelect">Role</label>
@@ -196,6 +202,13 @@
                 <button type="submit" class="confirm-btn">Confirm</button>
               </form>
             </section>
+
+            <div class="admin-actions">
+                <button type="button" class="add-account-btn">Add Club</button>
+                <button type="button" class="delete-account-btn ">Add Events</button>
+                <button type="button" class="add-category-btn">Add Achievement</button>
+            </div>
+            
         </div>
         </div>
       </main>

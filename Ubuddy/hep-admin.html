@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>ÜBuddy</title>
+
+  <!-- Poppins -->
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- Home and notification icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=home,notifications,calendar_month,groups_2,frame_person_mic,document_scanner,feedback,diversity_3,person_check,id_card,search,filter_alt">
+
+  <!-- Base CSS -->
+  <link rel="stylesheet" href="../css/base.css">
+  <link rel="stylesheet" href="../css/shared.css">
+  <link rel="stylesheet" href="../css/hep-admin.css">
+
+
+</head>
+
+<body>
+
+  <div class="page">
+
+    <!-- =========================
+         TOP TABS
+    ========================== -->
+    <nav class="tabs">
+
+      <a href="../pages/homepage.php" class="tab-icon material-symbols-outlined">
+        home
+      </a>
+
+      <a href="../pages/notification.php" class="tab-icon-bell material-symbols-outlined">
+        notifications
+      </a>
+
+      <!-- hep admin is active -->
+      <a href="hep-admin.html" class="tab-icon active material-symbols-outlined">
+        id_card
+      </a>
+                 
+      <span class="spacer"></span>
+
+      <a href="../pages/club_page.php" class="tab">
+        Clubs
+      </a>
+
+      <a href="../pages/event_page.php" class="tab">
+        Events
+      </a>
+
+      <a href="../pages/myactivity.php" class="tab">
+        My Activity
+      </a>
+
+      <a href="myapplication.html" class="tab">
+        My Applications
+      </a>
+
+    </nav>
+
+
+    <!-- =========================
+         MAIN WHITE SHEET
+    ========================== -->
+    <div class="sheet">
+
+      <!-- =========================
+           HEADER
+      ========================== -->
+      <header class="header">
+
+        <!-- Logo -->
+        <div class="logo">
+          ÜBuddy
+          <small>Let UBuddy be your buddy</small>
+        </div>
+
+
+        <!-- Student Profile -->
+        <div class="user">
+
+          <div class="user-info">
+            <strong>HEP Admin Name</strong>
+
+            <small>
+              ID???
+              <a href="#">View Profile</a>
+            </small>
+          </div>
+
+          <div class="avatar">
+            <!-- Profile image will go here later -->
+          </div>
+
+        </div>
+
+      </header>
+      <!-- =========================
+           PAGE CONTENT
+           Individual pages go here
+      ========================== -->
+      <main class="page-content">
+        <div class="hep-admin-page">
+
+          <a href="../pages/homepage.php" class="back-button">← Home</a>
+          <h1 class="hep-admin-title">HEP Admin</h1>
+
+          <!-- HEP admin card-->
+          <section class="admin-card">
+            <span class="material-symbols-outlined hep-admin-icon">id_card</span>
+            <div class="admin-details">
+                <h3>Admin Name</h3>
+                <small>UserID</small>
+            </div>
+            </section> 
+   
+        <div class="hep-admin-layout">
+            <!-- pending request -->
+            <section class="pending-request"> 
+                <h1>Pending Request</h1>
+                <!-- SEARCH AND FILTERS -->
+                <div class="search-bar">
+
+                  <div class="search-input">
+
+                  <span class="material-symbols-outlined search-icon">search
+                  </span>
+
+                  <input
+                      type="text"
+                      id="searchInput"
+                      placeholder="Search"
+                      aria-label="Search Feedback ID or entry"
+                    >
+                  </div>
+
+                  <button
+                      type="button"
+                      class="filter-btn material-symbols-outlined"
+                      id="toggleHomeFilter"
+                      aria-label="Show filters"
+                      aria-expanded="false"
+                      aria-controls="filterPanel"
+                      >filter_alt
+                  </button>
+                </div>
+
+                <section class="request-content new-event-type">
+                  <small>New Event</small>
+                  <h3>Event Name</h3>
+                  <h5>Club Name</h5>
+                  <p>Date of Event <br> Time <br> Location</p>
+                  <p class="p1">DD/MM/YY</p>
+                  <button type="button" class="view-details-btn">View Details</button>
+                </section>
+
+                <section class="request-content club-detail-change-type">
+                  <small>Club Detail Change</small>
+                  <h3>Club Name</h3>
+                  <p>Change in [Title] from [] to []</p>
+                  <p class="p1">DD/MM/YY</p>
+                  <button type="button" class="view-details-btn">View Details</button>
+                </section>
+
+                <section class="request-content event-detail-change-type">
+                  <small >Event Detail Change</small>
+                  <h3>Club Name</h3>
+                  <h5>Event Name</h5>
+                  <p>Change in [Venue] from [] to []</p>
+                  <p class="p1">DD/MM/YY</p>
+                  <button type="button" class="view-details-btn">View Details</button>
+                </section>
+
+                <section class="request-content add-achievement-type">
+                  <small>Add Achievement</small>
+                  <h3>Achievement Name</h3>
+                  <h5>Student ID + Student Name</h5>
+                  <p>Description</p>
+
+                  <p class="p1">DD/MM/YY</p>
+                  <button type="button" class="view-details-btn">View Details</button>
+                </section>
+
+            </section>
+
+            <div class="admin-actions">
+                <button type="button" class="add-club-btn">Add Club</button>
+                <button type="button" class="add-events-btn ">Add Events</button>
+                <button type="button" class="add-achievement-btn">Add Achievement</button>
+            </div>
+
+            <!-- User feedback -->
+            <section class="view-feedback">
+                 <h1>Feedbacks</h1>
+                <!-- SEARCH AND FILTERS -->
+                <div class="search-bar">
+
+                  <div class="search-input">
+
+                  <span class="material-symbols-outlined search-icon">search
+                  </span>
+
+                  <input
+                      type="text"
+                      id="searchInput"
+                      placeholder="Search"
+                      aria-label="Search Feedback ID or entry"
+                    >
+                  </div>
+
+                  <button
+                      type="button"
+                      class="filter-btn material-symbols-outlined"
+                      id="toggleHomeFilter"
+                      aria-label="Show filters"
+                      aria-expanded="false"
+                      aria-controls="filterPanel"
+                      >filter_alt
+                  </button>
+                </div>
+
+                <div id="info">
+                <section class="feedback-content">
+                  <h3>Feedback ID</h3>
+                  <p class="p1">DD/MM/YY</p>
+                  <p class="p2">Feedback entry</p>
+                  <button type="button" class="view-files-btn">View Files</button>
+                  <!-- <button type="button" class="archive-btn">Archive</button> -->
+                  <button type ="button" id="archive-btn">Archive</button>
+                </section>  
+                </div>           
+            </section>
+
+        </div>
+        </div>
+      </main>
+
+    </div>
+
+  </div>
+    <script src="../js/hep-admin.js"></script> 
+</body>
+</html>
