@@ -1,0 +1,338 @@
+[hidden] { display: none !important; }
+.committee-admin-title { text-align: center; margin:0; color: #0f4a89;}
+.club-name {text-align: center; margin: 0 0 12px; color:#519bec;}
+
+.back-button {
+  display: inline-block;
+  margin-bottom: 20px;
+
+  color: var(--navy);
+  text-decoration: none;
+
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.back-button:hover {
+  color: var(--orange);
+}
+
+
+.view-application-layout,
+.interviewslist-layout{
+  height: px;
+  background-color:#519bec;;
+  padding: 20px;
+  margin: 15px;
+  box-sizing: border-box;
+  border-radius: 40px;
+  corner-shape: squircle; /* Smooths out the curvature like an iOS app icon */
+}
+
+/* change the interview layout color */
+.interviewslist-layout{
+  background-color:#bcdcff;
+}
+
+.interviewslist-layout h1{
+display: flex;
+margin-bottom: 10px; /*give space between interviews title and search*/
+}
+
+/* from shared css */
+.search-input {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  gap: 8px;
+  padding: 12px 18px;
+  border-radius: 20px;
+  /* change background to white */
+  background: var(--white);
+}
+
+.search-input input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: #519bec;
+  font: 20px "Poppins", sans-serif;
+}
+
+.search-input input::placeholder {
+  color: var(--navy);
+  opacity: 0.6;
+}
+.filter-btn {
+  border: none;
+  background: none;
+  color: var(--white);
+  font-size: 32px;
+  cursor: pointer;
+}
+
+.filter-btn:hover {
+  color: var(--orange);
+}
+
+/* abis from shared css */
+
+.info-application {
+  position: relative; /*dot sit in the corner*/
+  height: fit-content; /* box shrinks to fit its content */
+  background-color: #fff;
+  padding: 15px 20px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  border-radius: 40px;
+  corner-shape: squircle;
+}
+
+
+/* gap between club name and status */
+.inline-row {
+  display: flex;
+  justify-content: space-between;    /* club name on the left, status on the right */
+  align-items:flex-start;  
+  gap: 4px 12px;
+  width: 100%;            /* Allows it to use the full width if needed */
+}
+
+.inline-row h2 {margin:0; }
+
+.student-detail p {
+  align-self: flex-start;      /* overrides any centering */
+  margin: 0;
+  padding: 0;
+  text-align: left;
+}
+
+.student-detail .p1{
+    font-size: 20px;
+    color: #519bec;
+}
+
+.student-detail .p2{
+    font-size: 18px;
+    color: #6F6E6E;
+}
+
+.student-detail .p3{
+    font-size: 18px;
+    color: #6F6E6E;
+}
+
+.membership-type{
+  display: flex;
+  justify-content: space-between; /*membership type info on left, buttons on the right*/
+  align-items:flex-end;  /*buttons line up with the bottom of the list*/
+  gap: 12px;
+  width: 100%;  
+  margin-top: 8px;   
+}
+
+.type-info{
+  display: flex;
+  flex-direction: column;          /* "Committee" on top, table underneath */
+  gap: 4px;
+}
+
+.type-info .p3,
+.position-choices .p
+{ margin: 0; }
+
+.rank-table {
+  border-collapse: collapse;
+  font-size: 14px;
+  color: #6F6E6E;
+}
+
+.rank-table td {
+  padding: 1px 16px 1px 0;         /* small gap between rank and position */
+  text-align: left;
+}
+
+/* interview part */
+.interview-section {
+  background-color: #fff;
+  padding: 15px 20px;
+  margin: 10px 0;
+  box-sizing: border-box;
+  border-radius: 40px;
+  corner-shape: squircle;
+
+  /* two columns: student info on left, date&time&venue + buttons on the right */
+  display: grid;
+  grid-template-columns: 1fr auto;
+  column-gap: 16px;
+  row-gap: 8px;
+}
+
+.interviewee-details{grid-column: 1;}
+.interview-details   { grid-column: 2; text-align: right; }
+.position-choices    { grid-column: 1; align-self: end; }
+.expand-details-btn  { grid-column: 2; align-self: end; justify-self: end; }
+
+.interview-extra {
+  grid-column: 1 / -1;           /* full-width row underneath */
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 12px;
+  margin-top: 8px;
+}
+
+.interview-extra[hidden] { display: none; }   /* otherwise display:flex overrides hidden */
+
+.interviewee-details h3,
+.interview-details h3 { margin: 0; color: #0f4a89; }
+
+.interviewee-details p,
+.interview-details p,
+.position-choices p,
+.interviewers p { margin: 0; }
+
+.interviewee-details .p1 { font-size: 20px; color: #519bec; }
+.interviewee-details .p2 { font-size: 18px; color: #6F6E6E; }
+.interview-details small { color: #6F6E6E; }
+
+.interviewers {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  color: #6F6E6E;
+}
+.interviewers-title { font-weight: bold; }
+
+.action-btns {
+  display: flex;
+  gap: 8px;
+}
+
+.accept-btn{
+    border: none;
+    border-radius: 999px;
+    padding: 10px 36px;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: bold;
+    color:#ffffff;
+    cursor: pointer;   
+    background: #69DB6D;
+}  
+
+.acceptinterview-btn{
+    border: none;
+    border-radius: 999px;
+    padding: 10px 36px;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: bold;
+    color:#ffffff;
+    cursor: pointer;   
+    background: #B48EFF;
+
+}
+.reject-btn{
+    border: none;
+    border-radius: 999px;
+    padding: 10px 36px;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: bold;
+    color:#ffffff;
+    cursor: pointer;
+    background:#FF6D6D;   
+} 
+
+.expand-details-btn{
+    border: none;
+    border-radius: 999px;
+    padding: 10px 36px;
+    font-family: inherit;
+    font-size: 18px;
+    font-weight: bold;
+    color:#ffffff;
+    cursor: pointer;
+    background:#519bec;   
+} 
+
+.accept-btn:hover,
+.acceptinterview-btn:hover,
+.reject-btn:hover {filter: brightness(0.95);}
+
+
+/* dropdown menu for committee admin */
+.dropdown{
+  position: relative; /*connect the menu to the button*/
+}
+
+.dropdown-content{
+    display: none;
+    position: absolute;
+    top: 100%; /*no gap, directly under the button*/
+    left: 0;
+    min-width: 160px;
+    background: #ffffff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    overflow: hidden;
+    z-index: 10;
+}
+
+/* when hover the accept button on interviews section */
+/* hover on desktop, focus/tap on touch and keyboard (for mobile ig)*/
+.dropdown:hover .dropdown-content,
+.dropdown:focus-within .dropdown-content{
+    display:block;
+}
+
+.action-btns .dropdown-content{
+  top:auto;
+  bottom: 100%; /*opens upward*/
+  min-width:170px;
+}
+
+/* Select Role: */
+.dropdown-content .h3 {
+    margin: 0;
+    padding: 10px 14px;
+    font-size: 15.3px;
+    font-weight: bold;
+    color:#0f4a89;
+    border-bottom: 1px solid #bcdcff;
+}
+/* Option 1,2,3 or Member*/
+.dropdown-content button {
+    display: block;
+    width: 100%;
+    padding: 10px 14px;
+    background:none;
+    border: none;
+    border-bottom: 1px solid #bcdcff; /*give border after each option*/
+    border-radius:0;
+    text-align:left;
+    font-family: inherit;
+    text-decoration: none;
+    font-size: 15.3px; 
+    font-weight:normal;
+    color:#0f4a89;
+    cursor:pointer;
+}
+
+.dropdown-content button:last-child {border-bottom: none; } 
+.dropdown-content button:hover {background:#bcdcff;}
+
+/* orange unread dot */
+.badge {
+  position:absolute;
+  top: 5px;
+  right:14px;
+  width: 14px;
+  height: 14px;
+  background-color: orange;
+  border-radius: 50%;
+  flex-shrink: 0;           /* keeps it a circle */
+}
