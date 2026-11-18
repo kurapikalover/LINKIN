@@ -5,7 +5,7 @@ const toggleBtn = document.getElementById("toggle-password");
 
     if (toggleBtn) {
         toggleBtn.addEventListener("click", () => {
-            const passwordField = btn.parentElement.getElementById("password");
+            const passwordField = document.getElementById("password");
             const confirmField = document.getElementById("confirm_password"); // null on the login page
 
             const showing = passwordField.type === "text";
