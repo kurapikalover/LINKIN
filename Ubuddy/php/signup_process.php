@@ -78,15 +78,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST'){
             //NEVER read it from $_POST or anyone could sign up as System Admin.
 
             $stmt->execute([
-                'name' => $name.
+                'name' => $name,
                 'email' => strtolower($email),
                 'password' => password_hash($password, PASSWORD_DEFAULT), //store hash only
             ]);
 
             //Success: send them to the login page with a message
             unset($_SESSION['csrf']);
-            $_SESSION['signup_success']= 'Account created! Please log in.';
-            header('Location; login.php')
+            $_SESSION['signup_success'] = 'Account created! Please log in.';
+            header('Location: login.php');
             exit;
         } catch (PDOException $e){
             //23505= unique violation where two sign upswith the same email at once 
