@@ -1,21 +1,23 @@
 console.log("Ubuddy is working!");
 
 // ----- Show / hide password (one eye controls both fields on signup) -----
-document.querySelectorAll(".toggle-password").forEach(btn => {
-    btn.addEventListener("click", () => {
-        const passwordField = btn.parentElement.querySelector("input");
-        const confirmField = document.getElementById("confirm_password"); // null on the login page
+const toggleBtn = document.getElementById("toggle-password");
 
-        const showing = passwordField.type === "text";
-        const newType = showing ? "password" : "text";
+    if (toggleBtn) {
+        toggleBtn.addEventListener("click", () => {
+            const passwordField = btn.parentElement.getElementById("password");
+            const confirmField = document.getElementById("confirm_password"); // null on the login page
 
-        passwordField.type = newType;
-        if (confirmField) confirmField.type = newType;
+            const showing = passwordField.type === "text";
+            const newType = showing ? "password" : "text";
 
-        btn.textContent = showing ? "👁" : "◡";
-        btn.setAttribute("aria-label", showing ? "Show password" : "Hide password");
+            passwordField.type = newType;
+            if (confirmField) confirmField.type = newType;
+
+            toggleBtn.textContent = showing ? "👁" : "◡";
+            toggleBtn.setAttribute("aria-label", showing ? "Show password" : "Hide password");
     });
-});
+}
 
 // ----- Password match check (signup page only) -----
 const form = document.getElementById("signupForm");
