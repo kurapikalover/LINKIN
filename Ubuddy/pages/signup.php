@@ -45,7 +45,7 @@ require_once __DIR__ . '/../php/shared_functions.php'; //for escapeHTML()
 
                 <!-- NEW -->
                 <!-- Server-side errors (same .login-error style as the login page) -->
-                <?php foreach ($errors as $err); ?>
+                <?php foreach ($errors as $err): ?>
                     <p class= "login-error" role= "alert"><?= escapeHTML($err) ?></p>
                 <?php endforeach; ?>
 
