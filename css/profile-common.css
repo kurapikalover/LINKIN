@@ -1,0 +1,267 @@
+
+/* ========================================
+   UBUDDY PROFILE PAGES - SHARED STYLES
+======================================== */
+
+:root {
+    --profile-navy: #172A46;
+    --profile-blue: #426FB1;
+    --profile-blue-hover: #263F63;
+    --profile-blue-light: #648BC2;
+
+    --profile-bg: #F5F7FB;
+    --profile-white: #FFFFFF;
+    --profile-text: #263449;
+    --profile-muted: #718096;
+    --profile-border: #E2E8F0;
+
+    --profile-green: #237A50;
+    --profile-green-bg: #E7F6ED;
+    --profile-yellow: #946200;
+    --profile-yellow-bg: #FFF4D6;
+    --profile-red: #B42332;
+    --profile-red-bg: #FDEBEC;
+
+    --profile-radius: 14px;
+    --profile-shadow: 0 4px 18px rgba(23, 42, 70, 0.06);
+}
+
+/* General layout */
+.profile-page,
+.page-content {
+    width: min(1100px, calc(100% - 40px));
+    margin: 40px auto;
+    color: var(--navy);
+    font-family: 'Poppins', sans-serif;
+}
+
+.profile-page *,
+.page-content * {
+    box-sizing: border-box;
+}
+
+/* Headings */
+.profile-page h1,
+.profile-page h2,
+.profile-page h3,
+.profile-page h4,
+.page-content h1,
+.page-content h2,
+.page-content h3,
+.page-content h4 {
+    color: var(--navy);
+}
+
+/* Buttons */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 42px;
+    padding: 11px 18px;
+    border: 1px solid var(--profile-blue);
+    border-radius: 9px;
+    background: var(--profile-blue);
+    color: var(--profile-white);
+    font-family: inherit;
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.btn:hover {
+    background: var(--profile-blue-hover);
+    border-color: var(--profile-blue-hover);
+    color: var(--profile-white);
+}
+
+.btn:active {
+    transform: scale(0.98);
+}
+
+.btn-secondary {
+    background: var(--profile-white);
+    color: var(--navy);
+    border-color: var(--profile-border);
+}
+
+.btn-secondary:hover {
+    background: #F0F4FA;
+    color: var(--navy);
+    border-color: #C7D4E5;
+}
+
+/* Text links */
+.text-link {
+    color: var(--profile-blue);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.text-link:hover {
+    color: var(--profile-blue-hover);
+    text-decoration: underline;
+}
+
+/* Shared cards */
+.profile-section {
+    margin-bottom: 26px;
+    padding: 26px;
+    background: var(--profile-white);
+    border: 1px solid var(--profile-border);
+    border-radius: var(--profile-radius);
+    box-shadow: var(--profile-shadow);
+}
+
+/* Shared section headings */
+.section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-bottom: 22px;
+}
+
+.section-heading h2 {
+    margin: 0;
+    color: var(--navy);
+    font-size: 18px;
+    font-weight: 700;
+}
+
+/* Shared form layout */
+.profile-form,
+.achievement-form {
+    display: flex;
+    flex-direction: column;
+    gap: 21px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+}
+
+.form-group label {
+    color: var(--navy);
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    padding: 12px 14px;
+    border: 1px solid #CBD5E1;
+    border-radius: 9px;
+    background: var(--profile-white);
+    color: var(--navy);
+    font-family: inherit;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select {
+    min-height: 46px;
+}
+
+.form-group textarea {
+    min-height: 130px;
+    resize: vertical;
+    line-height: 1.7;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: var(--profile-blue);
+    box-shadow: 0 0 0 3px rgba(66, 111, 177, 0.14);
+}
+
+.form-note {
+    margin: 0;
+    padding: 12px 15px;
+    background: #EEF4FC;
+    border-radius: 8px;
+    color: var(--navy);
+    font-size: 12px;
+    line-height: 1.7;
+}
+
+.form-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-top: 4px;
+}
+
+/* Shared messages */
+.notice {
+    margin-bottom: 20px;
+    padding: 14px 16px;
+    border-radius: 9px;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.error-notice {
+    background: var(--profile-red-bg);
+    border: 1px solid #F5C5CA;
+    color: var(--profile-red);
+}
+
+.success-notice {
+    background: var(--profile-green-bg);
+    border: 1px solid #B9E4CA;
+    color: var(--profile-green);
+}
+
+/* Responsive shared styles */
+@media (max-width: 700px) {
+    .profile-page,
+    .page-content {
+        width: calc(100% - 28px);
+        margin: 24px auto;
+    }
+
+    .profile-section {
+        padding: 20px;
+        margin-bottom: 20px;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .form-actions {
+        align-items: stretch;
+        flex-direction: column;
+    }
+
+    .form-actions .btn {
+        width: 100%;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .btn {
+        transition: none;
+    }
+
+    .btn:active {
+        transform: none;
+    }
+}

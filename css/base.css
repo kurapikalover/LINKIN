@@ -1,0 +1,141 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+/* =========================
+   VARIABLES
+========================= */
+
+:root {
+  --navy: #134a8e;
+  --orange: #ff7a1a;
+  --sky: #bcdcff;
+  --page-bg: #a9cdfc;
+  --white: #ffffff;
+  --muted: #8fb6e8;
+  --grey: #9aa3ad;
+  --dark-grey: #3f4146;
+}
+
+/* =========================
+   BASIC RESET
+========================= */
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  background: var(--page-bg);
+  color: var(--navy);
+}
+
+/* =========================
+   GENERAL PAGE LAYOUT
+========================= */
+
+.page {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 12px;
+}
+
+.sheet {
+  background: var(--white);
+  border-radius: 0 0 18px 18px;
+  overflow: hidden;
+  min-height: 700px;
+}
+
+.page-content {
+  padding: 20px;
+}
+
+/* =========================
+   CATEGORY BADGES
+========================= */
+
+.category {
+  display: inline-block;
+  padding: 5px 12px;
+  border-radius: 20px;
+  color: var(--white);
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.category-sports {
+  background: #ef5b6a;
+}
+
+.category-arts {
+  background: #f58fb0;
+}
+
+.category-recreational {
+  background: #4cc36b;
+}
+
+.category-culture {
+  background: #ff9a52;
+}
+
+.category-religious {
+  background: #c68af0;
+}
+
+.category-community {
+  background: #4c91d9;
+}
+
+/* =========================
+   SHARED EVENT STATUS BADGES
+========================= */
+
+.event-status {
+  display: inline-block;
+  max-width: 100%;
+  padding: 7px 16px;
+  border-radius: 8px;
+  font-family: "Poppins", sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+
+.status-upcoming {
+  background: #ddf3e4;
+  color: #21663a;
+}
+
+.status-ongoing {
+  background: #fff0cc;
+  color: #855b00;
+}
+
+.status-completed {
+  background: #e5e7eb;
+  color: #4b5563;
+}
+
+.status-cancelled {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.status-default {
+  background: #f3f4f6;
+  color: #374151;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 600px) {
+  .page {
+    padding: 8px;
+  }
+}

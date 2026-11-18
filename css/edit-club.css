@@ -1,0 +1,231 @@
+
+.edit-club-page {
+    max-width: 850px;
+    margin: 0 auto;
+    padding: 20px 0 50px;
+}
+
+.edit-club-page h1 {
+    color: #172A46;
+    font-size: 28px;
+    margin-bottom: 5px;
+}
+
+.edit-club-subtitle {
+    color: #858D99;
+    margin-bottom: 25px;
+}
+
+.edit-section {
+    background: #FFFFFF;
+    border: 1px solid #DCE5F1;
+    border-radius: 14px;
+    padding: 25px;
+    margin-bottom: 22px;
+}
+
+.edit-section h2 {
+    color: #172A46;
+    font-size: 19px;
+    margin: 0 0 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    margin-bottom: 18px;
+}
+
+.form-group:last-child {
+    margin-bottom: 0;
+}
+
+.form-group label {
+    color: #172A46;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.form-group input,
+.form-group textarea,
+.form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid #C7D4E5;
+    border-radius: 8px;
+    background: #F8FAFD;
+    color: #172A46;
+    font-family: inherit;
+    font-size: 14px;
+    outline: none;
+}
+
+.form-group input:focus,
+.form-group textarea:focus,
+.form-group select:focus {
+    border-color: #426FB1;
+    box-shadow: 0 0 0 3px rgba(66, 111, 177, 0.12);
+}
+
+.form-group textarea {
+    resize: vertical;
+}
+
+.form-group small {
+    color: #858D99;
+    font-size: 12px;
+}
+
+.fee-fields {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 15px;
+}
+
+.section-heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.section-heading h2 {
+    margin-bottom: 4px;
+}
+
+.section-heading p {
+    color: #858D99;
+    font-size: 13px;
+}
+
+.add-social-btn {
+    background: #EAF0F8;
+    color: #172A46;
+    border: 1px solid #C7D4E5;
+    border-radius: 8px;
+    padding: 10px 15px;
+    font-family: inherit;
+    font-weight: 600;
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.add-social-btn:hover {
+    background: #DCE7F5;
+}
+
+.social-link-row {
+    border: 1px solid #DCE5F1;
+    background: #F8FAFD;
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 15px;
+}
+
+.remove-social-btn {
+    background: #FCECEC;
+    color: #B42318;
+    border: none;
+    border-radius: 7px;
+    padding: 8px 13px;
+    font-family: inherit;
+    font-size: 12px;
+    cursor: pointer;
+    margin-top: 12px;
+}
+
+.remove-social-btn:hover {
+    background: #F8DADA;
+}
+
+.social-empty-message {
+    color: #858D99;
+    font-size: 13px;
+}
+
+.edit-form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+    margin-top: 25px;
+}
+
+.cancel-btn,
+.save-btn {
+    padding: 11px 22px;
+    border-radius: 8px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.cancel-btn {
+    background: #EAF0F8;
+    color: #172A46;
+    border: 1px solid #C7D4E5;
+}
+
+.save-btn {
+    background: #426FB1;
+    color: #FFFFFF;
+    border: none;
+}
+
+.save-btn:hover {
+    background: #263F63;
+}
+
+.form-message {
+    padding: 13px 16px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+}
+
+.error-message {
+    background: #FCECEC;
+    color: #B42318;
+}
+
+.success-message {
+    background: #E8F5EC;
+    color: #267442;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+@media (max-width: 600px) {
+    .edit-club-page {
+        padding: 15px;
+    }
+
+    .edit-section {
+        padding: 18px;
+    }
+
+    .fee-fields {
+        grid-template-columns: 1fr;
+        gap: 0;
+    }
+
+    .section-heading {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .edit-form-actions {
+        flex-direction: column-reverse;
+    }
+
+    .cancel-btn,
+    .save-btn {
+        text-align: center;
+        width: 100%;
+    }
+}
