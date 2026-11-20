@@ -2,6 +2,10 @@
 <?php
 session_start();
 
+// added this after making signup and signup process
+$success = $_SESSION['signup_success'] ?? '';
+unset($_SESSION['signup_success']);
+
 // Get any login error from the previous request
 $error = $_SESSION['login_error'] ?? '';
 unset($_SESSION['login_error']);
@@ -35,9 +39,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // Check account type
             if ($user['user_type'] === 'System Admin') {
 
-                $destination = 'admin.php';
+                $destination = 'system-admin.php';
 
-            } elseif ($user['user_type'] === 'Student') {
+            //emuni added  thisfor HEP admin 
+            } elseif ($user['user_type'] === 'Student Affairs') {
+
+                $destination = 'hep-admin.php';    
+
+            }elseif ($user['user_type'] === 'Student') {
 
                 // Check whether the student is a committee admin
                 $adminSql = "
