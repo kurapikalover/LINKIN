@@ -40,10 +40,15 @@ function pageHeader($studentName = null, $studentId = null, $adminClubs = [])
         'notifications.php'
     ], true);
 
+
     $isClubs = $currentPage === 'club_page.php';
     $isEvents = $currentPage === 'event_page.php';
 
     $isCommitteeAdmin = $currentPage === 'com-admin.php';
+    // added for checking if its hep 
+    $isHepAdmin = in_array($currentPage, ['hep-admin.php', 'achievement_review.php'], true);
+    $isSystemAdmin = $currentPage === 'system-admin.php';
+    
 
     $isMyActivity = in_array($currentPage, [
         'my_activity.php',
@@ -71,7 +76,7 @@ function pageHeader($studentName = null, $studentId = null, $adminClubs = [])
                 <span class="material-symbols-outlined">home</span>
             </a>
 
-            <!-- Notifications -->
+            
             <!-- Notifications -->
             <a
                 href="../pages/notification.php"
@@ -85,6 +90,32 @@ function pageHeader($studentName = null, $studentId = null, $adminClubs = [])
                     <span class="notification-dot"></span>
                 <?php endif; ?>
             </a>
+
+            <!-- Student Affairs aka HEP admin -->
+            <?php if (($_SESSION['user_type'] ?? '') === 'Student Affairs'): ?>
+                <a href="../pages/hep-admin.php"
+                    class="tab-icon <?= $isHepAdmin ? 'active' : '' ?>"
+                    aria-label="HEP Admin"
+                    <?= $isHepAdmin ? 'aria-current="page"' : '' ?>>
+                    <span class="material-symbols-outlined">id_card</span>
+                </a>
+            <?php endif; ?>
+
+             <!-- System Admin -->
+            <?php if (($_SESSION['user_type'] ?? '') === 'System Admin'): ?>
+
+                <a
+                    href="../pages/system-admin.php"
+                    class="tab-icon <?= $isSystemAdmin ? 'active' : '' ?>"
+                    aria-label="System Admin"
+                    <?= $isSystemAdmin ? 'aria-current="page"' : '' ?>
+                >
+                    <span class="material-symbols-outlined">
+                        admin_panel_settings
+                    </span>
+                </a>
+
+            <?php endif; ?>
 
             <!-- Committee Admin Dropdown -->
             <?php if (!empty($adminClubs)): ?>
